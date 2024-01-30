@@ -6,11 +6,11 @@ use leptos_router::*;
 #[component]
 pub fn RouterApp() -> impl IntoView {
     view! {
-      <Router>
-          <Routes>
-            <Route path="/" view=AddAccount />
-            <Route path="/add-account" view=AddAccount />
-          </Routes>
-      </Router>
+        <Router>
+            <Routes>
+                <Route path="/" view={AddAccount}/>
+                <Route path="/add-account" view={AddAccount}/>
+            </Routes>
+        </Router>
     }
 }

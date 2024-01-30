@@ -7,7 +7,7 @@ edition = "2021"
 
 [dependencies]
 leptos = { version = "0.6.3", features = ["csr", "nightly"] }
-leptos-use = {version="0.9.0",  features = ["serde"] }
+leptos-use = {git = "https://github.com/Synphonyte/leptos-use.git",  features = ["serde"] }
 leptos_router = { version = "0.6.3",  features = ["csr", "nightly"]}
 serde = "1.0.196"
 rand = "0.8.5"

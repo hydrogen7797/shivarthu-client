@@ -7,7 +7,5 @@ use router::RouterApp;
 
 #[component]
 pub fn App() -> impl IntoView {
-    view! {
-      <RouterApp/>
-    }
+    view! { <RouterApp/> }
 }
