@@ -1,0 +1,3 @@
+[toolchain]
+channel = "nightly" # stable|beta|nightly
+targets = [ "wasm32-unknown-unknown"]
