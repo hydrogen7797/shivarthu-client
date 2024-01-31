@@ -1,6 +1,10 @@
 # Shivarthu client based on leptos
 
-<!-- Change the auth.rs.bak file to auth.rs and give the authentication token -->
+## Change the auth file
+
+`src/constants/auth.rs.bak`
+
+Change the auth.rs.bak file to auth.rs and give the authentication token
 
 ```
 cargo install --locked trunk
