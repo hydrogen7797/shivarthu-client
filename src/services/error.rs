@@ -1,7 +1,6 @@
+use serde::{Deserialize, Serialize};
 use std::error::Error;
 use std::fmt;
-use serde::{Serialize, Deserialize};
-
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct ErrorString(pub String);
