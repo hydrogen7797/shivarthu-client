@@ -7,7 +7,7 @@ pub fn MarkdownField(
     class: String,
     name: String,
     #[prop(default = true)] required: bool,
-    #[prop(into)] markdown: WriteSignal<String>,
+    #[prop(into)] set_markdown: WriteSignal<String>,
 ) -> impl IntoView {
     let (html_data, set_html_data) = create_signal(String::from(""));
     let markdown_changed = move |e: KeyboardEvent| {
@@ -17,12 +17,12 @@ pub fn MarkdownField(
     };
 
     let handle_onchange = move |e: Event| {
-        markdown(event_target_value(&e));
+        set_markdown(event_target_value(&e));
     };
 
     view! {
         <>
-            <div class="md:container md:mx-auto pt-20">
+            <div>
                 <div>
                     <form>
                         <div class="mb-6">
@@ -31,10 +31,7 @@ pub fn MarkdownField(
                                 cols="50"
                                 name=name
                                 required=required
-                                class=format!(
-                                    "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 {}",
-                                    class,
-                                )
+                                class=format!("{}", class)
 
                                 on:keyup=markdown_changed
                                 on:input=handle_onchange

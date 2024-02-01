@@ -46,7 +46,7 @@ pub fn AddAccount() -> impl IntoView {
                             <div>
                                 <form
                                     class="max-w-sm mx-auto"
-                                    id="seed-submit-from"
+                                    id="seed-submit-form"
                                     on:submit=submit_click
                                 >
                                     <div class="mb-5">

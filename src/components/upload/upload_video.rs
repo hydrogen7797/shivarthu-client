@@ -1,6 +1,6 @@
 use crate::components::api::ipfs_request::ipfs_call;
 use crate::components::api::select_ipfs_provider::DEFAULT_IPFS_PROVIDER;
-
+use crate::constants::constant::DEFAULT_IPFS_FETCH_PROVIDER;
 use crate::services::error::ErrorString;
 use icondata;
 use leptos::ev::{DragEvent, Event};
@@ -11,17 +11,20 @@ use web_sys::{File, HtmlInputElement};
 async fn get_cid_ipfs(
     file_data: Option<File>,
     set_cid: WriteSignal<String>,
+    set_cid_props: WriteSignal<String>,
+    accept_file_type: String,
     set_spinner: WriteSignal<bool>,
 ) -> Result<String, ErrorString> {
     if let Some(file) = file_data.clone() {
         let file_type = file.type_();
         let file_name = file.name();
         gloo::console::log!(format! {"{:?}", file_name});
-        if file_type == "video/mp4" {
+        if file_type == accept_file_type {
             let ipfs_cid = ipfs_call(DEFAULT_IPFS_PROVIDER, file, file_name).await;
             gloo::console::log!(format! {"{:?}", ipfs_cid});
             set_spinner(false);
             set_cid(ipfs_cid.clone());
+            set_cid_props(ipfs_cid.clone());
             Ok(ipfs_cid)
         } else {
             Err(ErrorString("Unsupported file type".to_string()))
@@ -32,14 +35,34 @@ async fn get_cid_ipfs(
 }
 
 #[component]
-pub fn FileUpload(// #[prop(into)] ipfs_cid: WriteSignal<String>
+pub fn FileUpload(
+    #[prop(into)] set_cid_props: WriteSignal<String>,
+    accept_file_type: String,
 ) -> impl IntoView {
     let (cid, set_cid) = create_signal(String::from(""));
     let (spinner, set_spinner) = create_signal(false);
     let (file_option, set_file_option) = create_signal(None);
+    let accept_file_type_clone = accept_file_type.clone();
     let async_ipfs = create_resource(
-        move || (file_option(), set_cid, set_spinner),
-        |(value, set_cid, set_spinner)| async move { get_cid_ipfs(value, set_cid, set_spinner).await },
+        move || {
+            (
+                file_option(),
+                set_cid,
+                set_cid_props,
+                accept_file_type_clone.clone(),
+                set_spinner,
+            )
+        },
+        |(file_data, set_cid, set_cid_props, accept_file_type, set_spinner)| async move {
+            get_cid_ipfs(
+                file_data,
+                set_cid,
+                set_cid_props,
+                accept_file_type,
+                set_spinner,
+            )
+            .await
+        },
     );
     let file_handle = move |e: Event| {
         set_spinner(true);
@@ -69,8 +92,8 @@ pub fn FileUpload(// #[prop(into)] ipfs_cid: WriteSignal<String>
     };
 
     view! {
-        <div class="md:container md:mx-auto pt-20">
-            <div class="mb-6 grid grid-rows-2">
+        <div>
+            <div class="mb-6">
                 <div
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 min-h-80 flex justify-center items-center"
                     id="drag-container"
@@ -89,14 +112,18 @@ pub fn FileUpload(// #[prop(into)] ipfs_cid: WriteSignal<String>
                             />
                         </div>
                         <p class="text-lg text-gray-700">
-                            {"Drop your mp4 video here or click to select"}
+                            {format!(
+                                "Drop your {} here or click to select",
+                                accept_file_type.clone(),
+                            )}
+
                         </p>
                         <br/>
                         <div>
                             <input
                                 id="file-upload"
                                 type="file"
-                                accept="video/mp4"
+                                accept=accept_file_type
                                 multiple=false
                                 on:input=file_handle
                             />
@@ -113,8 +140,25 @@ pub fn FileUpload(// #[prop(into)] ipfs_cid: WriteSignal<String>
                                     <img src="img/rolling.gif" alt="loading" width="40"/>
                                 </div>
                             }
+                        } else if !cid().is_empty() {
+                            view! {
+                                <div>
+                                    <video width="320" height="240" controls=true preload="none">
+                                        <source
+                                            src=format!(
+                                                "{}{}",
+                                                DEFAULT_IPFS_FETCH_PROVIDER.address,
+                                                cid(),
+                                            )
+
+                                            type="video/mp4"
+                                        />
+                                        {"Your browser does not support the video tag."}
+                                    </video>
+                                </div>
+                            }
                         } else {
-                            view! { <div>{cid()}</div> }
+                            view! { <div></div> }
                         }
                     }}
 
