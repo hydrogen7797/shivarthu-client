@@ -41,46 +41,47 @@ pub fn FileUpload(
 ) -> impl IntoView {
     let (cid, set_cid) = create_signal(String::from(""));
     let (spinner, set_spinner) = create_signal(false);
-    let (file_option, set_file_option) = create_signal(None);
-    let accept_file_type_clone = accept_file_type.clone();
-    let async_ipfs = create_resource(
-        move || {
-            (
-                file_option(),
-                set_cid,
-                set_cid_props,
-                accept_file_type_clone.clone(),
-                set_spinner,
-            )
-        },
-        |(file_data, set_cid, set_cid_props, accept_file_type, set_spinner)| async move {
-            get_cid_ipfs(
-                file_data,
-                set_cid,
-                set_cid_props,
-                accept_file_type,
-                set_spinner,
-            )
-            .await
-        },
-    );
+    let accept_file_type1 = accept_file_type.clone();
+    let accept_file_type2 = accept_file_type.clone();
+
     let file_handle = move |e: Event| {
         set_spinner(true);
         let input: HtmlInputElement = event_target(&e);
         let file_data = input.files().unwrap().get(0);
         gloo::console::log!(format! {"{:?}", file_data});
-        set_file_option(file_data);
-        let cid = async_ipfs.get().unwrap();
+        let accept_file_type_clone = accept_file_type1.clone();
+        wasm_bindgen_futures::spawn_local(async move {
+            let cid_result = get_cid_ipfs(
+                file_data,
+                set_cid,
+                set_cid_props,
+                accept_file_type_clone,
+                set_spinner,
+            )
+            .await;
+            gloo::console::log!(format! {" Result {:?}", cid_result});
+        });
     };
     let ondrop = move |e: DragEvent| {
         gloo::console::log!(format! {"inside drag"});
         set_spinner(true);
+        let accept_file_type_clone = accept_file_type2.clone();
 
         e.prevent_default();
         let file_data: Option<web_sys::File> = e.data_transfer().unwrap().files().unwrap().get(0);
         gloo::console::log!(format! {"{:?}", file_data});
-        set_file_option(file_data);
-        let cid = async_ipfs.get().unwrap();
+
+        wasm_bindgen_futures::spawn_local(async move {
+            let cid_result = get_cid_ipfs(
+                file_data,
+                set_cid,
+                set_cid_props,
+                accept_file_type_clone,
+                set_spinner,
+            )
+            .await;
+            gloo::console::log!(format! {" Result {:?}", cid_result});
+        });
     };
 
     let ondragover = move |e: DragEvent| {
