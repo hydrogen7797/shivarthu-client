@@ -6,7 +6,6 @@ use crate::components::upload::upload_video::FileUpload;
 use crate::services::error::ErrorString;
 use json::object;
 use leptos::ev::SubmitEvent;
-use leptos::html::mark;
 use leptos::*;
 
 async fn get_cid_post(
@@ -45,9 +44,32 @@ pub fn AddProfile() -> impl IntoView {
 
     let submit_click = move |e: SubmitEvent| {
         e.prevent_default();
-        gloo::console::log!(format!("hello"));
-
         submit_action.dispatch((name(), markdown(), video_cid()));
+    };
+
+    let cid_value = move || {
+        gloo::console::log!("With in the set cid");
+
+        let cid_result = submit_action_value();
+
+        let cid = match cid_result {
+            Some(result_cid) => {
+                let cid_value_in_result = match result_cid {
+                    Ok(value) => {
+                        gloo::console::log!(format!("Got string: {}", value.clone()));
+                        value
+                    }
+                    Err(error) => {
+                        gloo::console::log!(format!("Error: {:?}", error));
+                        String::from("")
+                    }
+                };
+                cid_value_in_result
+            }
+            None => String::from(""),
+        };
+
+        cid
     };
 
     view! {
@@ -115,7 +137,7 @@ pub fn AddProfile() -> impl IntoView {
                         <p>{move || pending().then(|| "Loading...")}</p>
                         <p>"Pending: " <code>{move || format!("{:#?}", pending())}</code></p>
                         <p>
-                            "Value: " <code>{move || format!("{:#?}", submit_action_value())}</code>
+                            "Value: " <code>{move || cid_value()}</code>
                         </p>
 
                     </div>
