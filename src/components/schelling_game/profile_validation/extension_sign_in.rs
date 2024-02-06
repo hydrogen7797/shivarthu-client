@@ -1,4 +1,4 @@
-use crate::components::common_components::extension_sign_in::sign_in_with_extension;
+use crate::components::transaction::extension_sign_in::sign_in_with_extension;
 use leptos::*;
 
 #[component]
