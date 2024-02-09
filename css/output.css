@@ -2618,19 +2618,14 @@ h3 {
   z-index: 1;
 }
 
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .mx-0 {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-.my-6 {
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .my-3 {
@@ -2742,10 +2737,6 @@ h3 {
   flex-direction: column;
 }
 
-.place-content-center {
-  place-content: center;
-}
-
 .items-center {
   align-items: center;
 }
@@ -2823,9 +2814,19 @@ h3 {
   padding: 0.625rem;
 }
 
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
 .px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
+}
+
+.py-10 {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
 }
 
 .py-2 {
@@ -2836,16 +2837,6 @@ h3 {
 .py-2\.5 {
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
-}
-
-.px-10 {
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
-}
-
-.py-10 {
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
 }
 
 .pt-20 {

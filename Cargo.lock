@@ -2108,10 +2108,10 @@ version = "0.21.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9579d0ca9fb30da026bac2f0f7d9576ec93489aeb7cd4971dd5b4617d82c79b2"
 dependencies = [
- "jsonrpsee-client-transport",
- "jsonrpsee-core",
+ "jsonrpsee-client-transport 0.21.0",
+ "jsonrpsee-core 0.21.0",
  "jsonrpsee-http-client",
- "jsonrpsee-types",
+ "jsonrpsee-types 0.21.0",
 ]
 
 [[package]]
@@ -2124,7 +2124,7 @@ dependencies = [
  "futures-util",
  "gloo-net 0.5.0",
  "http 0.2.11",
- "jsonrpsee-core",
+ "jsonrpsee-core 0.21.0",
  "pin-project",
  "rustls-native-certs 0.7.0",
  "rustls-pki-types",
@@ -2135,6 +2135,20 @@ dependencies = [
  "tokio-util",
  "tracing",
  "url",
+]
+
+[[package]]
+name = "jsonrpsee-client-transport"
+version = "0.22.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6b1736cfa3845fd9f8f43751f2b8e0e83f7b6081e754502f7d63b6587692cc83"
+dependencies = [
+ "futures-channel",
+ "futures-util",
+ "gloo-net 0.5.0",
+ "jsonrpsee-core 0.22.0",
+ "thiserror",
+ "tracing",
 ]
 
 [[package]]
@@ -2150,7 +2164,7 @@ dependencies = [
  "futures-timer",
  "futures-util",
  "hyper",
- "jsonrpsee-types",
+ "jsonrpsee-types 0.21.0",
  "pin-project",
  "rustc-hash",
  "serde",
@@ -2158,6 +2172,29 @@ dependencies = [
  "thiserror",
  "tokio",
  "tokio-stream",
+ "tracing",
+ "wasm-bindgen-futures",
+]
+
+[[package]]
+name = "jsonrpsee-core"
+version = "0.22.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "82030d038658974732103e623ba2e0abec03bbbe175b39c0a2fafbada60c5868"
+dependencies = [
+ "anyhow",
+ "async-lock",
+ "async-trait",
+ "beef",
+ "futures-timer",
+ "futures-util",
+ "jsonrpsee-types 0.22.0",
+ "pin-project",
+ "rustc-hash",
+ "serde",
+ "serde_json",
+ "thiserror",
+ "tokio",
  "tracing",
  "wasm-bindgen-futures",
 ]
@@ -2171,8 +2208,8 @@ dependencies = [
  "async-trait",
  "hyper",
  "hyper-rustls",
- "jsonrpsee-core",
- "jsonrpsee-types",
+ "jsonrpsee-core 0.21.0",
+ "jsonrpsee-types 0.21.0",
  "serde",
  "serde_json",
  "thiserror",
@@ -2196,14 +2233,27 @@ dependencies = [
 ]
 
 [[package]]
-name = "jsonrpsee-wasm-client"
-version = "0.21.0"
+name = "jsonrpsee-types"
+version = "0.22.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "30f36d27503d0efc0355c1630b74ecfb367050847bf7241a0ed75fab6dfa96c0"
+checksum = "9a48fdc1202eafc51c63e00406575e59493284ace8b8b61aa16f3a6db5d64f1a"
 dependencies = [
- "jsonrpsee-client-transport",
- "jsonrpsee-core",
- "jsonrpsee-types",
+ "anyhow",
+ "beef",
+ "serde",
+ "serde_json",
+ "thiserror",
+]
+
+[[package]]
+name = "jsonrpsee-wasm-client"
+version = "0.22.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d36eb0e312840c69af0e5c6624fe959864d2e8b80bec194d2e20a39839ceef31"
+dependencies = [
+ "jsonrpsee-client-transport 0.22.0",
+ "jsonrpsee-core 0.22.0",
+ "jsonrpsee-types 0.22.0",
 ]
 
 [[package]]
@@ -2223,9 +2273,9 @@ checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
 
 [[package]]
 name = "leptos"
-version = "0.6.3"
+version = "0.6.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "10b936412e6ff7b7d4033043f1382c687a9f1995a9871a68b7189f408133c2a0"
+checksum = "0c115de7c6fca2164133e18328777d02c371434ace38049ac02886b5cffd22dc"
 dependencies = [
  "cfg-if",
  "leptos_config",
@@ -2243,8 +2293,9 @@ dependencies = [
 
 [[package]]
 name = "leptos-use"
-version = "0.9.0"
-source = "git+https://github.com/Synphonyte/leptos-use.git#a677eaf8770dfe02cc32d7055c9a4126a27f17b6"
+version = "0.10.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "885ab55e844f9dda9f1394bce011b5ff5332e0a1782c165c78d53f3138cbbd38"
 dependencies = [
  "async-trait",
  "cfg-if",
@@ -2267,9 +2318,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_config"
-version = "0.6.3"
+version = "0.6.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2a809362f6a14c740bfb38a9d8151ab06be7ccd4049a3354c1aab0f8d2bdf741"
+checksum = "055262ff3660e95ec95cadd8a05a02070d624354e08e30b99c14a81023feb2dc"
 dependencies = [
  "config",
  "regex",
@@ -2280,9 +2331,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_dom"
-version = "0.6.3"
+version = "0.6.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d4e58dcb4c8504460eda3c57919ffa826c44a542253c6c93be75d21bfcd2b776"
+checksum = "adfea7feb9c488448db466ca0673b691ec2a05efb0b2bc6626b7248ee04bb39c"
 dependencies = [
  "async-recursion",
  "cfg-if",
@@ -2310,9 +2361,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_hot_reload"
-version = "0.6.3"
+version = "0.6.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "273d7f2f1823a70944a72c8b47f925c489e38f6121808cd4c7f759b1b5efd5e6"
+checksum = "3ba8f68f7c3135975eb34ed19210272ebef2d6f422d138ff87a726b8793fe105"
 dependencies = [
  "anyhow",
  "camino",
@@ -2343,9 +2394,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_macro"
-version = "0.6.3"
+version = "0.6.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "669b724389f52fa2b0c8eb55fc1cd652a6738360d0a76d966b62fb3368fc0bf7"
+checksum = "039c510dafb7d9997e4b8accfcced5675fabc65720caf544592df32432d6d65a"
 dependencies = [
  "attribute-derive",
  "cfg-if",
@@ -2366,9 +2417,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_reactive"
-version = "0.6.3"
+version = "0.6.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3624e8d4d2da4c79adc045c177be50050c70fb266d30d93892676f8100bb68aa"
+checksum = "b30c5bc7f3496d6ba399578171cf133c50d2172f9791fe292db4da2fd0d8cec4"
 dependencies = [
  "base64 0.21.7",
  "cfg-if",
@@ -2393,9 +2444,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_router"
-version = "0.6.3"
+version = "0.6.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c0964eb6de904e102b71ed5707594edfbabe11789cc9bc097e5556574324ce7c"
+checksum = "498159479603569e1d7c969cffa0817b73249e96f825c295743f8f4607a68cbe"
 dependencies = [
  "cfg-if",
  "gloo-net 0.2.6",
@@ -2419,9 +2470,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_server"
-version = "0.6.3"
+version = "0.6.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9b31b4f6e1afecb955011548516020feab2ce165c407508e6357ad2a29e91c18"
+checksum = "f06b9b860479385991fad54cbee372382aee3c1e75ca78b5da6f8bda90c153e1"
 dependencies = [
  "inventory",
  "lazy_static",
@@ -3476,15 +3527,22 @@ dependencies = [
 
 [[package]]
 name = "pulldown-cmark"
-version = "0.9.6"
+version = "0.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "57206b407293d2bcd3af849ce869d52068623f19e1b5ff8e8778e3309439682b"
+checksum = "dce76ce678ffc8e5675b22aa1405de0b7037e2fdf8913fea40d1926c6fe1e6e7"
 dependencies = [
  "bitflags 2.4.2",
  "getopts",
  "memchr",
+ "pulldown-cmark-escape",
  "unicase",
 ]
+
+[[package]]
+name = "pulldown-cmark-escape"
+version = "0.10.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d5d8f9aa0e3cbcfaf8bf00300004ee3b72f74770f9cbac93f6928771f613276b"
 
 [[package]]
 name = "quote"
@@ -4182,9 +4240,9 @@ dependencies = [
 
 [[package]]
 name = "server_fn"
-version = "0.6.3"
+version = "0.6.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e7ede360796ba28c57625aa7cbbb25e7e87408f93cc662b68244d7dbfa1f589f"
+checksum = "97fab54d9dd2d7e9eba4efccac41d2ec3e7c6e9973d14c0486d662a32662320c"
 dependencies = [
  "bytes",
  "ciborium",
@@ -4211,9 +4269,9 @@ dependencies = [
 
 [[package]]
 name = "server_fn_macro"
-version = "0.6.3"
+version = "0.6.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b69afff1278975e9f862661a1bc5d8944aa9b542215359a550d4054864423779"
+checksum = "3be6011b586a0665546b7ced372b0be690d9e005d3f8524795da2843274d7720"
 dependencies = [
  "const_format",
  "convert_case 0.6.0",
@@ -4302,7 +4360,7 @@ dependencies = [
  "icondata",
  "js-sys",
  "json",
- "jsonrpsee-core",
+ "jsonrpsee-core 0.22.0",
  "jsonrpsee-wasm-client",
  "leptos",
  "leptos-use",

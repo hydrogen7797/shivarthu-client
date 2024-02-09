@@ -18,8 +18,8 @@ pub fn RouterApp() -> impl IntoView {
                 <Route path="/markdown" view=MarkdownHtmlView/>
                 // <Route path="/upload" view=FileUpload/>
                 <Route path="/add-profile" view=AddProfile/>
-                <Route path="/extension" view=ExtensionSignIn/>
-                <Route path="/signin" view=GetAccountsExtension />
+            // <Route path="/extension" view=ExtensionSignIn/>
+            // <Route path="/signin" view=GetAccountsExtension/>
             </Routes>
         </Router>
     }

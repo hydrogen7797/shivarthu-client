@@ -6,9 +6,9 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-leptos = { version = "0.6.3", features = ["csr", "nightly"] }
-leptos-use = {git = "https://github.com/Synphonyte/leptos-use.git",  features = ["serde"] }
-leptos_router = { version = "0.6.3",  features = ["csr", "nightly"]}
+leptos = { version = "0.6.5", features = ["csr", "nightly"] }
+leptos-use = {verison="0.10.2",  features = ["serde"] }
+leptos_router = { version = "0.6.5",  features = ["csr", "nightly"]}
 leptos_icons = "0.3.0"
 serde = "1.0.196"
 rand = "0.8.5"
@@ -24,8 +24,8 @@ futures = "0.3.28"
 hex = "0.4.3"
 tracing-subscriber = "0.3.17"
 wasm-bindgen-futures = "0.4.37"
-jsonrpsee-wasm-client = "0.21.0"
-jsonrpsee-core = "0.21.0"
+jsonrpsee-wasm-client = "0.22.0"
+jsonrpsee-core = "0.22.0"
 codec = { package = "parity-scale-codec", version = "3.0.0", default-features = false, features = ["derive", "full", "bit-vec"] }
 # getrandom = { version = "0.2.7", features = ["js"] }
 subxt = { version="0.34.0", default-features = false, features = ["jsonrpsee", "web"]}
@@ -33,7 +33,7 @@ subxt-signer = { version="0.34.0", default-features = false, features = ["web", 
 # sp-core = { version = "20.0.0", features = ["full_crypto"] }
 magic-crypt = "3.1.12"
 tiny-bip39 = "1.0.0"
-pulldown-cmark = "0.9.2"
+pulldown-cmark = "0.10.0"
 json = "0.12.4"
 regex= "1.8.3"
 sp-core-hashing= "15.0.0"
