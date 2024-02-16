@@ -1,5 +1,7 @@
 use crate::components::navigation::nav::Nav;
+use crate::components::schelling_game::profile_validation::apply_jurors_sign_in::SignTransaction;
 use crate::services::common_imp::View;
+use crate::services::error::ErrorString;
 use leptos::ev::SubmitEvent;
 use leptos::*;
 use leptos_router::*;
@@ -7,11 +9,18 @@ use leptos_router::*;
 #[component]
 pub fn ApplyJurors() -> impl IntoView {
     let params = use_params_map();
-    let profile_user_account = move || params.with(|params| params.get("profile_user_account").cloned().unwrap_or_default());
+    let profile_user_account = move || {
+        params.with(|params| {
+            params
+                .get("profile_user_account")
+                .cloned()
+                .unwrap_or_default()
+        })
+    };
 
     // gloo::console::log!(profile_user_account());
     let (current_view, set_current_view) = create_signal(View::Form);
-    let (juror_stake, set_juror_stake) = create_signal::<Option<u32>>(None);
+    let (juror_stake, set_juror_stake) = create_signal::<Result<u128, ErrorString>>(Ok(0));
     let submit_click = move |e: SubmitEvent| {
         e.prevent_default();
 
@@ -19,11 +28,10 @@ pub fn ApplyJurors() -> impl IntoView {
     };
 
     let stake_value = move |value: String| {
-
-        let stake = value.parse::<u32>().expect("Invalid input");
+        let stake = value.parse::<u128>().expect("Invalid input");
         gloo::console::log!(stake);
 
-        set_juror_stake(Some(stake));
+        set_juror_stake(Ok(stake));
     };
 
     let render_view = move || match current_view() {
@@ -40,7 +48,7 @@ pub fn ApplyJurors() -> impl IntoView {
                                 for="juror-stake"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                             >
-                               Juror Stake
+                                Juror Stake
                             </label>
                             <input
                                 type="text"
@@ -63,7 +71,11 @@ pub fn ApplyJurors() -> impl IntoView {
         }
         View::Success => {
             view! {
-                <div>// <SignTransaction  stake=stake profile_user_account=profile_user_account/>
+                <div>
+                    <SignTransaction
+                        stake=juror_stake().unwrap()
+                        profile_user_account=profile_user_account()
+                    />
 
                 </div>
             }

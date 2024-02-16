@@ -2,7 +2,7 @@ use crate::components::api::ipfs_request::ipfs_call_json_string;
 use crate::components::api::select_ipfs_provider::DEFAULT_IPFS_PROVIDER;
 use crate::components::markdown::markdown_field::MarkdownField;
 use crate::components::navigation::nav::Nav;
-use crate::components::schelling_game::profile_validation::add_profile_extension_sign_in::SignTransaction;
+use crate::components::schelling_game::profile_validation::add_profile_sign_in::SignTransaction;
 use crate::components::upload::upload_video::FileUpload;
 use crate::services::common_imp::View;
 use json::object;
