@@ -2,23 +2,27 @@ use crate::components::navigation::nav::Nav;
 use crate::services::common_imp::View;
 use leptos::ev::SubmitEvent;
 use leptos::*;
+use leptos_router::*;
 
 #[component]
-pub fn ApplyJurors(profile_user_account: String) -> impl IntoView {
+pub fn ApplyJurors() -> impl IntoView {
+    let params = use_params_map();
+    let profile_user_account = move || params.with(|params| params.get("profile_user_account").cloned().unwrap_or_default());
+
+    // gloo::console::log!(profile_user_account());
     let (current_view, set_current_view) = create_signal(View::Form);
     let (juror_stake, set_juror_stake) = create_signal::<Option<u32>>(None);
-
-    let submit_action = create_action(|input: &()| async { todo!() });
-
     let submit_click = move |e: SubmitEvent| {
         e.prevent_default();
-        submit_action.dispatch(());
 
         set_current_view(View::Success);
     };
 
     let stake_value = move |value: String| {
+
         let stake = value.parse::<u32>().expect("Invalid input");
+        gloo::console::log!(stake);
+
         set_juror_stake(Some(stake));
     };
 
@@ -33,17 +37,16 @@ pub fn ApplyJurors(profile_user_account: String) -> impl IntoView {
                     >
                         <div class="mb-5">
                             <label
-                                for="profile-name"
+                                for="juror-stake"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                             >
-                                Your Name
+                               Juror Stake
                             </label>
                             <input
                                 type="text"
-                                id="profile-name"
+                                id="juror-stake"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required
-                                prop:value=move || juror_stake()
                                 on:input=move |e| stake_value(event_target_value(&e))
                             />
                         </div>

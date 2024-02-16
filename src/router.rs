@@ -5,6 +5,7 @@ use crate::components::schelling_game::profile_validation::add_profile::AddProfi
 use crate::components::schelling_game::profile_validation::add_profile_extension_sign_in::ExtensionSignIn;
 use crate::components::transaction::get_accounts_extension::GetAccountsExtension;
 use crate::components::upload::upload_video::FileUpload;
+use crate::components::schelling_game::profile_validation::apply_jurors::ApplyJurors;
 use leptos::*;
 use leptos_router::*;
 
@@ -20,6 +21,7 @@ pub fn RouterApp() -> impl IntoView {
                 <Route path="/add-profile" view=AddProfile/>
             // <Route path="/extension" view=ExtensionSignIn/>
             // <Route path="/signin" view=GetAccountsExtension/>
+                <Route path="/apply-juror/:profile_user_account" view=ApplyJurors/>
             </Routes>
         </Router>
     }
