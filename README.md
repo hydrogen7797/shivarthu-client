@@ -19,6 +19,10 @@ trunk serve
 npx tailwindcss -i ./src/input.css -o ./css/output.css --watch
 
 ```
+## Start substrate node
+```bash
+./target/release/node-template --dev --tmp
+```
 
 ## daisyUI
 

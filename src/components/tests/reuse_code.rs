@@ -59,11 +59,7 @@ pub fn ApplyJurors(profile_user_account: String) -> impl IntoView {
             }
         }
         View::Success => {
-            view! {
-                // <SignTransaction  stake=stake profile_user_account=profile_user_account/>
-                <div>
-                </div>
-            }
+            view! { <div></div> }
         }
         _ => {
             view! { <div></div> }
