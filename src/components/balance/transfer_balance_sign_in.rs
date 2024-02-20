@@ -7,12 +7,8 @@ use subxt::utils::AccountId32;
 
 #[component]
 pub fn SignTransaction(dest_account: String, transfer_balance: u128) -> impl IntoView {
-    view! {         
-        <ExtensionSignIn dest_account=dest_account  transfer_balance=transfer_balance /> 
-    
-    }
+    view! { <ExtensionSignIn dest_account=dest_account transfer_balance=transfer_balance/> }
 }
-
 
 #[component]
 pub fn ExtensionSignIn(dest_account: String, transfer_balance: u128) -> impl IntoView {
@@ -49,7 +45,8 @@ pub fn ExtensionSignIn(dest_account: String, transfer_balance: u128) -> impl Int
 
 #[component]
 pub fn ExtensionTransaction(
-    dest_account: String, transfer_balance: u128,
+    dest_account: String,
+    transfer_balance: u128,
     account_address: String,
     account_source: String,
 ) -> impl IntoView {
@@ -57,11 +54,22 @@ pub fn ExtensionTransaction(
     let (extrinsic_success, set_extrinsic_success) = create_signal(String::from("extrinsic"));
     let (account, set_account) = create_signal((account_address, account_source));
     let transaction_resource = create_local_resource(
-        move || (dest_account.clone(), transfer_balance , account, set_error, set_extrinsic_success),
-        move |(dest_account, transfer_balance , account, set_error, set_extrinsic_success)| async move {
+        move || {
+            (
+                dest_account.clone(),
+                transfer_balance,
+                account,
+                set_error,
+                set_extrinsic_success,
+            )
+        },
+        move |(dest_account, transfer_balance, account, set_error, set_extrinsic_success)| async move {
             let account_id32 = AccountId32::from_str(&dest_account).unwrap();
 
-            let tx = polkadot::tx().balances().transfer_allow_death(subxt::utils::MultiAddress::Id(account_id32), transfer_balance);
+            let tx = polkadot::tx().balances().transfer_allow_death(
+                subxt::utils::MultiAddress::Id(account_id32),
+                transfer_balance,
+            );
             let (account_address, account_source) = account();
             sign_in_with_extension(
                 tx,
@@ -86,4 +94,3 @@ pub fn ExtensionTransaction(
         </div>
     }
 }
-

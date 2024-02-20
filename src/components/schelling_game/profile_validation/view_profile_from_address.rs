@@ -96,6 +96,7 @@ pub fn ViewProfileFromAddress() -> impl IntoView {
                                     DEFAULT_IPFS_FETCH_PROVIDER.address,
                                     profile_video_hash(),
                                 )
+
                                 type="video/mp4"
                             />
                             {"Your browser does not support the video tag."}
