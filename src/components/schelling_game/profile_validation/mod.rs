@@ -7,5 +7,8 @@ pub mod apply_jurors_sign_in;
 pub mod challenge_evidence;
 pub mod challenge_evidence_sign_in;
 pub mod change_period;
+pub mod change_period_sign_in;
+pub mod commit_vote;
+pub mod commit_vote_sign_in;
 pub mod fetch_ipfs_profile;
 pub mod view_profile_from_address;
