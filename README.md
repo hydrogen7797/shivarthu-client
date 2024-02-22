@@ -67,6 +67,10 @@ Format all .rs files ending with `_test.rs` within the examples directory
 
 `cargo fmt --all`
 
+## Format a file
+
+`rustfmt src/main.rs `
+
 <!-- ## rpc call to substrate
 ## transaction
 ## storage call

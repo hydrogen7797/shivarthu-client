@@ -12,3 +12,5 @@ pub mod commit_vote;
 pub mod commit_vote_sign_in;
 pub mod fetch_ipfs_profile;
 pub mod view_profile_from_address;
+pub mod draw_jurors;
+pub mod draw_jurors_sign_in;
