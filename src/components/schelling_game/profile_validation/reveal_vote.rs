@@ -1,5 +1,5 @@
 use crate::components::navigation::nav::Nav;
-use crate::components::schelling_game::profile_validation::commit_vote_sign_in::SignTransaction;
+use crate::components::schelling_game::profile_validation::reveal_vote_sign_in::SignTransaction;
 use crate::services::common_imp::View;
 use crate::services::error::ErrorString;
 use leptos::ev::SubmitEvent;
@@ -20,18 +20,22 @@ pub fn CommitVote() -> impl IntoView {
 
     // gloo::console::log!(profile_user_account());
     let (current_view, set_current_view) = create_signal(View::Form);
-    let (hash, set_hash) = create_signal::<Result<Option<[u8; 32]>, ErrorString>>(Ok(None));
-    let (commit_vote, set_commit_vote) = create_signal(String::from(""));
+    let (choice, set_choice) = create_signal::<Result<Option<u128>, ErrorString>>(Ok(None));
+    let (salt, set_salt) = create_signal(String::from(""));
     let submit_click = move |e: SubmitEvent| {
         e.prevent_default();
-        if !commit_vote().is_empty() {
-            let hash_data = sp_core_hashing::keccak_256(commit_vote().as_bytes());
-            set_hash(Ok(Some(hash_data)));
+        if choice().unwrap().is_some() {
+            set_current_view(View::Success);
         } else {
-            panic!("Commit vote is empty");
+            panic!("Choice not set");
         }
+    };
 
-        set_current_view(View::Success);
+    let choice_changed = move |value: String| {
+        let choice_value = value.parse::<u128>().expect("Invalid input");
+        gloo::console::log!(choice_value);
+
+        set_choice(Ok(Some(choice_value)));
     };
 
     let render_view = move || match current_view() {
@@ -43,19 +47,35 @@ pub fn CommitVote() -> impl IntoView {
                         id="apply-juror-submit-from"
                         on:submit=submit_click
                     >
+
                         <div class="mb-5">
                             <label
-                                for="commit-vote"
+                                for="choice"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                             >
-                                Commit Vote
+                                Choice
+                            </label>
+                            <input
+                                type="number"
+                                id="choice"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required
+                                on:input=move |ev| choice_changed(event_target_value(&ev))
+                            />
+                        </div>
+                        <div class="mb-5">
+                            <label
+                                for="salt"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                                Salt
                             </label>
                             <input
                                 type="text"
-                                id="commit-vote"
+                                id="salt"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required
-                                on:input=move |ev| set_commit_vote(event_target_value(&ev))
+                                on:input=move |ev| set_salt(event_target_value(&ev))
                             />
                         </div>
                         <button
@@ -73,7 +93,8 @@ pub fn CommitVote() -> impl IntoView {
             view! {
                 <div>
                     <SignTransaction
-                        hash=hash().unwrap().unwrap()
+                        salt=salt()
+                        choice=choice().unwrap().unwrap()
                         profile_user_account=profile_user_account()
                     />
 

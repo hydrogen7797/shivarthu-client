@@ -6,12 +6,12 @@ use std::str::FromStr;
 use subxt::utils::AccountId32;
 
 #[component]
-pub fn SignTransaction(iterations: u64, profile_user_account: String) -> impl IntoView {
-    view! { <ExtensionSignIn iterations=iterations profile_user_account=profile_user_account/> }
+pub fn SignTransaction(salt: String, choice: u128, profile_user_account: String) -> impl IntoView {
+    view! { <ExtensionSignIn salt=salt choice=choice profile_user_account=profile_user_account/> }
 }
 
 #[component]
-pub fn ExtensionSignIn(iterations: u64, profile_user_account: String) -> impl IntoView {
+pub fn ExtensionSignIn(salt: String, choice: u128, profile_user_account: String) -> impl IntoView {
     let (account_load, set_account_load) = create_signal(("".to_owned(), "".to_owned()));
 
     let render_html = move || {
@@ -25,7 +25,8 @@ pub fn ExtensionSignIn(iterations: u64, profile_user_account: String) -> impl In
             view! {
                 <div>
                     <ExtensionTransaction
-                        iterations=iterations
+                        salt=salt.clone()
+                        choice=choice
                         profile_user_account=profile_user_account.clone()
                         account_address=account_load().0
                         account_source=account_load().1
@@ -42,7 +43,8 @@ pub fn ExtensionSignIn(iterations: u64, profile_user_account: String) -> impl In
 
 #[component]
 pub fn ExtensionTransaction(
-    iterations: u64,
+    salt: String,
+    choice: u128,
     profile_user_account: String,
     account_address: String,
     account_source: String,
@@ -52,7 +54,8 @@ pub fn ExtensionTransaction(
     let transaction_resource = create_local_resource(
         move || {
             (
-                iterations,
+                salt.clone(),
+                choice,
                 profile_user_account.clone(),
                 account_address.clone(),
                 account_source.clone(),
@@ -61,7 +64,8 @@ pub fn ExtensionTransaction(
             )
         },
         move |(
-            iterations,
+            salt,
+            choice,
             profile_user_account,
             account_address,
             account_source,
@@ -69,10 +73,13 @@ pub fn ExtensionTransaction(
             set_extrinsic_success,
         )| async move {
             let account_id32 = AccountId32::from_str(&profile_user_account.clone()).unwrap();
+            let salt_vec = salt.as_bytes().to_vec();
 
-            let tx = polkadot::tx()
-                .profile_validation()
-                .draw_jurors(account_id32, iterations);
+            let tx =
+                polkadot::tx()
+                    .profile_validation()
+                    .reveal_vote(account_id32, choice, salt_vec);
+
             sign_in_with_extension(
                 tx,
                 account_address,

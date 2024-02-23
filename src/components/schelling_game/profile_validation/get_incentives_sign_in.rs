@@ -6,12 +6,12 @@ use std::str::FromStr;
 use subxt::utils::AccountId32;
 
 #[component]
-pub fn SignTransaction(iterations: u64, profile_user_account: String) -> impl IntoView {
-    view! { <ExtensionSignIn iterations=iterations profile_user_account=profile_user_account/> }
+pub fn SignTransaction(profile_user_account: String) -> impl IntoView {
+    view! { <ExtensionSignIn profile_user_account=profile_user_account/> }
 }
 
 #[component]
-pub fn ExtensionSignIn(iterations: u64, profile_user_account: String) -> impl IntoView {
+pub fn ExtensionSignIn(profile_user_account: String) -> impl IntoView {
     let (account_load, set_account_load) = create_signal(("".to_owned(), "".to_owned()));
 
     let render_html = move || {
@@ -25,7 +25,6 @@ pub fn ExtensionSignIn(iterations: u64, profile_user_account: String) -> impl In
             view! {
                 <div>
                     <ExtensionTransaction
-                        iterations=iterations
                         profile_user_account=profile_user_account.clone()
                         account_address=account_load().0
                         account_source=account_load().1
@@ -42,7 +41,6 @@ pub fn ExtensionSignIn(iterations: u64, profile_user_account: String) -> impl In
 
 #[component]
 pub fn ExtensionTransaction(
-    iterations: u64,
     profile_user_account: String,
     account_address: String,
     account_source: String,
@@ -52,7 +50,6 @@ pub fn ExtensionTransaction(
     let transaction_resource = create_local_resource(
         move || {
             (
-                iterations,
                 profile_user_account.clone(),
                 account_address.clone(),
                 account_source.clone(),
@@ -61,7 +58,6 @@ pub fn ExtensionTransaction(
             )
         },
         move |(
-            iterations,
             profile_user_account,
             account_address,
             account_source,
@@ -72,7 +68,8 @@ pub fn ExtensionTransaction(
 
             let tx = polkadot::tx()
                 .profile_validation()
-                .draw_jurors(account_id32, iterations);
+                .get_incentives(account_id32);
+
             sign_in_with_extension(
                 tx,
                 account_address,

@@ -3,7 +3,7 @@ use leptos::*;
 use leptos_router::*;
 
 #[component]
-pub fn ApplyJurors() -> impl IntoView {
+pub fn ChangePeriod() -> impl IntoView {
     let params = use_params_map();
     let navigate = leptos_router::use_navigate();
 

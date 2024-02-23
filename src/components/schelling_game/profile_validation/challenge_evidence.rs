@@ -26,7 +26,7 @@ async fn get_cid_post(
 }
 
 #[component]
-pub fn AddProfile() -> impl IntoView {
+pub fn ChallengeEvidence() -> impl IntoView {
     let params = use_params_map();
     let profile_user_account = move || {
         params.with(|params| {
