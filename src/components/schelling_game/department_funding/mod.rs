@@ -1,6 +1,6 @@
 
-// pub mod apply_jurors;
-// pub mod apply_jurors_sign_in;
+pub mod apply_jurors;
+pub mod apply_jurors_sign_in;
 pub mod change_period;
 pub mod change_period_sign_in;
 pub mod commit_vote;

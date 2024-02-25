@@ -75,3 +75,13 @@ Format all .rs files ending with `_test.rs` within the examples directory
 ## transaction
 ## storage call
 ## ipfs file upload -->
+
+## Metadata download
+
+```bash
+cargo install subxt-cli
+```
+
+```bash
+subxt metadata -f bytes > metadata.scale
+```
