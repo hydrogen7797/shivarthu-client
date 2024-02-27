@@ -9,21 +9,9 @@ use leptos_router::*;
 #[component]
 pub fn ApplyJurors() -> impl IntoView {
     let params = use_params_map();
-    
-    let user_to_calculate = move || {
-        params.with(|params| {
-            params
-                .get("user_to_calculate")
-                .cloned()
-                .unwrap_or_default()
-        })
-    };
-    
 
-    
-
-
-
+    let user_to_calculate =
+        move || params.with(|params| params.get("user_to_calculate").cloned().unwrap_or_default());
 
     // gloo::console::log!(user_to_calculate());
     let (current_view, set_current_view) = create_signal(View::Form);

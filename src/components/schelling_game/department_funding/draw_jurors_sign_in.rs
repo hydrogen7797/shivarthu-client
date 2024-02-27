@@ -7,7 +7,12 @@ use subxt::utils::AccountId32;
 
 #[component]
 pub fn SignTransaction(iterations: u64, department_required_fund_id: u64) -> impl IntoView {
-    view! { <ExtensionSignIn iterations=iterations department_required_fund_id=department_required_fund_id/> }
+    view! {
+        <ExtensionSignIn
+            iterations=iterations
+            department_required_fund_id=department_required_fund_id
+        />
+    }
 }
 
 #[component]
@@ -68,16 +73,9 @@ pub fn ExtensionTransaction(
             set_error,
             set_extrinsic_success,
         )| async move {
-
-            
-
-            
-
             let tx = polkadot::tx()
                 .department_funding()
                 .draw_jurors(department_required_fund_id, iterations);
-
-            
 
             sign_in_with_extension(
                 tx,

@@ -9,9 +9,6 @@ use leptos_router::*;
 #[component]
 pub fn ApplyJurors() -> impl IntoView {
     let params = use_params_map();
-    
-
-    
 
     let project_id = move || {
         params.with(|params| {
@@ -22,11 +19,6 @@ pub fn ApplyJurors() -> impl IntoView {
                 .unwrap_or_default()
         })
     };
-
-    
-
-
-
 
     // gloo::console::log!(project_id());
     let (current_view, set_current_view) = create_signal(View::Form);
@@ -82,10 +74,7 @@ pub fn ApplyJurors() -> impl IntoView {
         View::Success => {
             view! {
                 <div>
-                    <SignTransaction
-                        stake=juror_stake().unwrap()
-                        project_id=project_id()
-                    />
+                    <SignTransaction stake=juror_stake().unwrap() project_id=project_id()/>
 
                 </div>
             }

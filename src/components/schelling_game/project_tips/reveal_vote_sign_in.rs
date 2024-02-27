@@ -72,17 +72,11 @@ pub fn ExtensionTransaction(
             set_error,
             set_extrinsic_success,
         )| async move {
-            
-
-            
             let salt_vec = salt.as_bytes().to_vec();
 
-            let tx =
-                polkadot::tx()
-                    .project_tips()
-                    .reveal_vote(project_id, choice, salt_vec);
-
-            
+            let tx = polkadot::tx()
+                .project_tips()
+                .reveal_vote(project_id, choice, salt_vec);
 
             sign_in_with_extension(
                 tx,

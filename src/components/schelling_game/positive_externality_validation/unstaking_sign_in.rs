@@ -64,17 +64,11 @@ pub fn ExtensionTransaction(
             set_error,
             set_extrinsic_success,
         )| async move {
-
-            
             let account_id32 = AccountId32::from_str(&user_to_calculate.clone()).unwrap();
 
-            let tx = polkadot::tx().positive_externality_validation().unstaking(account_id32);
-            
-
-            
-
-
-
+            let tx = polkadot::tx()
+                .positive_externality_validation()
+                .unstaking(account_id32);
 
             sign_in_with_extension(
                 tx,

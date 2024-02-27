@@ -6,12 +6,26 @@ use std::str::FromStr;
 use subxt::utils::AccountId32;
 
 #[component]
-pub fn SignTransaction(salt: String, choice: u128, department_required_fund_id: u64) -> impl IntoView {
-    view! { <ExtensionSignIn salt=salt choice=choice department_required_fund_id=department_required_fund_id/> }
+pub fn SignTransaction(
+    salt: String,
+    choice: u128,
+    department_required_fund_id: u64,
+) -> impl IntoView {
+    view! {
+        <ExtensionSignIn
+            salt=salt
+            choice=choice
+            department_required_fund_id=department_required_fund_id
+        />
+    }
 }
 
 #[component]
-pub fn ExtensionSignIn(salt: String, choice: u128, department_required_fund_id: u64) -> impl IntoView {
+pub fn ExtensionSignIn(
+    salt: String,
+    choice: u128,
+    department_required_fund_id: u64,
+) -> impl IntoView {
     let (account_load, set_account_load) = create_signal(("".to_owned(), "".to_owned()));
 
     let render_html = move || {
@@ -72,17 +86,13 @@ pub fn ExtensionTransaction(
             set_error,
             set_extrinsic_success,
         )| async move {
-            
-
-            
             let salt_vec = salt.as_bytes().to_vec();
 
-            let tx =
-                polkadot::tx()
-                    .department_funding()
-                    .reveal_vote(department_required_fund_id, choice, salt_vec);
-
-            
+            let tx = polkadot::tx().department_funding().reveal_vote(
+                department_required_fund_id,
+                choice,
+                salt_vec,
+            );
 
             sign_in_with_extension(
                 tx,

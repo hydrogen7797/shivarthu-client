@@ -1,4 +1,3 @@
-
 pub mod apply_jurors;
 pub mod apply_jurors_sign_in;
 pub mod change_period;

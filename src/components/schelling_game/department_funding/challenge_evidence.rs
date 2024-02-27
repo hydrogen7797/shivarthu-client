@@ -120,7 +120,10 @@ pub fn ChallengeEvidence() -> impl IntoView {
 
         View::Success => view! {
             <div>
-                <SignTransaction post_cid=post_cid() department_required_fund_id=department_required_fund_id()/>
+                <SignTransaction
+                    post_cid=post_cid()
+                    department_required_fund_id=department_required_fund_id()
+                />
             </div>
         },
     };

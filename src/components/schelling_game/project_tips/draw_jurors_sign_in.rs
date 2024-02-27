@@ -68,16 +68,9 @@ pub fn ExtensionTransaction(
             set_error,
             set_extrinsic_success,
         )| async move {
-
-            
-
-            
-
             let tx = polkadot::tx()
                 .project_tips()
                 .draw_jurors(project_id, iterations);
-
-            
 
             sign_in_with_extension(
                 tx,

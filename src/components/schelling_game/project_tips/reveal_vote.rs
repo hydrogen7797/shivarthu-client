@@ -9,9 +9,6 @@ use leptos_router::*;
 #[component]
 pub fn CommitVote() -> impl IntoView {
     let params = use_params_map();
-    
-
-    
 
     let project_id = move || {
         params.with(|params| {
@@ -23,7 +20,6 @@ pub fn CommitVote() -> impl IntoView {
         })
     };
 
-    
     // gloo::console::log!(project_id());
     let (current_view, set_current_view) = create_signal(View::Form);
     let (choice, set_choice) = create_signal::<Result<Option<u128>, ErrorString>>(Ok(None));

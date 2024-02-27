@@ -17,6 +17,7 @@ pub mod get_incentives;
 pub mod get_incentives_sign_in;
 pub mod reveal_vote;
 pub mod reveal_vote_sign_in;
+pub mod rpc;
 pub mod unstaking;
 pub mod unstaking_sign_in;
 pub mod view_profile_from_address;

@@ -57,25 +57,8 @@ pub fn ExtensionTransaction(
                 set_extrinsic_success,
             )
         },
-        move |(
-            project_id,
-            account_address,
-            account_source,
-            set_error,
-            set_extrinsic_success,
-        )| async move {
-
-            
-
-            
-
+        move |(project_id, account_address, account_source, set_error, set_extrinsic_success)| async move {
             let tx = polkadot::tx().project_tips().unstaking(project_id);
-
-
-            
-
-
-
 
             sign_in_with_extension(
                 tx,

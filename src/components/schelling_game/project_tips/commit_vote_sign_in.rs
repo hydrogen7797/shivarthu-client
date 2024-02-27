@@ -68,17 +68,7 @@ pub fn ExtensionTransaction(
             set_error,
             set_extrinsic_success,
         )| async move {
-
-            
-
-            
-
-            let tx = polkadot::tx()
-            .project_tips()
-            .commit_vote(project_id, hash);
-
-            
-
+            let tx = polkadot::tx().project_tips().commit_vote(project_id, hash);
 
             sign_in_with_extension(
                 tx,

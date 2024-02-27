@@ -8,9 +8,6 @@ use leptos_router::*;
 #[component]
 pub fn GetIncentives() -> impl IntoView {
     let params = use_params_map();
-    
-
-    
 
     let project_id = move || {
         params.with(|params| {
@@ -21,8 +18,6 @@ pub fn GetIncentives() -> impl IntoView {
                 .unwrap_or_default()
         })
     };
-
-    
 
     // gloo::console::log!(project_id());
     let (current_view, set_current_view) = create_signal(View::Form);

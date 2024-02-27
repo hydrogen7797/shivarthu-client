@@ -7,10 +7,6 @@ pub fn ChangePeriod() -> impl IntoView {
     let params = use_params_map();
     let navigate = leptos_router::use_navigate();
 
-    
-
-    
-
     let project_id = move || {
         params.with(|params| {
             params
@@ -21,7 +17,6 @@ pub fn ChangePeriod() -> impl IntoView {
         })
     };
 
-    
     let submit_click = move |e: SubmitEvent| {
         e.prevent_default();
         navigate(

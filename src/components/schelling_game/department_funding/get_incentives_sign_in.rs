@@ -64,14 +64,9 @@ pub fn ExtensionTransaction(
             set_error,
             set_extrinsic_success,
         )| async move {
-
-            
-
-            
             let tx = polkadot::tx()
-            .department_funding()
-            .get_incentives(department_required_fund_id);
-            
+                .department_funding()
+                .get_incentives(department_required_fund_id);
 
             sign_in_with_extension(
                 tx,

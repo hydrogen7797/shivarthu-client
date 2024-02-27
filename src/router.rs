@@ -5,6 +5,8 @@ use crate::components::markdown::markdown_component::MarkdownHtmlView;
 use crate::components::schelling_game::profile_validation::add_profile::AddProfile;
 use crate::components::schelling_game::profile_validation::add_profile_sign_in::ExtensionSignIn;
 use crate::components::schelling_game::profile_validation::apply_jurors::ApplyJurors;
+use crate::components::schelling_game::profile_validation::rpc::evidence_end_block::EvidenceEndBlock;
+use crate::components::tests::block_number::BlockNumber;
 use crate::components::transaction::get_accounts_extension::GetAccountsExtension;
 use crate::components::upload::upload_video::FileUpload;
 use leptos::*;
@@ -24,7 +26,8 @@ pub fn RouterApp() -> impl IntoView {
                 // <Route path="/signin" view=GetAccountsExtension/>
                 <Route path="/apply-juror/:profile_user_account" view=ApplyJurors/>
                 <Route path="/transfer-balance" view=TransferBalance/>
-
+                <Route path="/block-number" view=BlockNumber/>
+            // <Route path="/evidence-end-block/:profile_user_account" view=EvidenceEndBlock/>
             </Routes>
         </Router>
     }

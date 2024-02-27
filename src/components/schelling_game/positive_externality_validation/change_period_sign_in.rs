@@ -10,18 +10,9 @@ use subxt::utils::AccountId32;
 pub fn SignTransaction() -> impl IntoView {
     let params = use_params_map();
 
-    
-    let user_to_calculate = move || {
-        params.with(|params| {
-            params
-                .get("user_to_calculate")
-                .cloned()
-                .unwrap_or_default()
-        })
-    };
-    
+    let user_to_calculate =
+        move || params.with(|params| params.get("user_to_calculate").cloned().unwrap_or_default());
 
-    
     view! { <ExtensionSignIn user_to_calculate=user_to_calculate()/> }
 }
 
@@ -79,16 +70,11 @@ pub fn ExtensionTransaction(
             set_error,
             set_extrinsic_success,
         )| async move {
-
-            
             let account_id32 = AccountId32::from_str(&user_to_calculate.clone()).unwrap();
 
             let tx = polkadot::tx()
                 .positive_externality_validation()
                 .pass_period(account_id32);
-            
-
-            
 
             sign_in_with_extension(
                 tx,

@@ -10,10 +10,6 @@ use subxt::utils::AccountId32;
 pub fn SignTransaction() -> impl IntoView {
     let params = use_params_map();
 
-    
-
-    
-
     let department_required_fund_id = move || {
         params.with(|params| {
             params
@@ -24,7 +20,6 @@ pub fn SignTransaction() -> impl IntoView {
         })
     };
 
-    
     view! { <ExtensionSignIn department_required_fund_id=department_required_fund_id()/> }
 }
 
@@ -82,15 +77,9 @@ pub fn ExtensionTransaction(
             set_error,
             set_extrinsic_success,
         )| async move {
-
-            
-
-            
             let tx = polkadot::tx()
-            .department_funding()
-            .pass_period(department_required_fund_id);
-
-            
+                .department_funding()
+                .pass_period(department_required_fund_id);
 
             sign_in_with_extension(
                 tx,

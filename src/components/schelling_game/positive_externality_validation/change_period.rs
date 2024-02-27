@@ -7,22 +7,16 @@ pub fn ChangePeriod() -> impl IntoView {
     let params = use_params_map();
     let navigate = leptos_router::use_navigate();
 
-    
-    let user_to_calculate = move || {
-        params.with(|params| {
-            params
-                .get("user_to_calculate")
-                .cloned()
-                .unwrap_or_default()
-        })
-    };
-    
+    let user_to_calculate =
+        move || params.with(|params| params.get("user_to_calculate").cloned().unwrap_or_default());
 
-    
     let submit_click = move |e: SubmitEvent| {
         e.prevent_default();
         navigate(
-            &format!("positive-externality-validation-change-period/{}", user_to_calculate()),
+            &format!(
+                "positive-externality-validation-change-period/{}",
+                user_to_calculate()
+            ),
             Default::default(),
         );
     };

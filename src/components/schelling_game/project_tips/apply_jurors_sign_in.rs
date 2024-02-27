@@ -68,14 +68,9 @@ pub fn ExtensionTransaction(
             set_error,
             set_extrinsic_success,
         )| async move {
-
-            
-
-            
             let tx = polkadot::tx()
                 .project_tips()
                 .apply_jurors(project_id, stake);
-            
 
             sign_in_with_extension(
                 tx,
