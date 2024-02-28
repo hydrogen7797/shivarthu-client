@@ -7,7 +7,6 @@ use std::str::FromStr;
 use subxt::utils::AccountId32;
 use subxt::{OnlineClient, PolkadotConfig};
 
-
 async fn load_data(profile_user_account: String, set_period: WriteSignal<Option<Period>>) {
     let account_id32 = AccountId32::from_str(&profile_user_account).unwrap();
 
@@ -47,23 +46,18 @@ async fn load_data(profile_user_account: String, set_period: WriteSignal<Option<
 }
 
 pub fn get_period_fn(profile_user_account: String) -> ReadSignal<Option<Period>> {
-
     let (period, set_period) = create_signal::<Option<Period>>(None);
 
     let action = create_action(
-        |(profile_user_account, set_period): &(
-            String,
-            WriteSignal<Option<Period>>,
-        )| {
+        |(profile_user_account, set_period): &(String, WriteSignal<Option<Period>>)| {
             let profile_user_account = profile_user_account.clone();
             let set_period = set_period.clone();
             async move { load_data(profile_user_account, set_period).await }
         },
-    ); 
+    );
 
     create_effect(move |_| {
         action.dispatch((profile_user_account.clone(), set_period));
-
     });
 
     period
