@@ -3,22 +3,9 @@ use crate::components::schelling_game::department_funding::unstaking_sign_in::Si
 use crate::services::common_imp::View;
 use leptos::ev::SubmitEvent;
 use leptos::*;
-use leptos_router::*;
 
 #[component]
-pub fn Unstaking() -> impl IntoView {
-    let params = use_params_map();
-
-    let department_required_fund_id = move || {
-        params.with(|params| {
-            params
-                .get("department_required_fund_id")
-                .cloned()
-                .and_then(|value| value.parse::<u64>().ok())
-                .unwrap_or_default()
-        })
-    };
-
+pub fn Unstaking(department_required_fund_id: u64) -> impl IntoView {
     // gloo::console::log!(department_required_fund_id());
     let (current_view, set_current_view) = create_signal(View::Form);
     let submit_click = move |e: SubmitEvent| {
@@ -49,7 +36,8 @@ pub fn Unstaking() -> impl IntoView {
         View::Success => {
             view! {
                 <div>
-                    <SignTransaction department_required_fund_id=department_required_fund_id()/>
+                    <SignTransaction department_required_fund_id=department_required_fund_id
+                        .clone()/>
 
                 </div>
             }

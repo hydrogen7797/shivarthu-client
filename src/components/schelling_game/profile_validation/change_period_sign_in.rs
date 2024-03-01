@@ -18,6 +18,7 @@ pub fn SignTransaction() -> impl IntoView {
                 .unwrap_or_default()
         })
     };
+
     view! { <ExtensionSignIn profile_user_account=profile_user_account()/> }
 }
 
@@ -80,6 +81,7 @@ pub fn ExtensionTransaction(
             let tx = polkadot::tx()
                 .profile_validation()
                 .pass_period(account_id32);
+
             sign_in_with_extension(
                 tx,
                 account_address,

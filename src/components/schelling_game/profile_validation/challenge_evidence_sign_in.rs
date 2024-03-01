@@ -69,6 +69,7 @@ pub fn ExtensionTransaction(
             set_extrinsic_success,
         )| async move {
             let content: Content = Content::IPFS(post_cid.as_bytes().to_vec());
+
             let account_id32 = AccountId32::from_str(&profile_user_account.clone()).unwrap();
 
             let tx = polkadot::tx()

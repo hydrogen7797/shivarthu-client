@@ -4,22 +4,9 @@ use crate::services::common_imp::View;
 use crate::services::error::ErrorString;
 use leptos::ev::SubmitEvent;
 use leptos::*;
-use leptos_router::*;
 
 #[component]
-pub fn ApplyJurors() -> impl IntoView {
-    let params = use_params_map();
-
-    let department_required_fund_id = move || {
-        params.with(|params| {
-            params
-                .get("department_required_fund_id")
-                .cloned()
-                .and_then(|value| value.parse::<u64>().ok())
-                .unwrap_or_default()
-        })
-    };
-
+pub fn ApplyJurors(department_required_fund_id: u64) -> impl IntoView {
     // gloo::console::log!(department_required_fund_id());
     let (current_view, set_current_view) = create_signal(View::Form);
     let (juror_stake, set_juror_stake) = create_signal::<Result<u128, ErrorString>>(Ok(0));
@@ -76,7 +63,7 @@ pub fn ApplyJurors() -> impl IntoView {
                 <div>
                     <SignTransaction
                         stake=juror_stake().unwrap()
-                        department_required_fund_id=department_required_fund_id()
+                        department_required_fund_id=department_required_fund_id.clone()
                     />
 
                 </div>

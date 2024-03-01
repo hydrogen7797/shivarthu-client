@@ -7,12 +7,7 @@ use leptos::*;
 use leptos_router::*;
 
 #[component]
-pub fn CommitVote() -> impl IntoView {
-    let params = use_params_map();
-
-    let user_to_calculate =
-        move || params.with(|params| params.get("user_to_calculate").cloned().unwrap_or_default());
-
+pub fn CommitVote(user_to_calculate: String) -> impl IntoView {
     // gloo::console::log!(user_to_calculate());
     let (current_view, set_current_view) = create_signal(View::Form);
     let (hash, set_hash) = create_signal::<Result<Option<[u8; 32]>, ErrorString>>(Ok(None));
@@ -69,7 +64,7 @@ pub fn CommitVote() -> impl IntoView {
                 <div>
                     <SignTransaction
                         hash=hash().unwrap().unwrap()
-                        user_to_calculate=user_to_calculate()
+                        user_to_calculate=user_to_calculate.clone()
                     />
 
                 </div>

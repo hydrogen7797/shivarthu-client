@@ -7,19 +7,7 @@ use leptos::*;
 use leptos_router::*;
 
 #[component]
-pub fn CommitVote() -> impl IntoView {
-    let params = use_params_map();
-
-    let project_id = move || {
-        params.with(|params| {
-            params
-                .get("project_id")
-                .cloned()
-                .and_then(|value| value.parse::<u64>().ok())
-                .unwrap_or_default()
-        })
-    };
-
+pub fn CommitVote(project_id: u64) -> impl IntoView {
     // gloo::console::log!(project_id());
     let (current_view, set_current_view) = create_signal(View::Form);
     let (hash, set_hash) = create_signal::<Result<Option<[u8; 32]>, ErrorString>>(Ok(None));
@@ -74,7 +62,7 @@ pub fn CommitVote() -> impl IntoView {
         View::Success => {
             view! {
                 <div>
-                    <SignTransaction hash=hash().unwrap().unwrap() project_id=project_id()/>
+                    <SignTransaction hash=hash().unwrap().unwrap() project_id=project_id.clone()/>
 
                 </div>
             }

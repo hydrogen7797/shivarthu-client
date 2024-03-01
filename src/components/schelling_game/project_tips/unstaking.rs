@@ -3,22 +3,9 @@ use crate::components::schelling_game::project_tips::unstaking_sign_in::SignTran
 use crate::services::common_imp::View;
 use leptos::ev::SubmitEvent;
 use leptos::*;
-use leptos_router::*;
 
 #[component]
-pub fn Unstaking() -> impl IntoView {
-    let params = use_params_map();
-
-    let project_id = move || {
-        params.with(|params| {
-            params
-                .get("project_id")
-                .cloned()
-                .and_then(|value| value.parse::<u64>().ok())
-                .unwrap_or_default()
-        })
-    };
-
+pub fn Unstaking(project_id: u64) -> impl IntoView {
     // gloo::console::log!(project_id());
     let (current_view, set_current_view) = create_signal(View::Form);
     let submit_click = move |e: SubmitEvent| {
@@ -49,7 +36,7 @@ pub fn Unstaking() -> impl IntoView {
         View::Success => {
             view! {
                 <div>
-                    <SignTransaction project_id=project_id()/>
+                    <SignTransaction project_id=project_id.clone()/>
 
                 </div>
             }

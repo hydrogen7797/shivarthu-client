@@ -3,23 +3,16 @@ use leptos::*;
 use leptos_router::*;
 
 #[component]
-pub fn ChangePeriod() -> impl IntoView {
-    let params = use_params_map();
+pub fn ChangePeriod(profile_user_account: String) -> impl IntoView {
     let navigate = leptos_router::use_navigate();
-
-    let profile_user_account = move || {
-        params.with(|params| {
-            params
-                .get("profile_user_account")
-                .cloned()
-                .unwrap_or_default()
-        })
-    };
 
     let submit_click = move |e: SubmitEvent| {
         e.prevent_default();
         navigate(
-            &format!("/profile-change-period/{}", profile_user_account()),
+            &format!(
+                "profile-validation-change-period/{}",
+                profile_user_account.clone()
+            ),
             Default::default(),
         );
     };

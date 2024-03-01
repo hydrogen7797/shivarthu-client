@@ -7,12 +7,7 @@ use leptos::*;
 use leptos_router::*;
 
 #[component]
-pub fn DrawJurors() -> impl IntoView {
-    let params = use_params_map();
-
-    let user_to_calculate =
-        move || params.with(|params| params.get("user_to_calculate").cloned().unwrap_or_default());
-
+pub fn DrawJurors(user_to_calculate: String) -> impl IntoView {
     // gloo::console::log!(user_to_calculate());
     let (current_view, set_current_view) = create_signal(View::Form);
     let (iterations, set_iterations) = create_signal::<Result<u64, ErrorString>>(Ok(0));
@@ -69,7 +64,7 @@ pub fn DrawJurors() -> impl IntoView {
                 <div>
                     <SignTransaction
                         iterations=iterations().unwrap()
-                        user_to_calculate=user_to_calculate()
+                        user_to_calculate=user_to_calculate.clone()
                     />
 
                 </div>

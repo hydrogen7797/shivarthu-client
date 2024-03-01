@@ -73,6 +73,7 @@ pub fn ExtensionTransaction(
             let tx = polkadot::tx()
                 .profile_validation()
                 .apply_jurors(account_id32, stake);
+
             sign_in_with_extension(
                 tx,
                 account_address,

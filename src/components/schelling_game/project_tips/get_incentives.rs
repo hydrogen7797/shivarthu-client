@@ -6,19 +6,7 @@ use leptos::*;
 use leptos_router::*;
 
 #[component]
-pub fn GetIncentives() -> impl IntoView {
-    let params = use_params_map();
-
-    let project_id = move || {
-        params.with(|params| {
-            params
-                .get("project_id")
-                .cloned()
-                .and_then(|value| value.parse::<u64>().ok())
-                .unwrap_or_default()
-        })
-    };
-
+pub fn GetIncentives(project_id: u64) -> impl IntoView {
     // gloo::console::log!(project_id());
     let (current_view, set_current_view) = create_signal(View::Form);
     let submit_click = move |e: SubmitEvent| {
@@ -49,7 +37,7 @@ pub fn GetIncentives() -> impl IntoView {
         View::Success => {
             view! {
                 <div>
-                    <SignTransaction project_id=project_id()/>
+                    <SignTransaction project_id=project_id.clone()/>
 
                 </div>
             }

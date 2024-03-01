@@ -26,22 +26,7 @@ async fn get_cid_post(
 }
 
 #[component]
-pub fn ChallengeEvidence() -> impl IntoView {
-    let params = use_params_map();
-    
-
-    
-
-    let project_id = move || {
-        params.with(|params| {
-            params
-                .get("project_id")
-                .cloned()
-                .and_then(|value| value.parse::<u64>().ok())
-                .unwrap_or_default()
-        })
-    };
-
+pub fn ChallengeEvidence(project_id: u64) -> impl IntoView {
     
     let (current_view, set_current_view) = create_signal(View::Form);
     let (markdown, set_markdown) = create_signal(String::from(""));
@@ -120,7 +105,7 @@ pub fn ChallengeEvidence() -> impl IntoView {
 
         View::Success => view! {
             <div>
-                <SignTransaction post_cid=post_cid() project_id=project_id()/>
+                <SignTransaction post_cid=post_cid() project_id=project_id.clone()/>
             </div>
         },
     };

@@ -7,17 +7,7 @@ use leptos::*;
 use leptos_router::*;
 
 #[component]
-pub fn DrawJurors() -> impl IntoView {
-    let params = use_params_map();
-    let profile_user_account = move || {
-        params.with(|params| {
-            params
-                .get("profile_user_account")
-                .cloned()
-                .unwrap_or_default()
-        })
-    };
-
+pub fn DrawJurors(profile_user_account: String) -> impl IntoView {
     // gloo::console::log!(profile_user_account());
     let (current_view, set_current_view) = create_signal(View::Form);
     let (iterations, set_iterations) = create_signal::<Result<u64, ErrorString>>(Ok(0));
@@ -74,7 +64,7 @@ pub fn DrawJurors() -> impl IntoView {
                 <div>
                     <SignTransaction
                         iterations=iterations().unwrap()
-                        profile_user_account=profile_user_account()
+                        profile_user_account=profile_user_account.clone()
                     />
 
                 </div>

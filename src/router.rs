@@ -24,7 +24,7 @@ pub fn RouterApp() -> impl IntoView {
                 <Route path="/add-profile" view=AddProfile/>
                 // <Route path="/extension" view=ExtensionSignIn/>
                 // <Route path="/signin" view=GetAccountsExtension/>
-                <Route path="/apply-juror/:profile_user_account" view=ApplyJurors/>
+                // <Route path="/apply-juror/:profile_user_account" view=ApplyJurors/>
                 <Route path="/transfer-balance" view=TransferBalance/>
                 <Route path="/block-number" view=BlockNumber/>
             // <Route path="/evidence-end-block/:profile_user_account" view=EvidenceEndBlock/>

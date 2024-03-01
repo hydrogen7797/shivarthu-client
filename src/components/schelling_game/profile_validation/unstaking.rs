@@ -3,20 +3,9 @@ use crate::components::schelling_game::profile_validation::unstaking_sign_in::Si
 use crate::services::common_imp::View;
 use leptos::ev::SubmitEvent;
 use leptos::*;
-use leptos_router::*;
 
 #[component]
-pub fn Unstaking() -> impl IntoView {
-    let params = use_params_map();
-    let profile_user_account = move || {
-        params.with(|params| {
-            params
-                .get("profile_user_account")
-                .cloned()
-                .unwrap_or_default()
-        })
-    };
-
+pub fn Unstaking(profile_user_account: String) -> impl IntoView {
     // gloo::console::log!(profile_user_account());
     let (current_view, set_current_view) = create_signal(View::Form);
     let submit_click = move |e: SubmitEvent| {
@@ -47,7 +36,7 @@ pub fn Unstaking() -> impl IntoView {
         View::Success => {
             view! {
                 <div>
-                    <SignTransaction profile_user_account=profile_user_account()/>
+                    <SignTransaction profile_user_account=profile_user_account.clone()/>
 
                 </div>
             }
