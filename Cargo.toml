@@ -41,3 +41,4 @@ sp-core-hashing= "16.0.0"
 anyhow ="1.0.80"
 polars = { version="0.37.0", default-features = false, features= ['csv']}
 oauth2 = "4.4.2"
+thiserror = "1.0.57"

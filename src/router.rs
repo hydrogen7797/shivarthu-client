@@ -1,4 +1,5 @@
 use crate::components::accounts::accounts_handling::add_account::AddAccount;
+use crate::components::accounts::set_phase_from_pass::SetPhraseFromPass;
 use crate::components::balance::transfer_balance::TransferBalance;
 use crate::components::home::Home;
 use crate::components::markdown::markdown_component::MarkdownHtmlView;
@@ -8,6 +9,7 @@ use crate::components::schelling_game::profile_validation::apply_jurors::ApplyJu
 use crate::components::schelling_game::profile_validation::game::schelling_game::SchellingGame;
 use crate::components::schelling_game::profile_validation::rpc::evidence_end_block::EvidenceEndBlock;
 use crate::components::tests::block_number::BlockNumber;
+use crate::components::tests::display_error::NumericInput;
 use crate::components::transaction::get_accounts_extension::GetAccountsExtension;
 use crate::components::upload::upload_video::FileUpload;
 use leptos::*;
@@ -29,6 +31,8 @@ pub fn RouterApp() -> impl IntoView {
                 <Route path="/transfer-balance" view=TransferBalance/>
                 <Route path="/block-number" view=BlockNumber/>
                 <Route path="/profile-validation/:profile_user_account" view=SchellingGame/>
+                <Route path="/error-handling" view=NumericInput/>
+                <Route path="/enter-password" view=SetPhraseFromPass/>
             </Routes>
         </Router>
     }

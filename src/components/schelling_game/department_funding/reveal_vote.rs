@@ -7,7 +7,7 @@ use leptos::*;
 use leptos_router::*;
 
 #[component]
-pub fn CommitVote(department_required_fund_id: u64) -> impl IntoView {
+pub fn RevealVote(department_required_fund_id: u64) -> impl IntoView {
     // gloo::console::log!(department_required_fund_id());
     let (current_view, set_current_view) = create_signal(View::Form);
     let (choice, set_choice) = create_signal::<Result<Option<u128>, ErrorString>>(Ok(None));

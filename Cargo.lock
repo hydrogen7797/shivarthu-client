@@ -4498,6 +4498,7 @@ dependencies = [
  "sp-core-hashing 16.0.0",
  "subxt",
  "subxt-signer",
+ "thiserror",
  "tiny-bip39",
  "tracing-subscriber",
  "wasm-bindgen",
