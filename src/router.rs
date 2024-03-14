@@ -10,6 +10,7 @@ use crate::components::schelling_game::profile_validation::game::schelling_game:
 use crate::components::schelling_game::profile_validation::rpc::evidence_end_block::EvidenceEndBlock;
 use crate::components::tests::block_number::BlockNumber;
 use crate::components::tests::display_error::NumericInput;
+use crate::components::tests::polkadotjs_test::Polkadotjs;
 use crate::components::transaction::get_accounts_extension::GetAccountsExtension;
 use crate::components::upload::upload_video::FileUpload;
 use leptos::*;
@@ -33,6 +34,7 @@ pub fn RouterApp() -> impl IntoView {
                 <Route path="/profile-validation/:profile_user_account" view=SchellingGame/>
                 <Route path="/error-handling" view=NumericInput/>
                 <Route path="/enter-password" view=SetPhraseFromPass/>
+                <Route path="/polkadotjs" view=Polkadotjs />
             </Routes>
         </Router>
     }
