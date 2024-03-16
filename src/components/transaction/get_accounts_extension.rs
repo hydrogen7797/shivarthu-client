@@ -61,6 +61,7 @@ pub fn GetAccountsExtension(set_account_load: WriteSignal<(String, String)>) -> 
                                                     <button
                                                         class="btn btn-outline btn-info btn-block my-3"
                                                         on:click=move |e| { onclick_button(e, i) }
+                                                        id={&account.address}
                                                     >
                                                         {&account.source}
                                                         {" | "}
