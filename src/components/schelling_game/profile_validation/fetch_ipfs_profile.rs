@@ -3,7 +3,7 @@ use crate::constants::constant::IPFSFetchProvider;
 use gloo::console::log;
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ProfileFetchResponse {
     pub version: String,
     pub name: String,

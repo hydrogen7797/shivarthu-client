@@ -8,6 +8,7 @@ use crate::components::schelling_game::profile_validation::add_profile_sign_in::
 use crate::components::schelling_game::profile_validation::apply_jurors::ApplyJurors;
 use crate::components::schelling_game::profile_validation::game::schelling_game::SchellingGame;
 use crate::components::schelling_game::profile_validation::rpc::evidence_end_block::EvidenceEndBlock;
+use crate::components::schelling_game::profile_validation::view_profile_from_address::ViewProfileFromAddress;
 use crate::components::tests::block_number::BlockNumber;
 use crate::components::tests::display_error::NumericInput;
 use crate::components::tests::polkadotjs_test::Polkadotjs;
@@ -26,6 +27,7 @@ pub fn RouterApp() -> impl IntoView {
                 <Route path="/markdown" view=MarkdownHtmlView/>
                 // <Route path="/upload" view=FileUpload/>
                 <Route path="/add-profile" view=AddProfile/>
+                <Route path="/view-profile/:profile_user_account" view=ViewProfileFromAddress/>
                 // <Route path="/extension" view=ExtensionSignIn/>
                 // <Route path="/signin" view=GetAccountsExtension/>
                 // <Route path="/apply-juror/:profile_user_account" view=ApplyJurors/>
