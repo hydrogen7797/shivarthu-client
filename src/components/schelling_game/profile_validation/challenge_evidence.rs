@@ -3,6 +3,8 @@ use crate::components::api::select_ipfs_provider::DEFAULT_IPFS_PROVIDER;
 use crate::components::markdown::markdown_field::MarkdownField;
 use crate::components::navigation::nav::Nav;
 use crate::components::schelling_game::profile_validation::challenge_evidence_sign_in::SignTransaction;
+use crate::components::schelling_game::profile_validation::rpc::evidence_end_block::EvidenceEndBlock;
+use crate::components::schelling_game::profile_validation::storage::challenger_fees::ChallengerFees;
 use crate::services::common_imp::View;
 use json::object;
 use leptos::ev::SubmitEvent;
@@ -58,16 +60,12 @@ pub fn ChallengeEvidence(profile_user_account: String) -> impl IntoView {
     };
 
     let render_view = move || match current_view() {
-        View::Form =>
-        // if post_cid().is_empty() {
-        {
+        View::Form => {
             view! {
-                <div>
-                    <form
-                        class="max-w-5xl mx-auto max-md:mx-10"
-                        id="add-profile-submit-from"
-                        on:submit=submit_click
-                    >
+                <div class="max-w-5xl mx-auto max-md:mx-10">
+                    <EvidenceEndBlock profile_user_account=profile_user_account.clone()/>
+                    <ChallengerFees profile_user_account=profile_user_account.clone()/>
+                    <form id="add-profile-submit-from" on:submit=submit_click>
 
                         <div class="mb-5">
                             <label

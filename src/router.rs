@@ -30,6 +30,7 @@ pub fn RouterApp() -> impl IntoView {
                 <Route path="/add-profile" view=AddProfile/>
                 <Route path="/view-profile/:profile_user_account" view=ViewProfileFromAddress/>
                 <Route path="/add-profile-stake/:profile_user_account" view=AddProfileStake/>
+                <Route path="/profile-validation-game/:profile_user_account" view=SchellingGame/>
                 // <Route path="/extension" view=ExtensionSignIn/>
                 // <Route path="/signin" view=GetAccountsExtension/>
                 // <Route path="/apply-juror/:profile_user_account" view=ApplyJurors/>

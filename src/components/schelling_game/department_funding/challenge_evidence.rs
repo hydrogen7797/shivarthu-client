@@ -3,6 +3,7 @@ use crate::components::api::select_ipfs_provider::DEFAULT_IPFS_PROVIDER;
 use crate::components::markdown::markdown_field::MarkdownField;
 use crate::components::navigation::nav::Nav;
 use crate::components::schelling_game::department_funding::challenge_evidence_sign_in::SignTransaction;
+
 use crate::services::common_imp::View;
 use json::object;
 use leptos::ev::SubmitEvent;
@@ -60,15 +61,11 @@ pub fn ChallengeEvidence(department_required_fund_id: u64) -> impl IntoView {
 
     let render_view = move || match current_view() {
         View::Form =>
-        // if post_cid().is_empty() {
         {
             view! {
-                <div>
-                    <form
-                        class="max-w-5xl mx-auto max-md:mx-10"
-                        id="add-profile-submit-from"
-                        on:submit=submit_click
-                    >
+                <div class="max-w-5xl mx-auto max-md:mx-10">
+
+                    <form id="add-profile-submit-from" on:submit=submit_click>
 
                         <div class="mb-5">
                             <label
