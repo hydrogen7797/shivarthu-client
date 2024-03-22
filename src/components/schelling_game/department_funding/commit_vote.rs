@@ -29,8 +29,7 @@ pub fn CommitVote(department_required_fund_id: u64) -> impl IntoView {
             view! {
                 <div class="max-w-5xl mx-auto max-md:mx-10">
 
-                    <div>
-                    </div>
+                    <div></div>
                     <form
 
                         id="commit-vote-submit-from"

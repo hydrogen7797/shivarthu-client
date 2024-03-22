@@ -5,7 +5,7 @@ use leptos::*;
 
 async fn load_data(profile_user_account: String, check_account: String) -> bool {
     let client = WasmClientBuilder::default().build(NODE_URL).await.unwrap();
-
+    // gloo::console::log!(profile_user_account.clone(), check_account.clone());
     let result: bool = client
         .request(
             "profilevalidation_selectedjuror",
@@ -29,11 +29,34 @@ pub fn JurorSelected(
     );
     view! {
         <div>
-        {move || match async_data.get(){
-            None => view! {<p><span class="loading loading-dots loading-xs"></span></p>}.into_view(),
-            Some(data) => view! {<p>{data}</p>}.into_view()
+            {move || match async_data.get() {
+                None => {
+                    view! {
+                        <p>
+                            <span class="loading loading-dots loading-xs"></span>
+                        </p>
+                    }
+                        .into_view()
+                }
+                Some(data) => {
+                    if data == false {
+                        view! {
+                            <div role="alert" class="alert alert-error">
+                                <p>Value: {data} , you are not selected as juror</p>
+                            </div>
+                        }
+                            .into_view()
+                    } else {
+                        view! {
+                            <div role="alert" class="alert alert-success">
+                                <p>Value: {data} , you are selected as juror</p>
+                            </div>
+                        }
+                            .into_view()
+                    }
+                }
+            }}
 
-        }}
         </div>
     }
 }
