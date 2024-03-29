@@ -1,0 +1,58 @@
+name: Build Rust & Deploy Leptos Page
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run workspace tests
+        run: cargo test --workspace --verbose
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      # Build with trunk-rs
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@nightly
+        with:
+          targets: wasm32-unknown-unknown
+          toolchain: nightly-x86_64-unknown-linux-gnu
+          components: rust-src
+      - name: Install Trunk
+        uses: mbround18/trunk-rs@v0.0.1
+      - name: Build and Deploy Leptos Directory
+        run: cd crates/ && cd leptos-site/ && trunk build --release
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./crates/delano-leptos-site/dist
+          destination: ./_site
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
+
