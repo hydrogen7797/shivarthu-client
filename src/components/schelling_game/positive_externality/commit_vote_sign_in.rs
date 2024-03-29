@@ -6,12 +6,12 @@ use std::str::FromStr;
 use subxt::utils::AccountId32;
 
 #[component]
-pub fn SignTransaction(user_to_calculate: String) -> impl IntoView {
-    view! { <ExtensionSignIn user_to_calculate=user_to_calculate/> }
+pub fn SignTransaction(hash: [u8; 32], user_to_calculate: String) -> impl IntoView {
+    view! { <ExtensionSignIn hash=hash user_to_calculate=user_to_calculate/> }
 }
 
 #[component]
-pub fn ExtensionSignIn(user_to_calculate: String) -> impl IntoView {
+pub fn ExtensionSignIn(hash: [u8; 32], user_to_calculate: String) -> impl IntoView {
     let (account_load, set_account_load) = create_signal(("".to_owned(), "".to_owned()));
 
     let render_html = move || {
@@ -25,6 +25,7 @@ pub fn ExtensionSignIn(user_to_calculate: String) -> impl IntoView {
             view! {
                 <div>
                     <ExtensionTransaction
+                        hash=hash
                         user_to_calculate=user_to_calculate.clone()
                         account_address=account_load().0
                         account_source=account_load().1
@@ -41,6 +42,7 @@ pub fn ExtensionSignIn(user_to_calculate: String) -> impl IntoView {
 
 #[component]
 pub fn ExtensionTransaction(
+    hash: [u8; 32],
     user_to_calculate: String,
     account_address: String,
     account_source: String,
@@ -50,6 +52,7 @@ pub fn ExtensionTransaction(
     let transaction_resource = create_local_resource(
         move || {
             (
+                hash.clone(),
                 user_to_calculate.clone(),
                 account_address.clone(),
                 account_source.clone(),
@@ -58,6 +61,7 @@ pub fn ExtensionTransaction(
             )
         },
         move |(
+            hash,
             user_to_calculate,
             account_address,
             account_source,
@@ -67,8 +71,8 @@ pub fn ExtensionTransaction(
             let account_id32 = AccountId32::from_str(&user_to_calculate.clone()).unwrap();
 
             let tx = polkadot::tx()
-                .positive_externality_validation()
-                .get_incentives(account_id32);
+                .positive_externality()
+                .commit_vote(account_id32, hash);
 
             sign_in_with_extension(
                 tx,

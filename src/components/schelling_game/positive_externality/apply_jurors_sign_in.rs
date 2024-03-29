@@ -2,22 +2,16 @@ use crate::components::transaction::extension_sign_in::sign_in_with_extension;
 use crate::components::transaction::get_accounts_extension::GetAccountsExtension;
 use crate::services::common_services::polkadot;
 use leptos::*;
-use leptos_router::*;
 use std::str::FromStr;
 use subxt::utils::AccountId32;
 
 #[component]
-pub fn SignTransaction() -> impl IntoView {
-    let params = use_params_map();
-
-    let user_to_calculate =
-        move || params.with(|params| params.get("user_to_calculate").cloned().unwrap_or_default());
-
-    view! { <ExtensionSignIn user_to_calculate=user_to_calculate()/> }
+pub fn SignTransaction(stake: u128, user_to_calculate: String) -> impl IntoView {
+    view! { <ExtensionSignIn stake=stake user_to_calculate=user_to_calculate/> }
 }
 
 #[component]
-pub fn ExtensionSignIn(user_to_calculate: String) -> impl IntoView {
+pub fn ExtensionSignIn(stake: u128, user_to_calculate: String) -> impl IntoView {
     let (account_load, set_account_load) = create_signal(("".to_owned(), "".to_owned()));
 
     let render_html = move || {
@@ -31,6 +25,7 @@ pub fn ExtensionSignIn(user_to_calculate: String) -> impl IntoView {
             view! {
                 <div>
                     <ExtensionTransaction
+                        stake=stake
                         user_to_calculate=user_to_calculate.clone()
                         account_address=account_load().0
                         account_source=account_load().1
@@ -47,6 +42,7 @@ pub fn ExtensionSignIn(user_to_calculate: String) -> impl IntoView {
 
 #[component]
 pub fn ExtensionTransaction(
+    stake: u128,
     user_to_calculate: String,
     account_address: String,
     account_source: String,
@@ -56,6 +52,7 @@ pub fn ExtensionTransaction(
     let transaction_resource = create_local_resource(
         move || {
             (
+                stake,
                 user_to_calculate.clone(),
                 account_address.clone(),
                 account_source.clone(),
@@ -64,6 +61,7 @@ pub fn ExtensionTransaction(
             )
         },
         move |(
+            stake,
             user_to_calculate,
             account_address,
             account_source,
@@ -73,8 +71,8 @@ pub fn ExtensionTransaction(
             let account_id32 = AccountId32::from_str(&user_to_calculate.clone()).unwrap();
 
             let tx = polkadot::tx()
-                .positive_externality_validation()
-                .pass_period(account_id32);
+                .positive_externality()
+                .apply_jurors(account_id32, stake);
 
             sign_in_with_extension(
                 tx,

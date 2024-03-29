@@ -10,7 +10,7 @@ pub fn ChangePeriod(user_to_calculate: String) -> impl IntoView {
         e.prevent_default();
         navigate(
             &format!(
-                "positive-externality-validation-change-period/{}",
+                "positive-externality-change-period/{}",
                 user_to_calculate.clone()
             ),
             Default::default(),

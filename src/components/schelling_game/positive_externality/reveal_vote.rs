@@ -1,6 +1,4 @@
-use crate::components::schelling_game::positive_externality_validation::reveal_vote_sign_in::SignTransaction;
-
-
+use crate::components::schelling_game::positive_externality::reveal_vote_sign_in::SignTransaction;
 
 use crate::services::common_imp::View;
 use crate::services::error::ErrorString;
@@ -10,10 +8,9 @@ use leptos_router::*;
 
 #[component]
 pub fn RevealVote(user_to_calculate: String) -> impl IntoView {
-    
     // gloo::console::log!(user_to_calculate());
     let (current_view, set_current_view) = create_signal(View::Form);
-    let (choice, set_choice) = create_signal::<Result<Option<u128>, ErrorString>>(Ok(None));
+    let (choice, set_choice) = create_signal::<Result<Option<i64>, ErrorString>>(Ok(None));
     let (salt, set_salt) = create_signal(String::from(""));
     let submit_click = move |e: SubmitEvent| {
         e.prevent_default();
@@ -25,7 +22,7 @@ pub fn RevealVote(user_to_calculate: String) -> impl IntoView {
     };
 
     let choice_changed = move |value: String| {
-        let choice_value = value.parse::<u128>().expect("Invalid input");
+        let choice_value = value.parse::<i64>().expect("Invalid input");
         gloo::console::log!(choice_value);
 
         set_choice(Ok(Some(choice_value)));
@@ -92,7 +89,6 @@ pub fn RevealVote(user_to_calculate: String) -> impl IntoView {
                 </div>
             }
         }
-      
     };
 
     view! { <>{move || render_view()}</> }

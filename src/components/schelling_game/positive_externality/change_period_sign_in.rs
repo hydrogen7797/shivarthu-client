@@ -2,12 +2,18 @@ use crate::components::transaction::extension_sign_in::sign_in_with_extension;
 use crate::components::transaction::get_accounts_extension::GetAccountsExtension;
 use crate::services::common_services::polkadot;
 use leptos::*;
+use leptos_router::*;
 use std::str::FromStr;
 use subxt::utils::AccountId32;
 
 #[component]
-pub fn SignTransaction(user_to_calculate: String) -> impl IntoView {
-    view! { <ExtensionSignIn user_to_calculate=user_to_calculate/> }
+pub fn SignTransaction() -> impl IntoView {
+    let params = use_params_map();
+
+    let user_to_calculate =
+        move || params.with(|params| params.get("user_to_calculate").cloned().unwrap_or_default());
+
+    view! { <ExtensionSignIn user_to_calculate=user_to_calculate()/> }
 }
 
 #[component]
@@ -67,8 +73,8 @@ pub fn ExtensionTransaction(
             let account_id32 = AccountId32::from_str(&user_to_calculate.clone()).unwrap();
 
             let tx = polkadot::tx()
-                .positive_externality_validation()
-                .unstaking(account_id32);
+                .positive_externality()
+                .pass_period(account_id32);
 
             sign_in_with_extension(
                 tx,

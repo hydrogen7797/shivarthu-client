@@ -1,7 +1,7 @@
 use crate::components::api::ipfs_request::ipfs_call_json_string;
 use crate::components::api::select_ipfs_provider::DEFAULT_IPFS_PROVIDER;
 use crate::components::markdown::markdown_field::MarkdownField;
-use crate::components::schelling_game::positive_externality_validation::challenge_evidence_sign_in::SignTransaction;
+use crate::components::schelling_game::positive_externality::challenge_evidence_sign_in::SignTransaction;
 
 use crate::services::common_imp::View;
 use json::object;

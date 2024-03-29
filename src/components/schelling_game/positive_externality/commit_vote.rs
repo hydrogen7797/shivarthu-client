@@ -1,4 +1,4 @@
-use crate::components::schelling_game::positive_externality_validation::commit_vote_sign_in::SignTransaction;
+use crate::components::schelling_game::positive_externality::commit_vote_sign_in::SignTransaction;
 
 use crate::services::common_imp::View;
 use crate::services::error::ErrorString;

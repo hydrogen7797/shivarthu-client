@@ -70,7 +70,9 @@ pub fn SchellingGameComponent(profile_user_account: String) -> impl IntoView {
                             </div>
                         },
                         Period::Appeal => view! { <div></div> },
-                        Period::Execution => view! { <div>You are in Execution phase. Get your incentives</div> },
+                        Period::Execution => {
+                            view! { <div>You are in Execution phase. Get your incentives</div> }
+                        }
                     };
                     view
                 } else {

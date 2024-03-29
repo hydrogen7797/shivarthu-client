@@ -6,12 +6,12 @@ use std::str::FromStr;
 use subxt::utils::AccountId32;
 
 #[component]
-pub fn SignTransaction(salt: String, choice: u128, user_to_calculate: String) -> impl IntoView {
+pub fn SignTransaction(salt: String, choice: i64, user_to_calculate: String) -> impl IntoView {
     view! { <ExtensionSignIn salt=salt choice=choice user_to_calculate=user_to_calculate/> }
 }
 
 #[component]
-pub fn ExtensionSignIn(salt: String, choice: u128, user_to_calculate: String) -> impl IntoView {
+pub fn ExtensionSignIn(salt: String, choice: i64, user_to_calculate: String) -> impl IntoView {
     let (account_load, set_account_load) = create_signal(("".to_owned(), "".to_owned()));
 
     let render_html = move || {
@@ -44,7 +44,7 @@ pub fn ExtensionSignIn(salt: String, choice: u128, user_to_calculate: String) ->
 #[component]
 pub fn ExtensionTransaction(
     salt: String,
-    choice: u128,
+    choice: i64,
     user_to_calculate: String,
     account_address: String,
     account_source: String,
@@ -72,17 +72,13 @@ pub fn ExtensionTransaction(
             set_error,
             set_extrinsic_success,
         )| async move {
-            
             let account_id32 = AccountId32::from_str(&user_to_calculate.clone()).unwrap();
             let salt_vec = salt.as_bytes().to_vec();
 
             let tx =
                 polkadot::tx()
-                    .positive_externality_validation()
+                    .positive_externality()
                     .reveal_vote(account_id32, choice, salt_vec);
-            
-
-            
 
             sign_in_with_extension(
                 tx,
@@ -95,8 +91,7 @@ pub fn ExtensionTransaction(
         },
     );
 
-     
-let loading = transaction_resource.loading();
+    let loading = transaction_resource.loading();
     let is_loading = move || {
         if loading() {
             view! {

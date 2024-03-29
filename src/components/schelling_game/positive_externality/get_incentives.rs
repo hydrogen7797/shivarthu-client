@@ -1,4 +1,4 @@
-use crate::components::schelling_game::positive_externality_validation::get_incentives_sign_in::SignTransaction;
+use crate::components::schelling_game::positive_externality::get_incentives_sign_in::SignTransaction;
 use crate::services::common_imp::View;
 use leptos::ev::SubmitEvent;
 use leptos::*;

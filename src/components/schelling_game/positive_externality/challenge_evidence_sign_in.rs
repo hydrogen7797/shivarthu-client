@@ -2,16 +2,17 @@ use crate::components::transaction::extension_sign_in::sign_in_with_extension;
 use crate::components::transaction::get_accounts_extension::GetAccountsExtension;
 use crate::services::common_services::polkadot;
 use leptos::*;
+use polkadot::runtime_types::pallet_support::Content;
 use std::str::FromStr;
 use subxt::utils::AccountId32;
 
 #[component]
-pub fn SignTransaction(iterations: u64, user_to_calculate: String) -> impl IntoView {
-    view! { <ExtensionSignIn iterations=iterations user_to_calculate=user_to_calculate/> }
+pub fn SignTransaction(post_cid: String, user_to_calculate: String) -> impl IntoView {
+    view! { <ExtensionSignIn post_cid=post_cid user_to_calculate=user_to_calculate/> }
 }
 
 #[component]
-pub fn ExtensionSignIn(iterations: u64, user_to_calculate: String) -> impl IntoView {
+pub fn ExtensionSignIn(post_cid: String, user_to_calculate: String) -> impl IntoView {
     let (account_load, set_account_load) = create_signal(("".to_owned(), "".to_owned()));
 
     let render_html = move || {
@@ -25,7 +26,7 @@ pub fn ExtensionSignIn(iterations: u64, user_to_calculate: String) -> impl IntoV
             view! {
                 <div>
                     <ExtensionTransaction
-                        iterations=iterations
+                        post_cid=post_cid.clone()
                         user_to_calculate=user_to_calculate.clone()
                         account_address=account_load().0
                         account_source=account_load().1
@@ -36,13 +37,12 @@ pub fn ExtensionSignIn(iterations: u64, user_to_calculate: String) -> impl IntoV
             view! { <div>{"Some Error Occured"}</div> }
         }
     };
-
     view! { <div>{move || render_html()}</div> }
 }
 
 #[component]
 pub fn ExtensionTransaction(
-    iterations: u64,
+    post_cid: String,
     user_to_calculate: String,
     account_address: String,
     account_source: String,
@@ -52,7 +52,7 @@ pub fn ExtensionTransaction(
     let transaction_resource = create_local_resource(
         move || {
             (
-                iterations,
+                post_cid.clone(),
                 user_to_calculate.clone(),
                 account_address.clone(),
                 account_source.clone(),
@@ -61,18 +61,24 @@ pub fn ExtensionTransaction(
             )
         },
         move |(
-            iterations,
+            post_cid,
             user_to_calculate,
             account_address,
             account_source,
             set_error,
             set_extrinsic_success,
         )| async move {
+            let content: Content = Content::IPFS(post_cid.as_bytes().to_vec());
+
+            
             let account_id32 = AccountId32::from_str(&user_to_calculate.clone()).unwrap();
 
             let tx = polkadot::tx()
-                .positive_externality_validation()
-                .draw_jurors(account_id32, iterations);
+                .positive_externality()
+                .challenge_profile(account_id32, content);
+            
+
+            
 
             sign_in_with_extension(
                 tx,
@@ -85,7 +91,8 @@ pub fn ExtensionTransaction(
         },
     );
 
-    let loading = transaction_resource.loading();
+     
+let loading = transaction_resource.loading();
     let is_loading = move || {
         if loading() {
             view! {
