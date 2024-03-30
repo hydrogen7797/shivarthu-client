@@ -1,6 +1,8 @@
 use crate::components::navigation::nav::Nav;
 use crate::components::schelling_game::profile_validation::apply_jurors::ApplyJurors;
+
 use crate::components::schelling_game::profile_validation::challenge_evidence::ChallengeEvidence;
+
 use crate::components::schelling_game::profile_validation::commit_vote::CommitVote;
 use crate::components::schelling_game::profile_validation::draw_jurors::DrawJurors;
 use crate::components::schelling_game::profile_validation::reveal_vote::RevealVote;
@@ -12,6 +14,7 @@ use leptos_router::*;
 #[component]
 pub fn SchellingGame() -> impl IntoView {
     let params = use_params_map();
+
     let profile_user_account = move || {
         params.with(|params| {
             params
@@ -44,7 +47,9 @@ pub fn SchellingGameComponent(profile_user_account: String) -> impl IntoView {
                     let view = match period {
                         Period::Evidence => view! {
                             <div>
+
                                 <ChallengeEvidence profile_user_account=profile_user_account()/>
+
                             </div>
                         },
                         Period::Staking => {

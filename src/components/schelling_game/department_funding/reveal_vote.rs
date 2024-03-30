@@ -1,5 +1,7 @@
+use crate::components::schelling_game::department_funding::change_period::ChangePeriod;
 use crate::components::schelling_game::department_funding::reveal_vote_sign_in::SignTransaction;
-
+use crate::components::schelling_game::department_funding::rpc::vote_end_block::VoteEndBlock;
+use crate::components::schelling_game::department_funding::storage::get_period::GetPeriod;
 use crate::services::common_imp::View;
 use crate::services::error::ErrorString;
 use leptos::ev::SubmitEvent;
@@ -32,7 +34,9 @@ pub fn RevealVote(department_required_fund_id: u64) -> impl IntoView {
         View::Form => {
             view! {
                 <div class="max-w-5xl mx-auto max-md:mx-10">
-
+                    <GetPeriod department_required_fund_id=department_required_fund_id.clone()/>
+                    <VoteEndBlock department_required_fund_id=department_required_fund_id.clone()/>
+                    <ChangePeriod department_required_fund_id=department_required_fund_id.clone()/>
                     <form id="reveal-vote-submit-from" on:submit=submit_click>
 
                         <div class="mb-5">

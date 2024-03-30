@@ -6,6 +6,7 @@ use leptos_router::*;
 #[component]
 pub fn JurorSelectedCheck() -> impl IntoView {
     let params = use_params_map();
+
     let profile_user_account = move || {
         params.with(|params| {
             params
@@ -14,6 +15,7 @@ pub fn JurorSelectedCheck() -> impl IntoView {
                 .unwrap_or_default()
         })
     };
+
     let (check_account, set_check_account) = create_signal(String::from(""));
 
     let account = untrack(move || profile_user_account());

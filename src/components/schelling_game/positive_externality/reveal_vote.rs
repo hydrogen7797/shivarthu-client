@@ -1,5 +1,7 @@
+use crate::components::schelling_game::positive_externality::change_period::ChangePeriod;
 use crate::components::schelling_game::positive_externality::reveal_vote_sign_in::SignTransaction;
-
+use crate::components::schelling_game::positive_externality::rpc::vote_end_block::VoteEndBlock;
+use crate::components::schelling_game::positive_externality::storage::get_period::GetPeriod;
 use crate::services::common_imp::View;
 use crate::services::error::ErrorString;
 use leptos::ev::SubmitEvent;
@@ -32,7 +34,9 @@ pub fn RevealVote(user_to_calculate: String) -> impl IntoView {
         View::Form => {
             view! {
                 <div class="max-w-5xl mx-auto max-md:mx-10">
-
+                    <GetPeriod user_to_calculate=user_to_calculate.clone()/>
+                    <VoteEndBlock user_to_calculate=user_to_calculate.clone()/>
+                    <ChangePeriod user_to_calculate=user_to_calculate.clone()/>
                     <form id="reveal-vote-submit-from" on:submit=submit_click>
 
                         <div class="mb-5">

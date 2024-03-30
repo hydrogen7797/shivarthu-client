@@ -2,7 +2,8 @@ use crate::components::api::ipfs_request::ipfs_call_json_string;
 use crate::components::api::select_ipfs_provider::DEFAULT_IPFS_PROVIDER;
 use crate::components::markdown::markdown_field::MarkdownField;
 use crate::components::schelling_game::project_tips::challenge_evidence_sign_in::SignTransaction;
-
+use crate::components::schelling_game::project_tips::rpc::evidence_end_block::EvidenceEndBlock;
+use crate::components::schelling_game::project_tips::storage::challenger_fees::ChallengerFees;
 use crate::services::common_imp::View;
 use json::object;
 use leptos::ev::SubmitEvent;
@@ -63,7 +64,8 @@ pub fn ChallengeEvidence(project_id: u64) -> impl IntoView {
         {
             view! {
                 <div class="max-w-5xl mx-auto max-md:mx-10">
-
+                    <EvidenceEndBlock project_id=project_id.clone()/>
+                    <ChallengerFees project_id=project_id.clone()/>
                     <form id="challenge-evidence-submit-from" on:submit=submit_click>
 
                         <div class="mb-5">

@@ -2,7 +2,6 @@ use crate::components::schelling_game::profile_validation::apply_jurors_sign_in:
 use crate::components::schelling_game::profile_validation::change_period::ChangePeriod;
 use crate::components::schelling_game::profile_validation::rpc::staking_end_block::StakingEndBlock;
 use crate::components::schelling_game::profile_validation::storage::get_period::GetPeriod;
-
 use crate::services::common_imp::View;
 use crate::services::error::ErrorString;
 use leptos::ev::SubmitEvent;

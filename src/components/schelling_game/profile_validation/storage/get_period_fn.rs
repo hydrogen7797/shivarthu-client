@@ -8,11 +8,12 @@ use subxt::utils::AccountId32;
 use subxt::{OnlineClient, PolkadotConfig};
 
 async fn load_data(profile_user_account: String, set_period: WriteSignal<Option<Period>>) {
-    let account_id32 = AccountId32::from_str(&profile_user_account).unwrap();
-
     let client = OnlineClient::<PolkadotConfig>::from_url(NODE_URL)
         .await
         .unwrap();
+
+    let account_id32 = AccountId32::from_str(&profile_user_account).unwrap();
+
     let profile_validation_block_storage = polkadot::storage()
         .profile_validation()
         .profile_validation_block(account_id32.clone());
@@ -25,7 +26,6 @@ async fn load_data(profile_user_account: String, set_period: WriteSignal<Option<
         .fetch(&profile_validation_block_storage)
         .await
         .unwrap();
-
     if profile_validation_block.is_some() {
         let key = SumTreeName::ProfileValidation {
             citizen_address: account_id32.clone(),
