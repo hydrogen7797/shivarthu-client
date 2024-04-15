@@ -64,6 +64,8 @@ pub fn CreateProject() -> impl IntoView {
     let (markdown, set_markdown) = create_signal(String::from(""));
     let (post_cid, set_post_cid) = create_signal(String::from(""));
     let (tip_name, set_tip_name) = create_signal(String::from(""));
+    let (funding_needed, set_funding_needed) = create_signal::<Option<u128>>(None);
+
 
     let submit_action = create_action(
         |(details, set_current_view, set_post_cid): &(
@@ -85,6 +87,12 @@ pub fn CreateProject() -> impl IntoView {
     let submit_click = move |e: SubmitEvent| {
         e.prevent_default();
         submit_action.dispatch((markdown(), set_current_view, set_post_cid));
+    };
+
+    let funding_needed_changed = move |value: String| {
+        let choice_value = value.parse::<u128>().expect("Invalid input");
+        gloo::console::log!(choice_value);
+        set_funding_needed(Some(choice_value));
     };
 
     let cid_value = move || {
@@ -135,8 +143,24 @@ pub fn CreateProject() -> impl IntoView {
                             <SelectOption tip_name is="SmallSpender"/>
                             <SelectOption tip_name is="MediumSpender"/>
                             <SelectOption tip_name is="BigSpender"/>
-
                         </select>
+
+                        <div class="mb-5">
+                            <label
+                                for="funding-needed"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                                Funding Needed
+                            </label>
+                            <input
+                                type="number"
+                                id="funding-needed"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required
+                                on:input=move |ev| funding_needed_changed(event_target_value(&ev))
+                            />
+                        </div>
+
                         <br/>
                         <br/>
                         <button
