@@ -1,5 +1,7 @@
 # Shivarthu client based on leptos
 
+Website: <https://shivarthu.on-fleek.app/>
+
 ## Change the auth file
 
 `src/constants/auth.rs.bak`
