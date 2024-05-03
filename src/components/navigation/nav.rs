@@ -28,7 +28,7 @@ pub fn Nav() -> impl IntoView {
                             class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
                         >
                             <li>
-                            <a href="/add-profile">"Add profile"</a>
+                                <a href="/add-profile">"Add profile"</a>
                             </li>
                             <li>
                                 <a>Portfolio</a>
