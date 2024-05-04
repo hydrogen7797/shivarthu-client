@@ -4,8 +4,8 @@ use crate::components::balance::transfer_balance::TransferBalance;
 use crate::components::home::Home;
 use crate::components::markdown::markdown_component::MarkdownHtmlView;
 use crate::components::schelling_game::positive_externality::{
-    apply_staking_period::ApplyStakingPeriod, create_post::CreatePositiveExternalityPost,
-    home::PositiveExternalityHome, apply_staking_period_params::ApplyStakingPeriodParams,
+    apply_staking_period_params::ApplyStakingPeriodParams,
+    create_post::CreatePositiveExternalityPost, home::PositiveExternalityHome, game::schelling_game::SchellingGame as PositiveExternalitySchellingGame
 };
 use crate::components::schelling_game::profile_validation::add_profile::AddProfile;
 use crate::components::schelling_game::profile_validation::add_profile_sign_in::ExtensionSignIn;
@@ -55,7 +55,15 @@ pub fn RouterApp() -> impl IntoView {
                 <Route path="/project-tips/create-project/:department_id" view=CreateProject/>
                 <Route path="/positive-externality" view=PositiveExternalityHome/>
                 <Route path="/positive-externality/create-post" view=CreatePositiveExternalityPost/>
-                <Route path="/positive-externality/apply-staking-period/:user_to_calculate" view=ApplyStakingPeriodParams />
+                <Route
+                    path="/positive-externality/apply-staking-period/:user_to_calculate"
+                    view=ApplyStakingPeriodParams
+                />
+
+                <Route
+                path="/positive-externality/schelling-game/:user_to_calculate"
+                view=PositiveExternalitySchellingGame
+            />
 
             </Routes>
         </Router>

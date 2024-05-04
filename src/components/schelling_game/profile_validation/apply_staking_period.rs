@@ -1,6 +1,4 @@
 use crate::components::schelling_game::profile_validation::apply_staking_period_sign_in::SignTransaction;
-use crate::components::schelling_game::profile_validation::storage::get_period::GetPeriod;
-use crate::components::schelling_game::profile_validation::change_period::ChangePeriod;
 use crate::services::common_imp::View;
 use crate::services::error::ErrorString;
 use leptos::ev::SubmitEvent;
@@ -22,13 +20,7 @@ pub fn ApplyStakingPeriod(profile_user_account: String) -> impl IntoView {
         View::Form => {
             view! {
                 <div class="max-w-5xl mx-auto max-md:mx-10">
-                    <GetPeriod profile_user_account=profile_user_account.clone()/>
-                    <ChangePeriod profile_user_account=profile_user_account.clone()/>
-                    <form
-
-                        id="apply-staking-period-from"
-                        on:submit=submit_click
-                    >
+                    <form id="apply-staking-period-from" on:submit=submit_click>
                         <div>Apply Staking Period</div>
                         <button
                             type="submit"

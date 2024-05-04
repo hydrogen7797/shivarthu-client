@@ -1,6 +1,4 @@
 use crate::components::schelling_game::department_funding::apply_staking_period_sign_in::SignTransaction;
-use crate::components::schelling_game::department_funding::change_period::ChangePeriod;
-use crate::components::schelling_game::department_funding::storage::get_period::GetPeriod;
 use crate::services::common_imp::View;
 use crate::services::error::ErrorString;
 use leptos::ev::SubmitEvent;
@@ -20,13 +18,7 @@ pub fn ApplyStakingPeriod(department_required_fund_id: u64) -> impl IntoView {
         View::Form => {
             view! {
                 <div class="max-w-5xl mx-auto max-md:mx-10">
-                    <GetPeriod department_required_fund_id=department_required_fund_id.clone()/>
-                    <ChangePeriod department_required_fund_id=department_required_fund_id.clone()/>
-                    <form
-
-                        id="apply-staking-period-from"
-                        on:submit=submit_click
-                    >
+                    <form id="apply-staking-period-from" on:submit=submit_click>
                         <div>Apply Staking Period</div>
                         <button
                             type="submit"
