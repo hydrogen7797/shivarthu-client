@@ -11,7 +11,7 @@ async fn load_data(user_to_calculate: String, set_end_period: WriteSignal<Option
     let client = WasmClientBuilder::default().build(NODE_URL).await.unwrap();
     let result: Option<u32> = client
         .request(
-            "positive_externality_evidenceperiodendblock",
+            "positiveexternality_evidenceperiodendblock",
             rpc_params![user_to_calculate],
         )
         .await

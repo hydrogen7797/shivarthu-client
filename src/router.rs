@@ -5,7 +5,9 @@ use crate::components::home::Home;
 use crate::components::markdown::markdown_component::MarkdownHtmlView;
 use crate::components::schelling_game::positive_externality::{
     apply_staking_period_params::ApplyStakingPeriodParams,
-    create_post::CreatePositiveExternalityPost, home::PositiveExternalityHome, game::schelling_game::SchellingGame as PositiveExternalitySchellingGame
+    create_post::CreatePositiveExternalityPost,
+    game::schelling_game::SchellingGame as PositiveExternalitySchellingGame,
+    home::PositiveExternalityHome,
 };
 use crate::components::schelling_game::profile_validation::add_profile::AddProfile;
 use crate::components::schelling_game::profile_validation::add_profile_sign_in::ExtensionSignIn;
@@ -61,9 +63,9 @@ pub fn RouterApp() -> impl IntoView {
                 />
 
                 <Route
-                path="/positive-externality/schelling-game/:user_to_calculate"
-                view=PositiveExternalitySchellingGame
-            />
+                    path="/positive-externality/schelling-game/:user_to_calculate"
+                    view=PositiveExternalitySchellingGame
+                />
 
             </Routes>
         </Router>

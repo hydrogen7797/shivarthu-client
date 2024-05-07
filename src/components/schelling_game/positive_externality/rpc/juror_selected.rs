@@ -8,7 +8,7 @@ async fn load_data(user_to_calculate: String, check_account: String) -> bool {
     // gloo::console::log!(user_to_calculate.clone(), check_account.clone());
     let result: bool = client
         .request(
-            "positive_externality_selectedjuror",
+            "positiveexternality_selectedjuror",
             rpc_params![user_to_calculate, check_account],
         )
         .await

@@ -14,7 +14,7 @@ async fn load_data(
     let client = WasmClientBuilder::default().build(NODE_URL).await.unwrap();
     let result: (u64, u64, bool) = client
         .request(
-            "positive_externality_drawingperiodend",
+            "positiveexternality_drawingperiodend",
             rpc_params![user_to_calculate],
         )
         .await
