@@ -1,6 +1,7 @@
 pub mod apply_jurors;
 pub mod apply_jurors_sign_in;
 pub mod apply_staking_period;
+pub mod apply_staking_period_params;
 pub mod apply_staking_period_sign_in;
 pub mod change_period;
 pub mod change_period_sign_in;
