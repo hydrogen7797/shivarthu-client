@@ -129,6 +129,7 @@ pub fn CreateDepartmentFund() -> impl IntoView {
                                 let new_value = event_target_value(&ev);
                                 set_tip_name(new_value);
                             }
+                            id="tipperselect"
 
                             class="select select-info w-full max-w-xs"
                         >
