@@ -7,7 +7,7 @@ use subxt::utils::AccountId32;
 
 #[component]
 pub fn SignTransaction(salt: String, choice: u128, profile_user_account: String) -> impl IntoView {
-    view! { <ExtensionSignIn salt=salt choice=choice profile_user_account=profile_user_account/> }
+    view! { <ExtensionSignIn salt={salt} choice={choice} profile_user_account={profile_user_account}/> }
 }
 
 #[component]
@@ -18,18 +18,18 @@ pub fn ExtensionSignIn(salt: String, choice: u128, profile_user_account: String)
         if account_load().0.is_empty() || account_load().1.is_empty() {
             view! {
                 <div>
-                    <GetAccountsExtension set_account_load=set_account_load/>
+                    <GetAccountsExtension set_account_load={set_account_load}/>
                 </div>
             }
         } else if !account_load().0.is_empty() && !account_load().1.is_empty() {
             view! {
                 <div>
                     <ExtensionTransaction
-                        salt=salt.clone()
-                        choice=choice
-                        profile_user_account=profile_user_account.clone()
-                        account_address=account_load().0
-                        account_source=account_load().1
+                        salt={salt.clone()}
+                        choice={choice}
+                        profile_user_account={profile_user_account.clone()}
+                        account_address={account_load().0}
+                        account_source={account_load().1}
                     />
                 </div>
             }

@@ -1,8 +1,8 @@
 use crate::constants::constant::NODE_URL;
 use crate::services::common_services::polkadot;
 use leptos::*;
-use polkadot::runtime_types::schelling_game_shared::types::Period;
-use polkadot::runtime_types::sortition_sum_game::types::SumTreeName;
+use polkadot::runtime_types::pallet_schelling_game_shared::types::Period;
+use polkadot::runtime_types::pallet_sortition_sum_game::types::SumTreeName;
 use subxt::{OnlineClient, PolkadotConfig};
 
 async fn load_data(department_required_fund_id: u64, set_period: WriteSignal<Option<Period>>) {

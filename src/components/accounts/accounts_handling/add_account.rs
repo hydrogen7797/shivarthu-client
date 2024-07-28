@@ -1,16 +1,16 @@
 use crate::components::accounts::accounts_store::AccountStore;
 use crate::components::navigation::nav::Nav;
 use crate::js_extension_binding;
+use codee::string::JsonSerdeCodec;
 use leptos::ev::SubmitEvent;
 use leptos::*;
 use leptos_use::storage::use_local_storage;
-use leptos_use::utils::JsonCodec;
 use magic_crypt::{new_magic_crypt, MagicCryptTrait};
 
 #[component]
 pub fn AddAccount() -> impl IntoView {
     let (_account_store, set_account_store, _reset_account_store) =
-        use_local_storage::<AccountStore, JsonCodec>("account-store-state");
+        use_local_storage::<AccountStore, JsonSerdeCodec>("account-store-state");
     let (seed, set_seed) = create_signal("".to_string());
     let (password, set_password) = create_signal("".to_string());
     let (confirm_password, set_confirm_password) = create_signal(String::from(""));
@@ -45,7 +45,7 @@ pub fn AddAccount() -> impl IntoView {
                                 <form
                                     class="max-w-sm mx-auto"
                                     id="seed-submit-form"
-                                    on:submit=submit_click
+                                    on:submit={submit_click}
                                 >
                                     <div class="mb-5">
                                         <label
@@ -60,8 +60,8 @@ pub fn AddAccount() -> impl IntoView {
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             placeholder="Enter the seed"
                                             required
-                                            prop:value=move || seed()
-                                            on:input=move |e| set_seed(event_target_value(&e))
+                                            prop:value={move || seed()}
+                                            on:input={move |e| set_seed(event_target_value(&e))}
                                         />
                                     </div>
                                     <div class="mb-5">
@@ -76,8 +76,8 @@ pub fn AddAccount() -> impl IntoView {
                                             id="password"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             required
-                                            prop:value=move || password()
-                                            on:input=move |e| set_password(event_target_value(&e))
+                                            prop:value={move || password()}
+                                            on:input={move |e| set_password(event_target_value(&e))}
                                         />
                                     </div>
                                     <div class="mb-5">
@@ -92,10 +92,10 @@ pub fn AddAccount() -> impl IntoView {
                                             id="confirm-password"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             required
-                                            prop:value=move || confirm_password()
-                                            on:input=move |e| set_confirm_password(
+                                            prop:value={move || confirm_password()}
+                                            on:input={move |e| set_confirm_password(
                                                 event_target_value(&e),
-                                            )
+                                            )}
                                         />
 
                                     </div>

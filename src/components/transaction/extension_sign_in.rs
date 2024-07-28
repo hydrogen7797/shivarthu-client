@@ -2,6 +2,7 @@ use crate::constants::constant::NODE_URL;
 use crate::services::common_services::{extension_signature_for_extrinsic, polkadot};
 use anyhow::anyhow;
 use leptos::*;
+use subxt::config::DefaultExtrinsicParamsBuilder;
 use subxt::ext::codec::Decode;
 use subxt::tx::SubmittableExtrinsic;
 use subxt::utils::{AccountId32, MultiSignature};
@@ -14,7 +15,7 @@ pub async fn sign_in_with_extension<T>(
     set_error: WriteSignal<String>,
     set_extrinsic_success: WriteSignal<String>,
 ) where
-    T: subxt::tx::TxPayload + 'static,
+    T: subxt::tx::Payload + 'static,
 {
     let account_id: AccountId32 = account_address.parse().unwrap();
 
@@ -74,11 +75,10 @@ pub async fn sign_in_with_extension<T>(
 
     let mut partial_signed_option = None;
     if multi_signature_option.is_some() && account_nonce_option.is_some() {
-        partial_signed_option = match api.tx().create_partial_signed_with_nonce(
-            &tx,
-            account_nonce_option.unwrap(),
-            Default::default(),
-        ) {
+        let params = DefaultExtrinsicParamsBuilder::new()
+            .nonce(account_nonce_option.unwrap())
+            .build();
+        partial_signed_option = match api.tx().create_partial_signed_offline(&tx, params) {
             Ok(partial_signed) => Some(partial_signed),
             Err(_) => {
                 set_error("PartialExtrinsic creation failed".to_string());

@@ -1,8 +1,8 @@
 use crate::constants::constant::NODE_URL;
 use crate::services::common_services::polkadot;
 use leptos::*;
-use polkadot::runtime_types::schelling_game_shared::types::Period;
-use polkadot::runtime_types::sortition_sum_game::types::SumTreeName;
+use polkadot::runtime_types::pallet_schelling_game_shared::types::Period;
+use polkadot::runtime_types::pallet_sortition_sum_game::types::SumTreeName;
 use std::str::FromStr;
 use subxt::utils::AccountId32;
 use subxt::{OnlineClient, PolkadotConfig};

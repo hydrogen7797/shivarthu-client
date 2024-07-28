@@ -6,6 +6,7 @@ use crate::services::common_imp::View;
 use crate::services::error::ErrorString;
 use leptos::ev::SubmitEvent;
 use leptos::*;
+use leptos_router::*;
 
 #[component]
 pub fn RevealVote(profile_user_account: String) -> impl IntoView {
@@ -33,10 +34,10 @@ pub fn RevealVote(profile_user_account: String) -> impl IntoView {
         View::Form => {
             view! {
                 <div class="max-w-5xl mx-auto max-md:mx-10">
-                    <GetPeriod profile_user_account=profile_user_account.clone()/>
-                    <VoteEndBlock profile_user_account=profile_user_account.clone()/>
-                    <ChangePeriod profile_user_account=profile_user_account.clone()/>
-                    <form id="reveal-vote-submit-from" on:submit=submit_click>
+                    <GetPeriod profile_user_account={profile_user_account.clone()}/>
+                    <VoteEndBlock profile_user_account={profile_user_account.clone()}/>
+                    <ChangePeriod profile_user_account={profile_user_account.clone()}/>
+                    <form id="reveal-vote-submit-from" on:submit={submit_click}>
 
                         <div class="mb-5">
                             <label
@@ -50,7 +51,7 @@ pub fn RevealVote(profile_user_account: String) -> impl IntoView {
                                 id="choice"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required
-                                on:input=move |ev| choice_changed(event_target_value(&ev))
+                                on:input={move |ev| choice_changed(event_target_value(&ev))}
                             />
                         </div>
                         <div class="mb-5">
@@ -65,7 +66,7 @@ pub fn RevealVote(profile_user_account: String) -> impl IntoView {
                                 id="salt"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required
-                                on:input=move |ev| set_salt(event_target_value(&ev))
+                                on:input={move |ev| set_salt(event_target_value(&ev))}
                             />
                         </div>
                         <button
@@ -84,9 +85,9 @@ pub fn RevealVote(profile_user_account: String) -> impl IntoView {
             view! {
                 <div>
                     <SignTransaction
-                        salt=salt()
-                        choice=choice().unwrap().unwrap()
-                        profile_user_account=profile_user_account.clone()
+                        salt={salt()}
+                        choice={choice().unwrap().unwrap()}
+                        profile_user_account={profile_user_account.clone()}
                     />
 
                 </div>

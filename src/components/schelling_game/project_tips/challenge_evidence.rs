@@ -64,9 +64,9 @@ pub fn ChallengeEvidence(project_id: u64) -> impl IntoView {
         {
             view! {
                 <div class="max-w-5xl mx-auto max-md:mx-10">
-                    <EvidenceEndBlock project_id=project_id.clone()/>
-                    <ChallengerFees project_id=project_id.clone()/>
-                    <form id="challenge-evidence-submit-from" on:submit=submit_click>
+                    <EvidenceEndBlock project_id={project_id.clone()}/>
+                    <ChallengerFees project_id={project_id.clone()}/>
+                    <form id="challenge-evidence-submit-from" on:submit={submit_click}>
 
                         <div class="mb-5">
                             <label
@@ -76,11 +76,11 @@ pub fn ChallengeEvidence(project_id: u64) -> impl IntoView {
                                 Profile Details
                             </label>
                             <MarkdownField
-                                set_markdown=set_markdown
-                                name=String::from("challenge-details")
-                                class=String::from(
+                                set_markdown={set_markdown}
+                                name={String::from("challenge-details")}
+                                class={String::from(
                                     "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
-                                )
+                                )}
                             />
 
                         </div>
@@ -103,7 +103,7 @@ pub fn ChallengeEvidence(project_id: u64) -> impl IntoView {
 
         View::Success => view! {
             <div>
-                <SignTransaction post_cid=post_cid() project_id=project_id.clone()/>
+                <SignTransaction post_cid={post_cid()} project_id={project_id.clone()}/>
             </div>
         },
     };

@@ -6,7 +6,7 @@ use subxt::utils::AccountId32;
 use subxt::{OnlineClient, PolkadotConfig};
 
 async fn load_data(profile_user_account: String, set_challenger_fee: WriteSignal<Option<u128>>) {
-    let _account_id32 = AccountId32::from_str(&profile_user_account).unwrap();
+    let account_id32 = AccountId32::from_str(&profile_user_account).unwrap();
 
     let client = OnlineClient::<PolkadotConfig>::from_url(NODE_URL)
         .await

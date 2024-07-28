@@ -1,8 +1,8 @@
 use crate::components::accounts::accounts_store::AccountStore;
+use codee::string::JsonSerdeCodec;
 use leptos::ev::SubmitEvent;
 use leptos::*;
 use leptos_use::storage::use_local_storage;
-use leptos_use::utils::JsonCodec;
 use magic_crypt::{new_magic_crypt, MagicCryptTrait};
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
@@ -19,7 +19,7 @@ pub enum PhraseFromPassError {
 pub fn SetPhraseFromPass() -> impl IntoView {
     let (password, set_password) = create_signal(Ok("".to_string()));
     let (account_store, _set_account_store, _reset_account_store) =
-        use_local_storage::<AccountStore, JsonCodec>("account-store-state");
+        use_local_storage::<AccountStore, JsonSerdeCodec>("account-store-state");
 
     let set_password_input = move |ev| {
         let password_string = event_target_value(&ev);
@@ -44,7 +44,7 @@ pub fn SetPhraseFromPass() -> impl IntoView {
     view! {
         <>
             <div>
-                <form class="max-w-sm mx-auto" id="seed-submit-form" on:submit=submit_click>
+                <form class="max-w-sm mx-auto" id="seed-submit-form" on:submit={submit_click}>
                     <div class="mb-5">
                         <label
                             for="password"
@@ -58,8 +58,8 @@ pub fn SetPhraseFromPass() -> impl IntoView {
                             id="password"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             required
-                            prop:value=move || password().unwrap()
-                            on:input=set_password_input
+                            prop:value={move || password().unwrap()}
+                            on:input={set_password_input}
                         />
 
                     </div>

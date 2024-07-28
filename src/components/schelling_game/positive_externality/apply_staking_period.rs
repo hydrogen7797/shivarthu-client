@@ -1,6 +1,6 @@
 use crate::components::schelling_game::positive_externality::apply_staking_period_sign_in::SignTransaction;
 use crate::services::common_imp::View;
-
+use crate::services::error::ErrorString;
 use leptos::ev::SubmitEvent;
 use leptos::*;
 
@@ -18,7 +18,7 @@ pub fn ApplyStakingPeriod(user_to_calculate: String) -> impl IntoView {
         View::Form => {
             view! {
                 <div class="max-w-5xl mx-auto max-md:mx-10">
-                    <form id="apply-staking-period-from" on:submit=submit_click>
+                    <form id="apply-staking-period-from" on:submit={submit_click}>
                         <div>Apply Staking Period</div>
                         <button
                             type="submit"
@@ -35,7 +35,7 @@ pub fn ApplyStakingPeriod(user_to_calculate: String) -> impl IntoView {
         View::Success => {
             view! {
                 <div>
-                    <SignTransaction user_to_calculate=user_to_calculate.clone()/>
+                    <SignTransaction user_to_calculate={user_to_calculate.clone()}/>
 
                 </div>
             }

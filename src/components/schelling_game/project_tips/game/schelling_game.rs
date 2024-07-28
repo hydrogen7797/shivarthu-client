@@ -5,7 +5,7 @@ use crate::components::schelling_game::project_tips::commit_vote::CommitVote;
 use crate::components::schelling_game::project_tips::draw_jurors::DrawJurors;
 use crate::components::schelling_game::project_tips::reveal_vote::RevealVote;
 use crate::components::schelling_game::project_tips::storage::get_period_fn::get_period_fn;
-use crate::services::common_services::polkadot::runtime_types::schelling_game_shared::types::Period;
+use crate::services::common_services::polkadot::runtime_types::pallet_schelling_game_shared::types::Period;
 use leptos::*;
 use leptos_router::*;
 
@@ -27,7 +27,7 @@ pub fn SchellingGame() -> impl IntoView {
 
     view! {
         <div>
-            <SchellingGameComponent project_id=account/>
+            <SchellingGameComponent project_id={account}/>
         </div>
     }
 }
@@ -44,27 +44,30 @@ pub fn SchellingGameComponent(project_id: u64) -> impl IntoView {
                 // let period_read_signal = period();
                 if let Some(period) = period() {
                     let view = match period {
-                        Period::Evidence => view! { <div></div> },
+                        Period::Evidence => view! {
+                            <div>
+                            </div>
+                        },
                         Period::Staking => {
                             view! {
                                 <div>
-                                    <ApplyJurors project_id=project_id()/>
+                                    <ApplyJurors project_id={project_id()}/>
                                 </div>
                             }
                         }
                         Period::Drawing => view! {
                             <div>
-                                <DrawJurors project_id=project_id()/>
+                                <DrawJurors project_id={project_id()}/>
                             </div>
                         },
                         Period::Commit => view! {
                             <div>
-                                <CommitVote project_id=project_id()/>
+                                <CommitVote project_id={project_id()}/>
                             </div>
                         },
                         Period::Vote => view! {
                             <div>
-                                <RevealVote project_id=project_id()/>
+                                <RevealVote project_id={project_id()}/>
                             </div>
                         },
                         Period::Appeal => view! { <div></div> },

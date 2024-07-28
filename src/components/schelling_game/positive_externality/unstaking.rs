@@ -17,7 +17,7 @@ pub fn Unstaking(user_to_calculate: String) -> impl IntoView {
         View::Form => {
             view! {
                 <div class="max-w-5xl mx-auto max-md:mx-10">
-                    <form id="unstaking-submit-from" on:submit=submit_click>
+                    <form id="unstaking-submit-from" on:submit={submit_click}>
                         <button
                             type="submit"
                             id="unstaking-submit"
@@ -32,7 +32,7 @@ pub fn Unstaking(user_to_calculate: String) -> impl IntoView {
         View::Success => {
             view! {
                 <div>
-                    <SignTransaction user_to_calculate=user_to_calculate.clone()/>
+                    <SignTransaction user_to_calculate={user_to_calculate.clone()}/>
 
                 </div>
             }

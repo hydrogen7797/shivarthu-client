@@ -53,7 +53,7 @@ pub fn StakingEndBlock(user_to_calculate: String) -> impl IntoView {
                         <div>
                             {"Staking Period ends: "} <span id="end-period-time">
                                 <Icon
-                                    icon=icondata::ImSpinner6
+                                    icon={icondata::ImSpinner6}
                                     style="color: green"
                                     class="inline-block"
                                 />

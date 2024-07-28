@@ -13,7 +13,7 @@ pub fn ApplyStakingPeriodParams() -> impl IntoView {
 
     view! {
         <div>
-            <ApplyStakingPeriod user_to_calculate=params_value/>
+            <ApplyStakingPeriod user_to_calculate={params_value}/>
         </div>
     }
 }

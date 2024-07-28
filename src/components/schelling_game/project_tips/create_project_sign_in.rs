@@ -2,8 +2,8 @@ use crate::components::transaction::extension_sign_in::sign_in_with_extension;
 use crate::components::transaction::get_accounts_extension::GetAccountsExtension;
 use crate::services::common_services::polkadot;
 use leptos::*;
+use polkadot::runtime_types::pallet_project_tips::types::TippingName;
 use polkadot::runtime_types::pallet_support::Content;
-use polkadot::runtime_types::project_tips::types::TippingName;
 
 fn match_tipping_name(name: &str) -> Option<TippingName> {
     match name {
@@ -24,10 +24,10 @@ pub fn SignTransaction(
 ) -> impl IntoView {
     view! {
         <ExtensionSignIn
-            post_cid=post_cid
-            department_id=department_id
-            tip_name=tip_name
-            funding_needed=funding_needed
+            post_cid={post_cid}
+            department_id={department_id}
+            tip_name={tip_name}
+            funding_needed={funding_needed}
         />
     }
 }
@@ -45,19 +45,19 @@ pub fn ExtensionSignIn(
         if account_load().0.is_empty() || account_load().1.is_empty() {
             view! {
                 <div>
-                    <GetAccountsExtension set_account_load=set_account_load/>
+                    <GetAccountsExtension set_account_load={set_account_load}/>
                 </div>
             }
         } else if !account_load().0.is_empty() && !account_load().1.is_empty() {
             view! {
                 <div>
                     <ExtensionTransaction
-                        post_cid=post_cid.clone()
-                        department_id=department_id.clone()
-                        tip_name=tip_name.clone()
-                        funding_needed=funding_needed.clone()
-                        account_address=account_load().0
-                        account_source=account_load().1
+                        post_cid={post_cid.clone()}
+                        department_id={department_id.clone()}
+                        tip_name={tip_name.clone()}
+                        funding_needed={funding_needed.clone()}
+                        account_address={account_load().0}
+                        account_source={account_load().1}
                     />
                 </div>
             }

@@ -7,7 +7,7 @@ use subxt::utils::AccountId32;
 
 #[component]
 pub fn SignTransaction(user_to_calculate: String) -> impl IntoView {
-    view! { <ExtensionSignIn user_to_calculate=user_to_calculate/> }
+    view! { <ExtensionSignIn user_to_calculate={user_to_calculate}/> }
 }
 
 #[component]
@@ -18,16 +18,16 @@ pub fn ExtensionSignIn(user_to_calculate: String) -> impl IntoView {
         if account_load().0.is_empty() || account_load().1.is_empty() {
             view! {
                 <div>
-                    <GetAccountsExtension set_account_load=set_account_load/>
+                    <GetAccountsExtension set_account_load={set_account_load}/>
                 </div>
             }
         } else if !account_load().0.is_empty() && !account_load().1.is_empty() {
             view! {
                 <div>
                     <ExtensionTransaction
-                        user_to_calculate=user_to_calculate.clone()
-                        account_address=account_load().0
-                        account_source=account_load().1
+                        user_to_calculate={user_to_calculate.clone()}
+                        account_address={account_load().0}
+                        account_source={account_load().1}
                     />
                 </div>
             }
@@ -68,7 +68,7 @@ pub fn ExtensionTransaction(
 
             let tx = polkadot::tx()
                 .positive_externality()
-                .get_incentives(account_id32);
+                .add_incentive_count(account_id32);
 
             sign_in_with_extension(
                 tx,

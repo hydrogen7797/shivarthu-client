@@ -2,10 +2,12 @@ use crate::components::transaction::extension_sign_in::sign_in_with_extension;
 use crate::components::transaction::get_accounts_extension::GetAccountsExtension;
 use crate::services::common_services::polkadot;
 use leptos::*;
+use std::str::FromStr;
+use subxt::utils::AccountId32;
 
 #[component]
 pub fn SignTransaction(project_id: u64) -> impl IntoView {
-    view! { <ExtensionSignIn project_id=project_id/> }
+    view! { <ExtensionSignIn project_id={project_id}/> }
 }
 
 #[component]
@@ -16,16 +18,16 @@ pub fn ExtensionSignIn(project_id: u64) -> impl IntoView {
         if account_load().0.is_empty() || account_load().1.is_empty() {
             view! {
                 <div>
-                    <GetAccountsExtension set_account_load=set_account_load/>
+                    <GetAccountsExtension set_account_load={set_account_load}/>
                 </div>
             }
         } else if !account_load().0.is_empty() && !account_load().1.is_empty() {
             view! {
                 <div>
                     <ExtensionTransaction
-                        project_id=project_id.clone()
-                        account_address=account_load().0
-                        account_source=account_load().1
+                        project_id={project_id.clone()}
+                        account_address={account_load().0}
+                        account_source={account_load().1}
                     />
                 </div>
             }
@@ -56,7 +58,9 @@ pub fn ExtensionTransaction(
             )
         },
         move |(project_id, account_address, account_source, set_error, set_extrinsic_success)| async move {
-            let tx = polkadot::tx().project_tips().get_incentives(project_id);
+            let tx = polkadot::tx()
+                .project_tips()
+                .add_incentive_count(project_id);
 
             sign_in_with_extension(
                 tx,

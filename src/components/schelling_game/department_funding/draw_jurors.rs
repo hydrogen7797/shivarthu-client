@@ -6,6 +6,7 @@ use crate::services::common_imp::View;
 use crate::services::error::ErrorString;
 use leptos::ev::SubmitEvent;
 use leptos::*;
+use leptos_router::*;
 
 #[component]
 pub fn DrawJurors(department_required_fund_id: u64) -> impl IntoView {
@@ -29,12 +30,13 @@ pub fn DrawJurors(department_required_fund_id: u64) -> impl IntoView {
         View::Form => {
             view! {
                 <div class="max-w-5xl mx-auto max-md:mx-10">
-                    <GetPeriod department_required_fund_id=department_required_fund_id.clone()/>
-                    <DrawingEndBlock department_required_fund_id=department_required_fund_id
-                        .clone()/>
-                    <ChangePeriod department_required_fund_id=department_required_fund_id.clone()/>
+                    <GetPeriod department_required_fund_id={department_required_fund_id.clone()}/>
+                    <DrawingEndBlock department_required_fund_id={department_required_fund_id
+                        .clone()}/>
+                    <ChangePeriod department_required_fund_id={department_required_fund_id
+                        .clone()}/>
 
-                    <form id="draw-juror-submit-from" on:submit=submit_click>
+                    <form id="draw-juror-submit-from" on:submit={submit_click}>
                         <div class="mb-5">
                             <label
                                 for="draw-jurors"
@@ -47,7 +49,7 @@ pub fn DrawJurors(department_required_fund_id: u64) -> impl IntoView {
                                 id="iterations"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required
-                                on:input=move |e| iteration_function(event_target_value(&e))
+                                on:input={move |e| iteration_function(event_target_value(&e))}
                             />
                         </div>
                         <button
@@ -66,8 +68,8 @@ pub fn DrawJurors(department_required_fund_id: u64) -> impl IntoView {
             view! {
                 <div>
                     <SignTransaction
-                        iterations=iterations().unwrap()
-                        department_required_fund_id=department_required_fund_id.clone()
+                        iterations={iterations().unwrap()}
+                        department_required_fund_id={department_required_fund_id.clone()}
                     />
 
                 </div>

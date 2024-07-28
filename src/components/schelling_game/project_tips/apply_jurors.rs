@@ -29,13 +29,13 @@ pub fn ApplyJurors(project_id: u64) -> impl IntoView {
         View::Form => {
             view! {
                 <div class="max-w-5xl mx-auto max-md:mx-10">
-                    <GetPeriod project_id=project_id.clone()/>
-                    <StakingEndBlock project_id=project_id.clone()/>
-                    <ChangePeriod project_id=project_id.clone()/>
+                    <GetPeriod project_id={project_id.clone()}/>
+                    <StakingEndBlock project_id={project_id.clone()}/>
+                    <ChangePeriod project_id={project_id.clone()}/>
                     <form
 
                         id="apply-juror-submit-from"
-                        on:submit=submit_click
+                        on:submit={submit_click}
                     >
                         <div class="mb-5">
                             <label
@@ -49,7 +49,7 @@ pub fn ApplyJurors(project_id: u64) -> impl IntoView {
                                 id="juror-stake"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required
-                                on:input=move |e| stake_value(event_target_value(&e))
+                                on:input={move |e| stake_value(event_target_value(&e))}
                             />
                         </div>
                         <button
@@ -67,7 +67,10 @@ pub fn ApplyJurors(project_id: u64) -> impl IntoView {
         View::Success => {
             view! {
                 <div>
-                    <SignTransaction stake=juror_stake().unwrap() project_id=project_id.clone()/>
+                    <SignTransaction
+                        stake={juror_stake().unwrap()}
+                        project_id={project_id.clone()}
+                    />
 
                 </div>
             }

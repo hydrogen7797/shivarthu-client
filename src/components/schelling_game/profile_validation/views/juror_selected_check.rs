@@ -36,11 +36,11 @@ pub fn JurorSelectedCheck() -> impl IntoView {
                     placeholder="Enter account address here"
                     id="juror-address-checking"
                     class="input input-bordered w-full max-w-xs"
-                    on:input=on_account
+                    on:input={on_account}
                 />
                 <br/>
                 <br/>
-                <JurorSelected profile_user_account=account check_account=check_account/>
+                <JurorSelected profile_user_account={account} check_account={check_account}/>
             </div>
         </div>
     }

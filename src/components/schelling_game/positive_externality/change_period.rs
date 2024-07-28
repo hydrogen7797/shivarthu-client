@@ -1,5 +1,6 @@
 use leptos::ev::SubmitEvent;
 use leptos::*;
+use leptos_router::*;
 
 #[component]
 pub fn ChangePeriod(user_to_calculate: String) -> impl IntoView {
@@ -21,7 +22,7 @@ pub fn ChangePeriod(user_to_calculate: String) -> impl IntoView {
             <form
 
                 id="change-period-submit-from"
-                on:submit=submit_click
+                on:submit={submit_click}
             >
                 <button
                     type="submit"
