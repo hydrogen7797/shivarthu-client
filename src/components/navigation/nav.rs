@@ -31,10 +31,16 @@ pub fn Nav() -> impl IntoView {
                                 <a href="/add-profile">"Add profile"</a>
                             </li>
                             <li>
-                                <a>Portfolio</a>
+                                <a href="/positive-externality/create-post">"Positive Externality"</a>
                             </li>
                             <li>
-                                <a>About</a>
+                                <a href="">"Departement Funding"</a>
+                            </li>
+                            <li>
+                                <a href="">"Create Project"</a>
+                            </li>
+                            <li>
+                                <a href="/">Home</a>
                             </li>
                         </ul>
                     </div>
