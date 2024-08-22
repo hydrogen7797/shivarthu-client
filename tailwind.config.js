@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: { 
-    files: ["*.html", "./src/**/*.rs"],
+  content: {
+    files: ["*.html", "./src/**/*.rs", "./node_modules/flowbite/**/*.js"],
   },
   // corePlugins: {
   //   preflight: false,
@@ -9,6 +9,5 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [require("daisyui"), require('flowbite/plugin')],
-}
-
+  plugins: [require("daisyui"), require("flowbite/plugin")],
+};
