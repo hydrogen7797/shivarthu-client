@@ -56,7 +56,7 @@ pub fn Nav() -> impl IntoView {
                     </button>
                     <div class=move || {
                         if nav_multi_level() == true {
-                            "w-full lg:block lg:w-auto"
+                            "w-full lg:block lg:w-auto text-3xl"
                         } else {
                             "hidden w-full lg:block lg:w-auto"
                         }
@@ -103,7 +103,7 @@ pub fn Nav() -> impl IntoView {
                                     id="dropdownNavbar"
                                     class=move || {
                                         if drop_down() == true {
-                                            "z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 block"
+                                            "z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600   block"
                                         } else {
                                             "z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
                                         }
