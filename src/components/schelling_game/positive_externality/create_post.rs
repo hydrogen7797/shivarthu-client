@@ -103,5 +103,10 @@ pub fn CreatePositiveExternalityPost() -> impl IntoView {
         },
     };
 
-    view! { <div> <Nav/> {move || render_view()}</div> }
+    view! {
+        <div>
+            <Nav/>
+            {move || render_view()}
+        </div>
+    }
 }

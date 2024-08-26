@@ -8,5 +8,9 @@ use router::RouterApp;
 
 #[component]
 pub fn App() -> impl IntoView {
-    view! { <RouterApp/> }
+    view! {
+        <div class="bg-white dark:bg-black">
+            <RouterApp/>
+        </div>
+    }
 }

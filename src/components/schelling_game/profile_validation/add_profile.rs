@@ -88,11 +88,7 @@ pub fn AddProfile() -> impl IntoView {
         {
             view! {
                 <div class="container mx-auto px-10">
-                    <form
-                        class=""
-                        id="add-profile-submit-from"
-                        on:submit=submit_click
-                    >
+                    <form class="" id="add-profile-submit-from" on:submit=submit_click>
 
                         <div class="mb-5">
                             <label
