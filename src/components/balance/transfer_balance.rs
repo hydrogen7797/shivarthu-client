@@ -31,7 +31,7 @@ pub fn TransferBalance() -> impl IntoView {
             view! {
                 <div>
                     <form
-                        class="max-w-5xl mx-auto max-md:mx-10"
+                        class="container mx-auto px-10"
                         id="apply-juror-submit-from"
                         on:submit=submit_click
                     >

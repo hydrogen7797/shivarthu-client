@@ -1,14 +1,12 @@
 use crate::components::api::ipfs_request::ipfs_call_json_string;
 use crate::components::api::select_ipfs_provider::DEFAULT_IPFS_PROVIDER;
 use crate::components::markdown::markdown_field::MarkdownField;
-use crate::components::schelling_game::department_funding::challenge_evidence_sign_in::SignTransaction;
-use crate::components::schelling_game::department_funding::rpc::evidence_end_block::EvidenceEndBlock;
-use crate::components::schelling_game::department_funding::storage::challenger_fees::ChallengerFees;
+use crate::components::navigation::nav::Nav;
+use crate::components::schelling_game::departments::create_department_sign_in::SignTransaction;
 use crate::services::common_imp::View;
 use json::object;
 use leptos::ev::SubmitEvent;
 use leptos::*;
-use leptos_router::*;
 
 async fn get_cid_post(
     details: String,
@@ -27,7 +25,7 @@ async fn get_cid_post(
 }
 
 #[component]
-pub fn ChallengeEvidence(department_required_fund_id: u64) -> impl IntoView {
+pub fn CreateDepartment() -> impl IntoView {
     let (current_view, set_current_view) = create_signal(View::Form);
     let (markdown, set_markdown) = create_signal(String::from(""));
     let (post_cid, set_post_cid) = create_signal(String::from(""));
@@ -45,7 +43,7 @@ pub fn ChallengeEvidence(department_required_fund_id: u64) -> impl IntoView {
             async move { get_cid_post(details, set_current_view, set_post_cid).await }
         },
     );
-    let submitted = submit_action.input();
+    let _submitted = submit_action.input();
     let pending = submit_action.pending();
     let submit_action_value = submit_action.value();
 
@@ -62,22 +60,19 @@ pub fn ChallengeEvidence(department_required_fund_id: u64) -> impl IntoView {
         View::Form => {
             view! {
                 <div class="container mx-auto px-10">
-                    <EvidenceEndBlock department_required_fund_id=department_required_fund_id
-                        .clone()/>
-                    <ChallengerFees department_required_fund_id=department_required_fund_id
-                        .clone()/>
-                    <form id="challenge-evidence-submit-from" on:submit=submit_click>
+                    <h2>"Create a department"</h2>
+                    <form id="create-department" on:submit=submit_click>
 
                         <div class="mb-5">
                             <label
-                                for="profile-details"
+                                for="create-department"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                             >
-                                Profile Details
+                                "Department Details"
                             </label>
                             <MarkdownField
                                 set_markdown=set_markdown
-                                name=String::from("challenge-details")
+                                name=String::from("department details")
                                 class=String::from(
                                     "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
                                 )
@@ -87,11 +82,11 @@ pub fn ChallengeEvidence(department_required_fund_id: u64) -> impl IntoView {
 
                         <button
                             type="submit"
-                            id="challenge-evidence-submit"
+                            id="create-department-submit"
                             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                         >
 
-                            Submit
+                            "Submit"
                         </button>
 
                     </form>
@@ -103,13 +98,15 @@ pub fn ChallengeEvidence(department_required_fund_id: u64) -> impl IntoView {
 
         View::Success => view! {
             <div>
-                <SignTransaction
-                    post_cid=post_cid()
-                    department_required_fund_id=department_required_fund_id.clone()
-                />
+                <SignTransaction post_cid=post_cid()/>
             </div>
         },
     };
 
-    view! { <div>{move || render_view()}</div> }
+    view! {
+        <div>
+            <Nav/>
+            {move || render_view()}
+        </div>
+    }
 }

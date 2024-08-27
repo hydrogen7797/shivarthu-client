@@ -28,7 +28,6 @@ async fn get_cid_post(
 
 #[component]
 pub fn ChallengeEvidence(user_to_calculate: String) -> impl IntoView {
-    
     let (current_view, set_current_view) = create_signal(View::Form);
     let (markdown, set_markdown) = create_signal(String::from(""));
     let (post_cid, set_post_cid) = create_signal(String::from(""));
@@ -60,10 +59,9 @@ pub fn ChallengeEvidence(user_to_calculate: String) -> impl IntoView {
     };
 
     let render_view = move || match current_view() {
-        View::Form =>
-        {
+        View::Form => {
             view! {
-                <div class="max-w-5xl mx-auto max-md:mx-10">
+                <div class="container mx-auto px-10">
                     <EvidenceEndBlock user_to_calculate=user_to_calculate.clone()/>
                     <ChallengerFees user_to_calculate=user_to_calculate.clone()/>
                     <form id="challenge-evidence-submit-from" on:submit=submit_click>

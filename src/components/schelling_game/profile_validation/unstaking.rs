@@ -16,7 +16,7 @@ pub fn Unstaking(profile_user_account: String) -> impl IntoView {
     let render_view = move || match current_view() {
         View::Form => {
             view! {
-                <div class="max-w-5xl mx-auto max-md:mx-10">
+                <div class="container mx-auto px-10">
                     <form id="unstaking-submit-from" on:submit=submit_click>
                         <button
                             type="submit"

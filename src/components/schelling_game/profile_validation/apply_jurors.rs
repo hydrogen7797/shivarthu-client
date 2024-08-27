@@ -28,7 +28,7 @@ pub fn ApplyJurors(profile_user_account: String) -> impl IntoView {
     let render_view = move || match current_view() {
         View::Form => {
             view! {
-                <div class="max-w-5xl mx-auto max-md:mx-10">
+                <div class="container mx-auto px-10">
                     <GetPeriod profile_user_account=profile_user_account.clone()/>
                     <StakingEndBlock profile_user_account=profile_user_account.clone()/>
                     <ChangePeriod profile_user_account=profile_user_account.clone()/>

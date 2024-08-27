@@ -33,7 +33,7 @@ pub fn RevealVote(department_required_fund_id: u64) -> impl IntoView {
     let render_view = move || match current_view() {
         View::Form => {
             view! {
-                <div class="max-w-5xl mx-auto max-md:mx-10">
+                <div class="container mx-auto px-10">
                     <GetPeriod department_required_fund_id=department_required_fund_id.clone()/>
                     <VoteEndBlock department_required_fund_id=department_required_fund_id.clone()/>
                     <ChangePeriod department_required_fund_id=department_required_fund_id.clone()/>

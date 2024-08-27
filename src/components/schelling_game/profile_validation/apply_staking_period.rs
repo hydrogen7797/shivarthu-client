@@ -6,7 +6,6 @@ use leptos::*;
 
 #[component]
 pub fn ApplyStakingPeriod(profile_user_account: String) -> impl IntoView {
-
     // gloo::console::log!(profile_user_account());
     let (current_view, set_current_view) = create_signal(View::Form);
     let submit_click = move |e: SubmitEvent| {
@@ -15,11 +14,10 @@ pub fn ApplyStakingPeriod(profile_user_account: String) -> impl IntoView {
         set_current_view(View::Success);
     };
 
-
     let render_view = move || match current_view() {
         View::Form => {
             view! {
-                <div class="max-w-5xl mx-auto max-md:mx-10">
+                <div class="container mx-auto px-10">
                     <form id="apply-staking-period-from" on:submit=submit_click>
                         <div>Apply Staking Period</div>
                         <button

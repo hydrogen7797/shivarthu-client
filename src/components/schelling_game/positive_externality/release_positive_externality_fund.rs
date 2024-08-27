@@ -17,7 +17,7 @@ pub fn ReleasePositiveExternalityFund(user_to_calculate: String) -> impl IntoVie
     let render_view = move || match current_view() {
         View::Form => {
             view! {
-                <div class="max-w-5xl mx-auto max-md:mx-10">
+                <div class="container mx-auto px-10">
                     <form id="get-incentives-submit-from" on:submit=submit_click>
                         <button
                             type="submit"

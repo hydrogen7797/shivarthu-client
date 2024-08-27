@@ -103,7 +103,7 @@ pub fn CreateProject() -> impl IntoView {
             view! {
                 <div>
                     <form
-                        class="max-w-5xl mx-auto max-md:mx-10"
+                        class="container mx-auto px-10"
                         id="add-profile-submit-from"
                         on:submit=submit_click
                     >

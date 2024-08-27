@@ -29,7 +29,7 @@ pub fn CommitVote(user_to_calculate: String) -> impl IntoView {
     let render_view = move || match current_view() {
         View::Form => {
             view! {
-                <div class="max-w-5xl mx-auto max-md:mx-10">
+                <div class="container mx-auto px-10">
                     <GetPeriod user_to_calculate=user_to_calculate.clone()/>
                     <CommitEndBlock user_to_calculate=user_to_calculate.clone()/>
                     <ChangePeriod user_to_calculate=user_to_calculate.clone()/>

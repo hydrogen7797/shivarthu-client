@@ -18,7 +18,7 @@ pub fn ChangePeriod(department_required_fund_id: u64) -> impl IntoView {
     };
 
     view! {
-        <div class="max-w-5xl mx-auto max-md:mx-10">
+        <div class="container mx-auto px-10">
             <form
 
                 id="change-period-submit-from"

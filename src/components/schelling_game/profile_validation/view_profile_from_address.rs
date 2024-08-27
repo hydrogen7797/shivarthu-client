@@ -76,7 +76,7 @@ pub fn ViewProfileFromAddress() -> impl IntoView {
                 }
                 Some(data) => {
                     view! {
-                        <div class="max-w-5xl mx-auto max-md:mx-10">
+                        <div class="container mx-auto px-10">
                             <div class="mb-5">
                                 <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                     <h2 class="heading">{"Name"}</h2>

@@ -22,7 +22,7 @@ pub fn JurorSelectedCheck() -> impl IntoView {
     view! {
         <div>
             <Nav/>
-            <div class="max-w-5xl mx-auto max-md:mx-10">
+            <div class="container mx-auto px-10">
                 <h1>Check if an account selected as juror:</h1>
                 <br/>
                 <input

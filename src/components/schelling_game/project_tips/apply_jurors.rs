@@ -28,7 +28,7 @@ pub fn ApplyJurors(project_id: u64) -> impl IntoView {
     let render_view = move || match current_view() {
         View::Form => {
             view! {
-                <div class="max-w-5xl mx-auto max-md:mx-10">
+                <div class="container mx-auto px-10">
                     <GetPeriod project_id=project_id.clone()/>
                     <StakingEndBlock project_id=project_id.clone()/>
                     <ChangePeriod project_id=project_id.clone()/>
