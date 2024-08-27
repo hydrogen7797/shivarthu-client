@@ -266,6 +266,17 @@ pub fn Nav() -> impl IntoView {
                                 };
                                 format!("{} {}", base_classes, height_class)
                             }>
+                                <a href="/create-department">"Create Department"</a>
+                            </li>
+                            <li class=move || {
+                                let base_classes = "block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-white lg:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent";
+                                let height_class = if nav_multi_level() == true {
+                                    "h-24 flex justify-start items-center"
+                                } else {
+                                    ""
+                                };
+                                format!("{} {}", base_classes, height_class)
+                            }>
                                 <a href="#">"Department Funding"</a>
                             </li>
                             <li class=move || {
