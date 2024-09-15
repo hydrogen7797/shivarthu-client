@@ -25,6 +25,7 @@ use crate::components::schelling_game::profile_validation::add_profile_stake::Ad
 use crate::components::schelling_game::profile_validation::change_period_sign_in::SignTransaction as ChangePeriodProfileValidation;
 use crate::components::schelling_game::profile_validation::game::schelling_game::SchellingGame;
 
+use crate::components::login::get_login_account::GetLoginAccount;
 use crate::components::schelling_game::departments::create_department::CreateDepartment;
 use crate::components::schelling_game::profile_validation::view_profile_from_address::ViewProfileFromAddress;
 use crate::components::schelling_game::profile_validation::views::juror_selected_check::JurorSelectedCheck;
@@ -134,6 +135,9 @@ pub fn RouterApp() -> impl IntoView {
 
                 // Create department
                 <Route path="/create-department" view=CreateDepartment/>
+
+                // Login account
+                <Route path="/get-login-account" view=GetLoginAccount/>
             </Routes>
         </Router>
     }

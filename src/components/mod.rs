@@ -2,6 +2,7 @@ pub mod accounts;
 pub mod api;
 pub mod balance;
 pub mod home;
+pub mod login;
 pub mod markdown;
 pub mod navigation;
 pub mod schelling_game;
