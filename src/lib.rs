@@ -1,7 +1,9 @@
 mod components;
 mod constants;
+
 #[allow(long_running_const_eval)]
 mod js_extension_binding;
+
 mod router;
 mod services;
 use leptos::*;
