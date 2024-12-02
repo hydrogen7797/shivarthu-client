@@ -36,6 +36,10 @@ pub fn AddProfile() -> impl IntoView {
     let (markdown, set_markdown) = create_signal(String::from(""));
     let (video_cid, set_video_cid) = create_signal(String::from(""));
     let (post_cid, set_post_cid) = create_signal(String::from(""));
+    let (country, set_country) = create_signal(String::from(""));
+    let (state, set_state) = create_signal(String::from(""));
+    let (city, set_city) = create_signal(String::from(""));
+    let (street, set_street) = create_signal(String::from(""));
 
     let submit_action = create_action(
         |(name, details, profile_video_cid, set_current_view, set_post_cid): &(
@@ -121,6 +125,71 @@ pub fn AddProfile() -> impl IntoView {
                                 )
                             />
 
+                        </div>
+
+                        <div class="mb-5">
+                            <label
+                                for="country"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                               Country
+                            </label>
+                            <input
+                                type="text"
+                                id="country"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required
+                                prop:value=move || country()
+                                on:input=move |e| set_country(event_target_value(&e))
+                            />
+                        </div>
+
+                        <div class="mb-5">
+                            <label
+                                for="state"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                            State
+                            </label>
+                            <input
+                                type="text"
+                                id="state"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required
+                                prop:value=move || state()
+                                on:input=move |e| set_state(event_target_value(&e))
+                            />
+                        </div>
+                        <div class="mb-5">
+                            <label
+                                for="city"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                            City
+                            </label>
+                            <input
+                                type="text"
+                                id="city"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required
+                                prop:value=move || city()
+                                on:input=move |e| set_city(event_target_value(&e))
+                            />
+                        </div>
+                        <div class="mb-5">
+                            <label
+                                for="street"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                            Street
+                            </label>
+                            <input
+                                type="text"
+                                id="street"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                prop:value=move || street()
+                                on:input=move |e| set_street(event_target_value(&e))
+                            />
                         </div>
 
                         <div class="mb-5">
