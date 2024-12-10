@@ -9,7 +9,10 @@ use subxt::utils::AccountId32;
 #[component]
 pub fn SignTransaction(post_cid: String, department_required_fund_id: u64) -> impl IntoView {
     view! {
-        <ExtensionSignIn post_cid=post_cid department_required_fund_id=department_required_fund_id/>
+        <ExtensionSignIn
+            post_cid={post_cid}
+            department_required_fund_id={department_required_fund_id}
+        />
     }
 }
 
@@ -21,17 +24,17 @@ pub fn ExtensionSignIn(post_cid: String, department_required_fund_id: u64) -> im
         if account_load().0.is_empty() || account_load().1.is_empty() {
             view! {
                 <div>
-                    <GetAccountsExtension set_account_load=set_account_load/>
+                    <GetAccountsExtension set_account_load={set_account_load}/>
                 </div>
             }
         } else if !account_load().0.is_empty() && !account_load().1.is_empty() {
             view! {
                 <div>
                     <ExtensionTransaction
-                        post_cid=post_cid.clone()
-                        department_required_fund_id=department_required_fund_id.clone()
-                        account_address=account_load().0
-                        account_source=account_load().1
+                        post_cid={post_cid.clone()}
+                        department_required_fund_id={department_required_fund_id.clone()}
+                        account_address={account_load().0}
+                        account_source={account_load().1}
                     />
                 </div>
             }

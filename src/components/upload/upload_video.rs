@@ -98,14 +98,14 @@ pub fn FileUpload(
                 <div
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full h-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 min-h-80 flex justify-center items-center"
                     id="drag-container"
-                    on:drop=ondrop
-                    on:dragover=ondragover
-                    on:dragenter=ondragenter
+                    on:drop={ondrop}
+                    on:dragover={ondragover}
+                    on:dragenter={ondragenter}
                 >
                     <div class="text-center">
                         <div class="mb-4">
                             <Icon
-                                icon=icondata::BsCloudUpload
+                                icon={icondata::BsCloudUpload}
                                 width="10em"
                                 height="10em"
                                 style="color: green"
@@ -124,9 +124,9 @@ pub fn FileUpload(
                             <input
                                 id="file-upload"
                                 type="file"
-                                accept=accept_file_type
+                                accept={accept_file_type}
                                 multiple=false
-                                on:input=file_handle
+                                on:input={file_handle}
                             />
 
                         </div>
@@ -146,11 +146,11 @@ pub fn FileUpload(
                                 <div>
                                     <video width="320" height="240" controls=true preload="none">
                                         <source
-                                            src=format!(
+                                            src={format!(
                                                 "{}{}",
                                                 DEFAULT_IPFS_FETCH_PROVIDER.address,
                                                 cid(),
-                                            )
+                                            )}
 
                                             id="profile-video-load"
 

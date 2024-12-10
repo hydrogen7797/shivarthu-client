@@ -7,7 +7,7 @@ use subxt::utils::AccountId32;
 
 #[component]
 pub fn SignTransaction(hash: [u8; 32], project_id: u64) -> impl IntoView {
-    view! { <ExtensionSignIn hash=hash project_id=project_id/> }
+    view! { <ExtensionSignIn hash={hash} project_id={project_id}/> }
 }
 
 #[component]
@@ -18,17 +18,17 @@ pub fn ExtensionSignIn(hash: [u8; 32], project_id: u64) -> impl IntoView {
         if account_load().0.is_empty() || account_load().1.is_empty() {
             view! {
                 <div>
-                    <GetAccountsExtension set_account_load=set_account_load/>
+                    <GetAccountsExtension set_account_load={set_account_load}/>
                 </div>
             }
         } else if !account_load().0.is_empty() && !account_load().1.is_empty() {
             view! {
                 <div>
                     <ExtensionTransaction
-                        hash=hash
-                        project_id=project_id.clone()
-                        account_address=account_load().0
-                        account_source=account_load().1
+                        hash={hash}
+                        project_id={project_id.clone()}
+                        account_address={account_load().0}
+                        account_source={account_load().1}
                     />
                 </div>
             }

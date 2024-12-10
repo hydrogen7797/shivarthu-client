@@ -87,7 +87,7 @@ pub fn ViewProfileFromAddress() -> impl IntoView {
                             <div class="mb-5">
                                 <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                     <h2 class="heading">{"Details"}</h2>
-                                    <p inner_html=data.details.clone()></p>
+                                    <p inner_html={data.details.clone()}></p>
                                 </div>
 
                             </div>
@@ -95,11 +95,11 @@ pub fn ViewProfileFromAddress() -> impl IntoView {
                                 <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                     <video width="320" height="240" controls=true>
                                         <source
-                                            src=format!(
+                                            src={format!(
                                                 "{}{}",
                                                 DEFAULT_IPFS_FETCH_PROVIDER.address,
                                                 data.profile_video_cid.clone(),
-                                            )
+                                            )}
 
                                             type="video/mp4"
                                         />

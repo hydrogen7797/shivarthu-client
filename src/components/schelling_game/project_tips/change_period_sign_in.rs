@@ -20,7 +20,7 @@ pub fn SignTransaction() -> impl IntoView {
         })
     };
 
-    view! { <ExtensionSignIn project_id=project_id()/> }
+    view! { <ExtensionSignIn project_id={project_id()}/> }
 }
 
 #[component]
@@ -31,16 +31,16 @@ pub fn ExtensionSignIn(project_id: u64) -> impl IntoView {
         if account_load().0.is_empty() || account_load().1.is_empty() {
             view! {
                 <div>
-                    <GetAccountsExtension set_account_load=set_account_load/>
+                    <GetAccountsExtension set_account_load={set_account_load}/>
                 </div>
             }
         } else if !account_load().0.is_empty() && !account_load().1.is_empty() {
             view! {
                 <div>
                     <ExtensionTransaction
-                        project_id=project_id.clone()
-                        account_address=account_load().0
-                        account_source=account_load().1
+                        project_id={project_id.clone()}
+                        account_address={account_load().0}
+                        account_source={account_load().1}
                     />
                 </div>
             }

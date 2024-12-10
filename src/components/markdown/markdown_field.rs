@@ -29,17 +29,17 @@ pub fn MarkdownField(
                             <textarea
                                 rows="10"
                                 cols="50"
-                                name=name
-                                required=required
-                                class=format!("{}", class)
+                                name={name}
+                                required={required}
+                                class={format!("{}", class)}
 
-                                on:keyup=markdown_changed
-                                on:input=handle_onchange
+                                on:keyup={markdown_changed}
+                                on:input={handle_onchange}
                             ></textarea>
                         </div>
                     </form>
                 </div>
-                <div inner_html=html_data></div>
+                <div inner_html={html_data}></div>
             </div>
         </>
     }

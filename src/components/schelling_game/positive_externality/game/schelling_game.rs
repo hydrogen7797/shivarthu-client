@@ -20,7 +20,7 @@ pub fn SchellingGame() -> impl IntoView {
 
     view! {
         <div>
-            <SchellingGameComponent user_to_calculate=account/>
+            <SchellingGameComponent user_to_calculate={account}/>
         </div>
     }
 }
@@ -41,23 +41,23 @@ pub fn SchellingGameComponent(user_to_calculate: String) -> impl IntoView {
                         Period::Staking => {
                             view! {
                                 <div>
-                                    <ApplyJurors user_to_calculate=user_to_calculate()/>
+                                    <ApplyJurors user_to_calculate={user_to_calculate()}/>
                                 </div>
                             }
                         }
                         Period::Drawing => view! {
                             <div>
-                                <DrawJurors user_to_calculate=user_to_calculate()/>
+                                <DrawJurors user_to_calculate={user_to_calculate()}/>
                             </div>
                         },
                         Period::Commit => view! {
                             <div>
-                                <CommitVote user_to_calculate=user_to_calculate()/>
+                                <CommitVote user_to_calculate={user_to_calculate()}/>
                             </div>
                         },
                         Period::Vote => view! {
                             <div>
-                                <RevealVote user_to_calculate=user_to_calculate()/>
+                                <RevealVote user_to_calculate={user_to_calculate()}/>
                             </div>
                         },
                         Period::Appeal => view! { <div></div> },

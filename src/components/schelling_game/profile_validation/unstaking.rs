@@ -17,7 +17,7 @@ pub fn Unstaking(profile_user_account: String) -> impl IntoView {
         View::Form => {
             view! {
                 <div class="container mx-auto px-10">
-                    <form id="unstaking-submit-from" on:submit=submit_click>
+                    <form id="unstaking-submit-from" on:submit={submit_click}>
                         <button
                             type="submit"
                             id="unstaking-submit"
@@ -32,7 +32,7 @@ pub fn Unstaking(profile_user_account: String) -> impl IntoView {
         View::Success => {
             view! {
                 <div>
-                    <SignTransaction profile_user_account=profile_user_account.clone()/>
+                    <SignTransaction profile_user_account={profile_user_account.clone()}/>
 
                 </div>
             }

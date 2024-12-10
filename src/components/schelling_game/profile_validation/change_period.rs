@@ -22,7 +22,7 @@ pub fn ChangePeriod(profile_user_account: String) -> impl IntoView {
             <form
 
                 id="change-period-submit-from"
-                on:submit=submit_click
+                on:submit={submit_click}
             >
                 <button
                     type="submit"

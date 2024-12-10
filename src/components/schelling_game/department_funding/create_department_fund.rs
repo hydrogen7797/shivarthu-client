@@ -36,7 +36,7 @@ async fn get_cid_post(
 #[component]
 pub fn SelectOption(is: &'static str, tip_name: ReadSignal<String>) -> impl IntoView {
     view! {
-        <option value=is selected=move || tip_name() == is>
+        <option value={is} selected={move || tip_name() == is}>
             {is}
         </option>
     }
@@ -105,7 +105,7 @@ pub fn CreateDepartmentFund() -> impl IntoView {
                     <form
                         class="container mx-auto px-10"
                         id="add-profile-submit-from"
-                        on:submit=submit_click
+                        on:submit={submit_click}
                     >
                         <div class="mb-5">
                             <label
@@ -115,20 +115,20 @@ pub fn CreateDepartmentFund() -> impl IntoView {
                                 Profile Details
                             </label>
                             <MarkdownField
-                                set_markdown=set_markdown
-                                name=String::from("profile-details")
-                                class=String::from(
+                                set_markdown={set_markdown}
+                                name={String::from("profile-details")}
+                                class={String::from(
                                     "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
-                                )
+                                )}
                             />
 
                         </div>
 
                         <select
-                            on:change=move |ev| {
+                            on:change={move |ev| {
                                 let new_value = event_target_value(&ev);
                                 set_tip_name(new_value);
-                            }
+                            }}
 
                             id="tipperselect"
 
@@ -156,7 +156,7 @@ pub fn CreateDepartmentFund() -> impl IntoView {
                                 id="funding-needed"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required
-                                on:input=move |ev| funding_needed_changed(event_target_value(&ev))
+                                on:input={move |ev| funding_needed_changed(event_target_value(&ev))}
                             />
                         </div>
 
@@ -180,10 +180,10 @@ pub fn CreateDepartmentFund() -> impl IntoView {
         View::Success => view! {
             <div>
                 <SignTransaction
-                    post_cid=post_cid()
-                    department_id=department_id
-                    tip_name=tip_name()
-                    funding_needed=funding_needed().unwrap()
+                    post_cid={post_cid()}
+                    department_id={department_id}
+                    tip_name={tip_name()}
+                    funding_needed={funding_needed().unwrap()}
                 />
             </div>
         },

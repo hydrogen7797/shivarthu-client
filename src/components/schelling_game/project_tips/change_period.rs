@@ -19,7 +19,7 @@ pub fn ChangePeriod(project_id: u64) -> impl IntoView {
             <form
 
                 id="change-period-submit-from"
-                on:submit=submit_click
+                on:submit={submit_click}
             >
                 <button
                     type="submit"

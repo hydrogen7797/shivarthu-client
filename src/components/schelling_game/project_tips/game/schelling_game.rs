@@ -27,7 +27,7 @@ pub fn SchellingGame() -> impl IntoView {
 
     view! {
         <div>
-            <SchellingGameComponent project_id=account/>
+            <SchellingGameComponent project_id={account}/>
         </div>
     }
 }
@@ -48,23 +48,23 @@ pub fn SchellingGameComponent(project_id: u64) -> impl IntoView {
                         Period::Staking => {
                             view! {
                                 <div>
-                                    <ApplyJurors project_id=project_id()/>
+                                    <ApplyJurors project_id={project_id()}/>
                                 </div>
                             }
                         }
                         Period::Drawing => view! {
                             <div>
-                                <DrawJurors project_id=project_id()/>
+                                <DrawJurors project_id={project_id()}/>
                             </div>
                         },
                         Period::Commit => view! {
                             <div>
-                                <CommitVote project_id=project_id()/>
+                                <CommitVote project_id={project_id()}/>
                             </div>
                         },
                         Period::Vote => view! {
                             <div>
-                                <RevealVote project_id=project_id()/>
+                                <RevealVote project_id={project_id()}/>
                             </div>
                         },
                         Period::Appeal => view! { <div></div> },

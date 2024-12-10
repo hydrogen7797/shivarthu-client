@@ -18,7 +18,7 @@ pub fn ApplyStakingPeriod(profile_user_account: String) -> impl IntoView {
         View::Form => {
             view! {
                 <div class="container mx-auto px-10">
-                    <form id="apply-staking-period-from" on:submit=submit_click>
+                    <form id="apply-staking-period-from" on:submit={submit_click}>
                         <div>Apply Staking Period</div>
                         <button
                             type="submit"
@@ -35,7 +35,7 @@ pub fn ApplyStakingPeriod(profile_user_account: String) -> impl IntoView {
         View::Success => {
             view! {
                 <div>
-                    <SignTransaction profile_user_account=profile_user_account.clone()/>
+                    <SignTransaction profile_user_account={profile_user_account.clone()}/>
 
                 </div>
             }

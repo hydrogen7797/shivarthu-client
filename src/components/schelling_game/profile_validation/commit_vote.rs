@@ -30,9 +30,9 @@ pub fn CommitVote(profile_user_account: String) -> impl IntoView {
         View::Form => {
             view! {
                 <div class="container mx-auto px-10">
-                    <GetPeriod profile_user_account=profile_user_account.clone()/>
-                    <CommitEndBlock profile_user_account=profile_user_account.clone()/>
-                    <ChangePeriod profile_user_account=profile_user_account.clone()/>
+                    <GetPeriod profile_user_account={profile_user_account.clone()}/>
+                    <CommitEndBlock profile_user_account={profile_user_account.clone()}/>
+                    <ChangePeriod profile_user_account={profile_user_account.clone()}/>
                     <div>
 
                         <div class="flex justify-center items-center">
@@ -58,7 +58,7 @@ pub fn CommitVote(profile_user_account: String) -> impl IntoView {
                     <form
 
                         id="commit-vote-submit-from"
-                        on:submit=submit_click
+                        on:submit={submit_click}
                     >
                         <div class="mb-5">
                             <label
@@ -72,7 +72,7 @@ pub fn CommitVote(profile_user_account: String) -> impl IntoView {
                                 id="commit-vote"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required
-                                on:input=move |ev| set_commit_vote(event_target_value(&ev))
+                                on:input={move |ev| set_commit_vote(event_target_value(&ev))}
                             />
                         </div>
                         <button
@@ -91,8 +91,8 @@ pub fn CommitVote(profile_user_account: String) -> impl IntoView {
             view! {
                 <div>
                     <SignTransaction
-                        hash=hash().unwrap().unwrap()
-                        profile_user_account=profile_user_account.clone()
+                        hash={hash().unwrap().unwrap()}
+                        profile_user_account={profile_user_account.clone()}
                     />
 
                 </div>

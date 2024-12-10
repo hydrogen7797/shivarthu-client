@@ -30,15 +30,16 @@ pub fn CommitVote(department_required_fund_id: u64) -> impl IntoView {
         View::Form => {
             view! {
                 <div class="container mx-auto px-10">
-                    <GetPeriod department_required_fund_id=department_required_fund_id.clone()/>
-                    <CommitEndBlock department_required_fund_id=department_required_fund_id
-                        .clone()/>
-                    <ChangePeriod department_required_fund_id=department_required_fund_id.clone()/>
+                    <GetPeriod department_required_fund_id={department_required_fund_id.clone()}/>
+                    <CommitEndBlock department_required_fund_id={department_required_fund_id
+                        .clone()}/>
+                    <ChangePeriod department_required_fund_id={department_required_fund_id
+                        .clone()}/>
                     <div></div>
                     <form
 
                         id="commit-vote-submit-from"
-                        on:submit=submit_click
+                        on:submit={submit_click}
                     >
                         <div class="mb-5">
                             <label
@@ -52,7 +53,7 @@ pub fn CommitVote(department_required_fund_id: u64) -> impl IntoView {
                                 id="commit-vote"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required
-                                on:input=move |ev| set_commit_vote(event_target_value(&ev))
+                                on:input={move |ev| set_commit_vote(event_target_value(&ev))}
                             />
                         </div>
                         <button
@@ -71,8 +72,8 @@ pub fn CommitVote(department_required_fund_id: u64) -> impl IntoView {
             view! {
                 <div>
                     <SignTransaction
-                        hash=hash().unwrap().unwrap()
-                        department_required_fund_id=department_required_fund_id.clone()
+                        hash={hash().unwrap().unwrap()}
+                        department_required_fund_id={department_required_fund_id.clone()}
                     />
 
                 </div>

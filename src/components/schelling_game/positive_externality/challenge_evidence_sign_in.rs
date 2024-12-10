@@ -8,7 +8,7 @@ use subxt::utils::AccountId32;
 
 #[component]
 pub fn SignTransaction(post_cid: String, user_to_calculate: String) -> impl IntoView {
-    view! { <ExtensionSignIn post_cid=post_cid user_to_calculate=user_to_calculate/> }
+    view! { <ExtensionSignIn post_cid={post_cid} user_to_calculate={user_to_calculate}/> }
 }
 
 #[component]
@@ -19,17 +19,17 @@ pub fn ExtensionSignIn(post_cid: String, user_to_calculate: String) -> impl Into
         if account_load().0.is_empty() || account_load().1.is_empty() {
             view! {
                 <div>
-                    <GetAccountsExtension set_account_load=set_account_load/>
+                    <GetAccountsExtension set_account_load={set_account_load}/>
                 </div>
             }
         } else if !account_load().0.is_empty() && !account_load().1.is_empty() {
             view! {
                 <div>
                     <ExtensionTransaction
-                        post_cid=post_cid.clone()
-                        user_to_calculate=user_to_calculate.clone()
-                        account_address=account_load().0
-                        account_source=account_load().1
+                        post_cid={post_cid.clone()}
+                        user_to_calculate={user_to_calculate.clone()}
+                        account_address={account_load().0}
+                        account_source={account_load().1}
                     />
                 </div>
             }

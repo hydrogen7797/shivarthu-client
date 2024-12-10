@@ -34,10 +34,12 @@ pub fn RevealVote(department_required_fund_id: u64) -> impl IntoView {
         View::Form => {
             view! {
                 <div class="container mx-auto px-10">
-                    <GetPeriod department_required_fund_id=department_required_fund_id.clone()/>
-                    <VoteEndBlock department_required_fund_id=department_required_fund_id.clone()/>
-                    <ChangePeriod department_required_fund_id=department_required_fund_id.clone()/>
-                    <form id="reveal-vote-submit-from" on:submit=submit_click>
+                    <GetPeriod department_required_fund_id={department_required_fund_id.clone()}/>
+                    <VoteEndBlock department_required_fund_id={department_required_fund_id
+                        .clone()}/>
+                    <ChangePeriod department_required_fund_id={department_required_fund_id
+                        .clone()}/>
+                    <form id="reveal-vote-submit-from" on:submit={submit_click}>
 
                         <div class="mb-5">
                             <label
@@ -51,7 +53,7 @@ pub fn RevealVote(department_required_fund_id: u64) -> impl IntoView {
                                 id="choice"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required
-                                on:input=move |ev| choice_changed(event_target_value(&ev))
+                                on:input={move |ev| choice_changed(event_target_value(&ev))}
                             />
                         </div>
                         <div class="mb-5">
@@ -66,7 +68,7 @@ pub fn RevealVote(department_required_fund_id: u64) -> impl IntoView {
                                 id="salt"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required
-                                on:input=move |ev| set_salt(event_target_value(&ev))
+                                on:input={move |ev| set_salt(event_target_value(&ev))}
                             />
                         </div>
                         <button
@@ -85,9 +87,9 @@ pub fn RevealVote(department_required_fund_id: u64) -> impl IntoView {
             view! {
                 <div>
                     <SignTransaction
-                        salt=salt()
-                        choice=choice().unwrap().unwrap()
-                        department_required_fund_id=department_required_fund_id.clone()
+                        salt={salt()}
+                        choice={choice().unwrap().unwrap()}
+                        department_required_fund_id={department_required_fund_id.clone()}
                     />
 
                 </div>

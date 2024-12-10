@@ -27,7 +27,7 @@ pub fn SchellingGame() -> impl IntoView {
 
     view! {
         <div>
-            <SchellingGameComponent department_required_fund_id=account/>
+            <SchellingGameComponent department_required_fund_id={account}/>
         </div>
     }
 }
@@ -48,23 +48,23 @@ pub fn SchellingGameComponent(department_required_fund_id: u64) -> impl IntoView
                         Period::Staking => {
                             view! {
                                 <div>
-                                    <ApplyJurors department_required_fund_id=department_required_fund_id()/>
+                                    <ApplyJurors department_required_fund_id={department_required_fund_id()}/>
                                 </div>
                             }
                         }
                         Period::Drawing => view! {
                             <div>
-                                <DrawJurors department_required_fund_id=department_required_fund_id()/>
+                                <DrawJurors department_required_fund_id={department_required_fund_id()}/>
                             </div>
                         },
                         Period::Commit => view! {
                             <div>
-                                <CommitVote department_required_fund_id=department_required_fund_id()/>
+                                <CommitVote department_required_fund_id={department_required_fund_id()}/>
                             </div>
                         },
                         Period::Vote => view! {
                             <div>
-                                <RevealVote department_required_fund_id=department_required_fund_id()/>
+                                <RevealVote department_required_fund_id={department_required_fund_id()}/>
                             </div>
                         },
                         Period::Appeal => view! { <div></div> },

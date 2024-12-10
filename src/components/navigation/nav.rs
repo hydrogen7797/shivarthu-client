@@ -31,9 +31,9 @@ pub fn Nav() -> impl IntoView {
                         <a class="btn btn-ghost text-xl dark:text-white">"Shivarthu"</a>
                     </a>
                     <button
-                        on:click=move |_| {
+                        on:click={move |_| {
                             set_nav_multi_level.update(|n| *n = !*n);
-                        }
+                        }}
 
                         data-collapse-toggle="navbar-multi-level"
                         type="button"
@@ -58,15 +58,15 @@ pub fn Nav() -> impl IntoView {
                             ></path>
                         </svg>
                     </button>
-                    <div class=move || {
+                    <div class={move || {
                         if nav_multi_level() == true {
                             "w-full lg:block lg:w-auto text-3xl"
                         } else {
                             "hidden w-full lg:block lg:w-auto"
                         }
-                    }>
+                    }}>
                         <ul class="flex flex-col font-medium p-4 lg:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 lg:space-x-8 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:border-0 lg:bg-white dark:bg-gray-800 lg:dark:bg-gray-900 dark:border-gray-700">
-                            <li class=move || {
+                            <li class={move || {
                                 let base_classes = "py-2 px-3 text-white bg-blue-700 rounded lg:bg-transparent lg:text-blue-700 lg:p-0 lg:dark:text-blue-500 dark:bg-blue-600 lg:dark:bg-transparent";
                                 let height_class = if nav_multi_level() == true {
                                     "h-24 flex justify-start items-center"
@@ -74,7 +74,7 @@ pub fn Nav() -> impl IntoView {
                                     ""
                                 };
                                 format!("{} {}", base_classes, height_class)
-                            }>
+                            }}>
 
                                 <a
                                     href="/"
@@ -84,7 +84,7 @@ pub fn Nav() -> impl IntoView {
                                     "Home"
                                 </a>
                             </li>
-                            <li class=move || {
+                            <li class={move || {
                                 let base_classes = "";
                                 let height_class = if nav_multi_level() == true {
                                     "h-24 flex justify-start items-center"
@@ -92,12 +92,12 @@ pub fn Nav() -> impl IntoView {
                                     ""
                                 };
                                 format!("{} {}", base_classes, height_class)
-                            }>
+                            }}>
                                 <button
-                                    node_ref=el
-                                    on:click=move |_| {
+                                    node_ref={el}
+                                    on:click={move |_| {
                                         set_drop_down.update(|n| *n = !*n);
-                                    }
+                                    }}
 
                                     id="dropdownNavbarLink"
                                     data-dropdown-toggle="dropdownNavbar"
@@ -122,15 +122,15 @@ pub fn Nav() -> impl IntoView {
                                 </button>
                                 <div
                                     id="dropdownNavbar"
-                                    class=move || {
+                                    class={move || {
                                         if drop_down() == true {
                                             "z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600   block"
                                         } else {
                                             "z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
                                         }
-                                    }
+                                    }}
 
-                                    style=move || {
+                                    style={move || {
                                         if drop_down() == true {
                                             format!(
                                                 "position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate({}px, {}px);",
@@ -144,7 +144,7 @@ pub fn Nav() -> impl IntoView {
                                                 y(),
                                             )
                                         }
-                                    }
+                                    }}
                                 >
 
                                     <ul
@@ -246,7 +246,7 @@ pub fn Nav() -> impl IntoView {
                                     </div>
                                 </div>
                             </li>
-                            <li class=move || {
+                            <li class={move || {
                                 let base_classes = "block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-white lg:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent";
                                 let height_class = if nav_multi_level() == true {
                                     "h-24 flex justify-start items-center"
@@ -254,10 +254,10 @@ pub fn Nav() -> impl IntoView {
                                     ""
                                 };
                                 format!("{} {}", base_classes, height_class)
-                            }>
+                            }}>
                                 <a href="/add-profile">"Add Profile"</a>
                             </li>
-                            <li class=move || {
+                            <li class={move || {
                                 let base_classes = "block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-white lg:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent";
                                 let height_class = if nav_multi_level() == true {
                                     "h-24 flex justify-start items-center"
@@ -265,13 +265,13 @@ pub fn Nav() -> impl IntoView {
                                     ""
                                 };
                                 format!("{} {}", base_classes, height_class)
-                            }>
+                            }}>
                                 <a href="/positive-externality/create-post">
 
                                     "Positive Externality"
                                 </a>
                             </li>
-                            <li class=move || {
+                            <li class={move || {
                                 let base_classes = "block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-white lg:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent";
                                 let height_class = if nav_multi_level() == true {
                                     "h-24 flex justify-start items-center"
@@ -279,10 +279,10 @@ pub fn Nav() -> impl IntoView {
                                     ""
                                 };
                                 format!("{} {}", base_classes, height_class)
-                            }>
+                            }}>
                                 <a href="/create-department">"Create Department"</a>
                             </li>
-                            <li class=move || {
+                            <li class={move || {
                                 let base_classes = "block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-white lg:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent";
                                 let height_class = if nav_multi_level() == true {
                                     "h-24 flex justify-start items-center"
@@ -290,7 +290,7 @@ pub fn Nav() -> impl IntoView {
                                     ""
                                 };
                                 format!("{} {}", base_classes, height_class)
-                            }>
+                            }}>
                                 <a href="#">"Department Funding"</a>
                             </li>
                             // <li class=move || {
@@ -327,7 +327,7 @@ pub fn Nav() -> impl IntoView {
                                                 let copy = copy.clone();
                                                 move |_| copy(&full_id)
                                             }>
-                                                <Show when=copied fallback=|| "Copy">
+                                                <Show when={copied} fallback={|| "Copy"}>
                                                     Copied!
                                                 </Show>
                                             </button>

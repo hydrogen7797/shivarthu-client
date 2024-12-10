@@ -30,11 +30,11 @@ pub fn DrawJurors(user_to_calculate: String) -> impl IntoView {
         View::Form => {
             view! {
                 <div class="container mx-auto px-10">
-                    <GetPeriod user_to_calculate=user_to_calculate.clone()/>
-                    <DrawingEndBlock user_to_calculate=user_to_calculate.clone()/>
-                    <ChangePeriod user_to_calculate=user_to_calculate.clone()/>
+                    <GetPeriod user_to_calculate={user_to_calculate.clone()}/>
+                    <DrawingEndBlock user_to_calculate={user_to_calculate.clone()}/>
+                    <ChangePeriod user_to_calculate={user_to_calculate.clone()}/>
 
-                    <form id="draw-juror-submit-from" on:submit=submit_click>
+                    <form id="draw-juror-submit-from" on:submit={submit_click}>
                         <div class="mb-5">
                             <label
                                 for="draw-jurors"
@@ -47,7 +47,7 @@ pub fn DrawJurors(user_to_calculate: String) -> impl IntoView {
                                 id="iterations"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required
-                                on:input=move |e| iteration_function(event_target_value(&e))
+                                on:input={move |e| iteration_function(event_target_value(&e))}
                             />
                         </div>
                         <button
@@ -66,8 +66,8 @@ pub fn DrawJurors(user_to_calculate: String) -> impl IntoView {
             view! {
                 <div>
                     <SignTransaction
-                        iterations=iterations().unwrap()
-                        user_to_calculate=user_to_calculate.clone()
+                        iterations={iterations().unwrap()}
+                        user_to_calculate={user_to_calculate.clone()}
                     />
 
                 </div>

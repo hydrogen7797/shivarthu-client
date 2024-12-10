@@ -13,9 +13,9 @@ pub fn SignTransaction(
 ) -> impl IntoView {
     view! {
         <ExtensionSignIn
-            salt=salt
-            choice=choice
-            department_required_fund_id=department_required_fund_id
+            salt={salt}
+            choice={choice}
+            department_required_fund_id={department_required_fund_id}
         />
     }
 }
@@ -32,18 +32,18 @@ pub fn ExtensionSignIn(
         if account_load().0.is_empty() || account_load().1.is_empty() {
             view! {
                 <div>
-                    <GetAccountsExtension set_account_load=set_account_load/>
+                    <GetAccountsExtension set_account_load={set_account_load}/>
                 </div>
             }
         } else if !account_load().0.is_empty() && !account_load().1.is_empty() {
             view! {
                 <div>
                     <ExtensionTransaction
-                        salt=salt.clone()
-                        choice=choice
-                        department_required_fund_id=department_required_fund_id.clone()
-                        account_address=account_load().0
-                        account_source=account_load().1
+                        salt={salt.clone()}
+                        choice={choice}
+                        department_required_fund_id={department_required_fund_id.clone()}
+                        account_address={account_load().0}
+                        account_source={account_load().1}
                     />
                 </div>
             }

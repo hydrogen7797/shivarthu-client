@@ -28,7 +28,7 @@ pub fn SchellingGame() -> impl IntoView {
 
     view! {
         <div>
-            <SchellingGameComponent profile_user_account=account/>
+            <SchellingGameComponent profile_user_account={account}/>
         </div>
     }
 }
@@ -48,30 +48,30 @@ pub fn SchellingGameComponent(profile_user_account: String) -> impl IntoView {
                         Period::Evidence => view! {
                             <div>
 
-                                <ChallengeEvidence profile_user_account=profile_user_account()/>
+                                <ChallengeEvidence profile_user_account={profile_user_account()}/>
 
                             </div>
                         },
                         Period::Staking => {
                             view! {
                                 <div>
-                                    <ApplyJurors profile_user_account=profile_user_account()/>
+                                    <ApplyJurors profile_user_account={profile_user_account()}/>
                                 </div>
                             }
                         }
                         Period::Drawing => view! {
                             <div>
-                                <DrawJurors profile_user_account=profile_user_account()/>
+                                <DrawJurors profile_user_account={profile_user_account()}/>
                             </div>
                         },
                         Period::Commit => view! {
                             <div>
-                                <CommitVote profile_user_account=profile_user_account()/>
+                                <CommitVote profile_user_account={profile_user_account()}/>
                             </div>
                         },
                         Period::Vote => view! {
                             <div>
-                                <RevealVote profile_user_account=profile_user_account()/>
+                                <RevealVote profile_user_account={profile_user_account()}/>
                             </div>
                         },
                         Period::Appeal => view! { <div></div> },

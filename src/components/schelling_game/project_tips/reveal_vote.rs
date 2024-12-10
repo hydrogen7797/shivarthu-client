@@ -34,10 +34,10 @@ pub fn RevealVote(project_id: u64) -> impl IntoView {
         View::Form => {
             view! {
                 <div class="container mx-auto px-10">
-                    <GetPeriod project_id=project_id.clone()/>
-                    <VoteEndBlock project_id=project_id.clone()/>
-                    <ChangePeriod project_id=project_id.clone()/>
-                    <form id="reveal-vote-submit-from" on:submit=submit_click>
+                    <GetPeriod project_id={project_id.clone()}/>
+                    <VoteEndBlock project_id={project_id.clone()}/>
+                    <ChangePeriod project_id={project_id.clone()}/>
+                    <form id="reveal-vote-submit-from" on:submit={submit_click}>
 
                         <div class="mb-5">
                             <label
@@ -51,7 +51,7 @@ pub fn RevealVote(project_id: u64) -> impl IntoView {
                                 id="choice"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required
-                                on:input=move |ev| choice_changed(event_target_value(&ev))
+                                on:input={move |ev| choice_changed(event_target_value(&ev))}
                             />
                         </div>
                         <div class="mb-5">
@@ -66,7 +66,7 @@ pub fn RevealVote(project_id: u64) -> impl IntoView {
                                 id="salt"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required
-                                on:input=move |ev| set_salt(event_target_value(&ev))
+                                on:input={move |ev| set_salt(event_target_value(&ev))}
                             />
                         </div>
                         <button
@@ -85,9 +85,9 @@ pub fn RevealVote(project_id: u64) -> impl IntoView {
             view! {
                 <div>
                     <SignTransaction
-                        salt=salt()
-                        choice=choice().unwrap().unwrap()
-                        project_id=project_id.clone()
+                        salt={salt()}
+                        choice={choice().unwrap().unwrap()}
+                        project_id={project_id.clone()}
                     />
 
                 </div>

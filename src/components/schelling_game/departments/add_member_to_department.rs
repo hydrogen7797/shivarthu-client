@@ -22,7 +22,7 @@ pub fn AddMemberToDepartment(department_id: u64) -> impl IntoView {
                     <form
 
                         id="add-department-member-submit-from"
-                        on:submit=submit_click
+                        on:submit={submit_click}
                     >
                         <div class="mb-5">
                             <label
@@ -36,7 +36,7 @@ pub fn AddMemberToDepartment(department_id: u64) -> impl IntoView {
                                 id="department-member"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required
-                                on:input=move |ev| set_account_id(event_target_value(&ev))
+                                on:input={move |ev| set_account_id(event_target_value(&ev))}
                             />
                         </div>
                         <button
@@ -54,7 +54,10 @@ pub fn AddMemberToDepartment(department_id: u64) -> impl IntoView {
         View::Success => {
             view! {
                 <div>
-                    <SignTransaction account_id=account_id() department_id=department_id.clone()/>
+                    <SignTransaction
+                        account_id={account_id()}
+                        department_id={department_id.clone()}
+                    />
 
                 </div>
             }
