@@ -18,7 +18,7 @@ pub fn ExtensionSignIn() -> impl IntoView {
                 <div>
                     <GetAccountsExtension set_account_load={set_account_load}/>
                 </div>
-            }
+            }.into_any()
         } else if !account_load().0.is_empty() && !account_load().1.is_empty() {
             view! {
                 <div>
@@ -27,17 +27,26 @@ pub fn ExtensionSignIn() -> impl IntoView {
                         account_source={account_load().1}
                     />
                 </div>
-            }
+            }.into_any()
         } else {
-            view! { <div>{"Some Error Occured"}</div> }
+            view! { <div>{"Some Error Occured"}</div> }.into_any()
         }
     };
 
     view! { <div>{move || render_html()}</div> }
 }
 
-async fn load_data(account_address: String, account_source: String, set_error:WriteSignal<String>, set_extrinsic_success:WriteSignal<String>) -> i32 {
-    
+async fn load_data(account_address: String, account_source: String, set_error:WriteSignal<String>, set_extrinsic_success:WriteSignal<String>) {
+    let tx = polkadot::tx().department_funding().pass_period(10);
+
+            sign_in_with_extension(
+                tx,
+                account_address,
+                account_source,
+                set_error,
+                set_extrinsic_success,
+            )
+            .await;
 }
 #[component]
 pub fn ExtensionTransaction(account_address: String, account_source: String) -> impl IntoView {
@@ -46,21 +55,26 @@ pub fn ExtensionTransaction(account_address: String, account_source: String) -> 
     let transaction_resource = LocalResource::new(move ||{
         load_data(account_address.clone(), account_source.clone(), set_error, set_extrinsic_success)
     });
-    
 
-    let loading = transaction_resource.loading();
-    let is_loading = move || {
-        if loading() {
-            "Loading... Please sign with extension."
-        } else {
-            "Idle."
-        }
+    let async_result = move || {
+        transaction_resource
+            .get()
+            .as_deref()
+            .map(|_| view!{<div></div>}.into_any())
+            // This loading state will only show before the first load
+            .unwrap_or_else(|| view! {
+                <div class="alert">
+                    <span class="loading loading-spinner"></span>
+                    "Loading... Please sign with extension."
+                </div>
+            }
+            .into_any())
     };
+    
 
     view! {
         <div>
-            <div>{move || transaction_resource.get()}</div>
-            <div>{move || is_loading()}</div>
+            <div>{async_result()}</div>
             <div>{move || error()}</div>
             <div>{move || extrinsic_success()}</div>
         </div>

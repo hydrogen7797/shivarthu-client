@@ -75,7 +75,7 @@ pub fn TransferBalance() -> impl IntoView {
                         </button>
                     </form>
                 </div>
-            }
+            }.into_any()
         }
         View::Success => {
             view! {
@@ -86,10 +86,10 @@ pub fn TransferBalance() -> impl IntoView {
                     />
 
                 </div>
-            }
+            }.into_any()
         }
         _ => {
-            view! { <div></div> }
+            view! { <div></div> }.into_any()
         }
     };
 
