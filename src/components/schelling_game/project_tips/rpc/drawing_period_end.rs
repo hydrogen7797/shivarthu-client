@@ -53,18 +53,17 @@ pub fn DrawingEndBlock(project_id: u64) -> impl IntoView {
                             {"Drawing Period ends: "}
                             <span id="end-period-time">{move || drawing_period().unwrap().2}</span>
                         </div>
-                    }.into_any()
+                    }
+                        .into_any()
                 } else {
                     view! {
                         <div>
                             {"Drawing Period ends: "} <span id="end-period-time">
-                                <Icon
-                                    icon=icondata::ImSpinner6
-                                    style="color: green"
-                                />
+                                <Icon icon=icondata::ImSpinner6 style="color: green"/>
                             </span>
                         </div>
-                    }.into_any()
+                    }
+                        .into_any()
                 }
             }}
 

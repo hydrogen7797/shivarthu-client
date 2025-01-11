@@ -50,9 +50,9 @@ pub fn SchellingGameComponent(profile_user_account: String) -> impl IntoView {
                     let view = match period {
                         Period::Evidence => view! {
                             <div>
-                            
+
                                 <ChallengeEvidence profile_user_account=profile_user_account()/>
-                            
+
                             </div>
                         }.into_any(),
                         Period::Staking => {

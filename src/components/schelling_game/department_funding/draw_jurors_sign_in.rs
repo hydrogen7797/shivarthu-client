@@ -7,7 +7,12 @@ use subxt::utils::AccountId32;
 
 #[component]
 pub fn SignTransaction(iterations: u64, department_required_fund_id: u64) -> impl IntoView {
-    view! { <ExtensionSignIn iterations=iterations department_required_fund_id=department_required_fund_id/> }
+    view! {
+        <ExtensionSignIn
+            iterations=iterations
+            department_required_fund_id=department_required_fund_id
+        />
+    }
 }
 
 #[component]
@@ -95,7 +100,7 @@ let async_result = move || {
         transaction_resource
             .get()
             .as_deref()
-            .map(|_| view!{<div></div>}.into_any())
+            .map(|_| view! { <div></div> }.into_any())
             // This loading state will only show before the first load
             .unwrap_or_else(|| view! {
                 <div class="alert">

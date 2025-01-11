@@ -65,9 +65,5 @@ pub fn TotalFundProfileCollected(project_id: u64) -> impl IntoView {
     };
        
 
-    view! {
-        <div>
-            {async_result}
-        </div>
-    }
+    view! { <div>{async_result}</div> }
 }

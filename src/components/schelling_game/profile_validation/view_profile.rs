@@ -60,52 +60,50 @@ pub fn ViewProfileFromAddress() -> impl IntoView {
         async_load
             .get()
             .as_deref()
-            .map(|data| view!{<div class="container mx-auto px-10">
-            <div class="mb-5">
-                <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                    <h2 class="heading">{"Name"}</h2>
-                    <p class="data">{format!("{}", data.name.clone())}</p>
+            .map(|data| view! {
+                <div class="container mx-auto px-10">
+                    <div class="mb-5">
+                        <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            <h2 class="heading">{"Name"}</h2>
+                            <p class="data">{format!("{}", data.name.clone())}</p>
+                        </div>
+
+                    </div>
+                    <div class="mb-5">
+                        <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            <h2 class="heading">{"Details"}</h2>
+                            <p inner_html=data.details.clone()></p>
+                        </div>
+
+                    </div>
+                    <div class="mb-5">
+                        <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            <video width="320" height="240" controls=true>
+                                <source
+                                    src=format!(
+                                        "{}{}",
+                                        DEFAULT_IPFS_FETCH_PROVIDER.address,
+                                        data.profile_video_cid.clone(),
+                                    )
+
+                                    type="video/mp4"
+                                />
+                                {"Your browser does not support the video tag."}
+                            </video>
+                        </div>
+
+                    </div>
                 </div>
-
-            </div>
-            <div class="mb-5">
-                <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                    <h2 class="heading">{"Details"}</h2>
-                    <p inner_html={data.details.clone()}></p>
-                </div>
-
-            </div>
-            <div class="mb-5">
-                <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                    <video width="320" height="240" controls=true>
-                        <source
-                            src={format!(
-                                "{}{}",
-                                DEFAULT_IPFS_FETCH_PROVIDER.address,
-                                data.profile_video_cid.clone(),
-                            )}
-
-                            type="video/mp4"
-                        />
-                        {"Your browser does not support the video tag."}
-                    </video>
-                </div>
-
-            </div>
-        </div>}.into_any())
+            }.into_any())
             // This loading state will only show before the first load
             .unwrap_or_else(|| view! {
                 <p>
-                <span class="loading loading-spinner text-primary"></span>
-                Loading...
-            </p>
+                    <span class="loading loading-spinner text-primary"></span>
+                    Loading...
+                </p>
             }
             .into_any())
     };
 
-    view! {
-        <div>
-           {async_result}
-        </div>
-    }
+    view! { <div>{async_result}</div> }
 }

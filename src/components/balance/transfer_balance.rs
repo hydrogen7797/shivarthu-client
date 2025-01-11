@@ -33,7 +33,7 @@ pub fn TransferBalance() -> impl IntoView {
                     <form
                         class="container mx-auto px-10"
                         id="apply-juror-submit-from"
-                        on:submit={submit_click}
+                        on:submit=submit_click
                     >
                         <div class="mb-5">
                             <label
@@ -47,7 +47,7 @@ pub fn TransferBalance() -> impl IntoView {
                                 id="destination account"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required
-                                on:input={move |e| set_dest_account(event_target_value(&e))}
+                                on:input=move |e| set_dest_account(event_target_value(&e))
                             />
                         </div>
 
@@ -63,7 +63,7 @@ pub fn TransferBalance() -> impl IntoView {
                                 id="transfer-balance"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required
-                                on:input={move |e| transfer_value_fn(event_target_value(&e))}
+                                on:input=move |e| transfer_value_fn(event_target_value(&e))
                             />
                         </div>
                         <button
@@ -81,8 +81,8 @@ pub fn TransferBalance() -> impl IntoView {
             view! {
                 <div>
                     <SignTransaction
-                        dest_account={dest_account()}
-                        transfer_balance={transfer_balance().unwrap()}
+                        dest_account=dest_account()
+                        transfer_balance=transfer_balance().unwrap()
                     />
 
                 </div>

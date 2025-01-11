@@ -48,7 +48,6 @@ pub fn SchellingGameComponent(user_to_calculate: String) -> impl IntoView {
                     let view = match period {
                         Period::Evidence => view! {
                             <div>
-                            
                             </div>
                         }.into_any(),
                         Period::Staking => {

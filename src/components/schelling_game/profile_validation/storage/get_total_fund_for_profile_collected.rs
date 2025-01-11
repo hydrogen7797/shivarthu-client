@@ -65,9 +65,5 @@ pub fn TotalFundProfileCollected(profile_user_account: String) -> impl IntoView 
     };
        
 
-    view! {
-        <div>
-            {async_result}
-        </div>
-    }
+    view! { <div>{async_result}</div> }
 }

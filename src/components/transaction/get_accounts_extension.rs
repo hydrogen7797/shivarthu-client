@@ -64,10 +64,10 @@ pub fn GetAccountsExtension(set_account_load: WriteSignal<(String, String)>) -> 
                                                 <div>
                                                     <button
                                                         class="btn btn-outline btn-info btn-block my-3"
-                                                        on:click={move |e| { onclick_button(e, i) }}
-                                                        id={account.address.clone()}
+                                                        on:click=move |e| { onclick_button(e, i) }
+                                                        id=account.address.clone()
                                                     >
-                                                     {account.source.clone()}
+                                                        {account.source.clone()}
                                                         {" | "}
                                                         {account.name.clone()}
                                                         <br/>
@@ -89,11 +89,7 @@ pub fn GetAccountsExtension(set_account_load: WriteSignal<(String, String)>) -> 
         <>
             <div class="container py-10 px-10 mx-0 min-w-full flex flex-col items-center">
                 <div>
-                    <button
-                        on:click={get_accounts_click}
-                        class="btn btn-warning"
-                        id="select-account"
-                    >
+                    <button on:click=get_accounts_click class="btn btn-warning" id="select-account">
                         {"=> Select an Account for Signing"}
                     </button>
                 </div>

@@ -17,6 +17,7 @@ use crate::components::schelling_game::positive_externality::{
     game::schelling_game::SchellingGame as PositiveExternalitySchellingGame,
     home::PositiveExternalityHome,
     views::juror_selected_check::JurorSelectedCheck as JurorSelectedCheckPositiveExternality,
+    views::view_positive_externality::ViewPositiveExternality,
 };
 use crate::components::schelling_game::profile_validation::add_profile::AddProfile;
 
@@ -48,102 +49,113 @@ pub fn RouterApp() -> impl IntoView {
     view! {
         <Router>
             <Routes fallback=|| "Not Found.">
-                <Route path=path!("/") view={Home}/>
-                <Route path=path!("/add-account") view={AddAccount}/>
-                <Route path=path!("/markdown") view={MarkdownHtmlView}/>
-                <Route path=path!("/add-profile") view={AddProfile}/>
-                <Route path=path!("/view-profile/:profile_user_account") view={ViewProfileFromAddress}/>
-                <Route path=path!("/add-profile-stake/:profile_user_account") view={AddProfileStake}/>
-                <Route path=path!("/profile-validation-game/:profile_user_account") view={SchellingGame}/>
+                <Route path=path!("/") view=Home/>
+                <Route path=path!("/add-account") view=AddAccount/>
+                <Route path=path!("/markdown") view=MarkdownHtmlView/>
+                <Route path=path!("/add-profile") view=AddProfile/>
+                <Route
+                    path=path!("/view-profile/:profile_user_account")
+                    view=ViewProfileFromAddress
+                />
+                <Route path=path!("/add-profile-stake/:profile_user_account") view=AddProfileStake/>
+                <Route
+                    path=path!("/profile-validation-game/:profile_user_account")
+                    view=SchellingGame
+                />
                 // // <Route path="/extension" view=ExtensionSignIn/>
                 // // <Route path="/signin" view=GetAccountsExtension/>
                 // // <Route path="/apply-juror/:profile_user_account" view=ApplyJurors/>
-                <Route path=path!("/transfer-balance") view={TransferBalance}/>
-                <Route path=path!("/block-number") view={BlockNumber}/>
-                <Route path=path!("/juror-selected/:profile_user_account") view={JurorSelectedCheck}/>
-                <Route path=path!("/profile-validation/:profile_user_account") view={SchellingGame}/>
-                <Route path=path!("/error-handling") view={NumericInput}/>
-                <Route path=path!("/enter-password") view={SetPhraseFromPass}/>
-                <Route path=path!("/polkadotjs") view={Polkadotjs}/>
+                <Route path=path!("/transfer-balance") view=TransferBalance/>
+                <Route path=path!("/block-number") view=BlockNumber/>
+                <Route path=path!("/juror-selected/:profile_user_account") view=JurorSelectedCheck/>
+                <Route path=path!("/profile-validation/:profile_user_account") view=SchellingGame/>
+                <Route path=path!("/error-handling") view=NumericInput/>
+                <Route path=path!("/enter-password") view=SetPhraseFromPass/>
+                <Route path=path!("/polkadotjs") view=Polkadotjs/>
                 <Route
                     path=path!("/profile-validation-change-period/:profile_user_account")
-                    view={ChangePeriodProfileValidation}
+                    view=ChangePeriodProfileValidation
                 />
 
                 // Project tips routes
 
-                <Route path=path!("/project-tips/create-project/:department_id") view={CreateProject}/>
+                <Route
+                    path=path!("/project-tips/create-project/:department_id")
+                    view=CreateProject
+                />
                 <Route
                     path=path!("/project-tips/apply-staking-period/:project_id")
-                    view={ApplyStakingPeriodForProjectTips}
+                    view=ApplyStakingPeriodForProjectTips
                 />
                 <Route
                     path=path!("/project-tips/schelling-game/:project_id")
-                    view={ProjectTipsSchellingGame}
+                    view=ProjectTipsSchellingGame
                 />
                 <Route
                     path=path!("/project-tips-change-period/:project_id")
-                    view={ChangePeriodProjectTips}
+                    view=ChangePeriodProjectTips
                 />
                 <Route
                     path=path!("/project-tips-juror-selected/:project_id")
-                    view={JurorSelectedCheckProjectTips}
+                    view=JurorSelectedCheckProjectTips
                 />
 
                 // Positive externality routes
 
-                <Route path=path!("/positive-externality") view={PositiveExternalityHome}/>
+                <Route path=path!("/positive-externality") view=PositiveExternalityHome/>
                 <Route
                     path=path!("/positive-externality/create-post")
-                    view={CreatePositiveExternalityPost}
+                    view=CreatePositiveExternalityPost
                 />
                 <Route
                     path=path!("/positive-externality/apply-staking-period/:user_to_calculate")
-                    view={ApplyStakingPeriodForPositiveExternality}
+                    view=ApplyStakingPeriodForPositiveExternality
                 />
 
                 <Route
                     path=path!("/positive-externality/schelling-game/:user_to_calculate")
-                    view={PositiveExternalitySchellingGame}
+                    view=PositiveExternalitySchellingGame
                 />
 
                 <Route
                     path=path!("/positive-externality-change-period/:user_to_calculate")
-                    view={ChangePeriodPositiveExternality}
+                    view=ChangePeriodPositiveExternality
                 />
                 <Route
                     path=path!("/positive-externality-juror-selected/:user_to_calculate")
-                    view={JurorSelectedCheckPositiveExternality}
+                    view=JurorSelectedCheckPositiveExternality
                 />
+
+                <Route path=path!("/positive-externality-view/:user") view=ViewPositiveExternality/>
 
                 // Department funding routes
                 <Route
                     path=path!("/department-funding/create-department-fund/:department_id")
-                    view={CreateDepartmentFund}
+                    view=CreateDepartmentFund
                 />
 
                 <Route
                     path=path!("/department-funding/apply-staking-period/:department_id")
-                    view={ApplyStakingPeriodForDepartmentFunding}
+                    view=ApplyStakingPeriodForDepartmentFunding
                 />
                 <Route
                     path=path!("/department-funding/schelling-game/:department_id")
-                    view={ProjectTipsSchellingGame}
+                    view=ProjectTipsSchellingGame
                 />
                 <Route
                     path=path!("/department-funding-change-period/:department_id")
-                    view={ChangePeriodDepartmentFunding}
+                    view=ChangePeriodDepartmentFunding
                 />
                 <Route
                     path=path!("/department-funding-juror-selected/:department_id")
-                    view={JurorSelectedCheckDepartmentFunding}
+                    view=JurorSelectedCheckDepartmentFunding
                 />
 
                 // Create department
-                <Route path=path!("/create-department") view={CreateDepartment}/>
+                <Route path=path!("/create-department") view=CreateDepartment/>
 
                 // Login account
-                <Route path=path!("/get-login-account") view={GetLoginAccount}/>
+                <Route path=path!("/get-login-account") view=GetLoginAccount/>
             </Routes>
         </Router>
     }

@@ -5,7 +5,7 @@ use leptos::prelude::*;
 
 #[component]
 pub fn SignTransaction(project_id: u64) -> impl IntoView {
-    view! { <ExtensionSignIn project_id={project_id}/> }
+    view! { <ExtensionSignIn project_id=project_id/> }
 }
 
 #[component]
@@ -16,16 +16,16 @@ pub fn ExtensionSignIn(project_id: u64) -> impl IntoView {
         if account_load().0.is_empty() || account_load().1.is_empty() {
             view! {
                 <div>
-                    <GetAccountsExtension set_account_load={set_account_load}/>
+                    <GetAccountsExtension set_account_load=set_account_load/>
                 </div>
             }.into_any()
         } else if !account_load().0.is_empty() && !account_load().1.is_empty() {
             view! {
                 <div>
                     <ExtensionTransaction
-                        project_id={project_id.clone()}
-                        account_address={account_load().0}
-                        account_source={account_load().1}
+                        project_id=project_id.clone()
+                        account_address=account_load().0
+                        account_source=account_load().1
                     />
                 </div>
             }.into_any()
@@ -77,7 +77,7 @@ pub fn ExtensionTransaction(
         transaction_resource
             .get()
             .as_deref()
-            .map(|_| view!{<div></div>}.into_any())
+            .map(|_| view! { <div></div> }.into_any())
             // This loading state will only show before the first load
             .unwrap_or_else(|| view! {
                 <div class="alert">

@@ -63,12 +63,9 @@ pub fn ChallengeEvidence(project_id: u64) -> impl IntoView {
         {
             view! {
                 <div class="max-w-5xl mx-auto max-md:mx-10">
-                <EvidenceEndBlock project_id=project_id.clone()  />
-                <ChallengerFees  project_id=project_id.clone()  />
-                    <form                       
-                        id="challenge-evidence-submit-from"
-                        on:submit=submit_click
-                    >
+                    <EvidenceEndBlock project_id=project_id.clone()/>
+                    <ChallengerFees project_id=project_id.clone()/>
+                    <form id="challenge-evidence-submit-from" on:submit=submit_click>
 
                         <div class="mb-5">
                             <label
@@ -110,9 +107,5 @@ pub fn ChallengeEvidence(project_id: u64) -> impl IntoView {
         }.into_any(),
     };
 
-    view! {
-        <div>
-            {move || render_view()}
-        </div>
-    }
+    view! { <div>{move || render_view()}</div> }
 }

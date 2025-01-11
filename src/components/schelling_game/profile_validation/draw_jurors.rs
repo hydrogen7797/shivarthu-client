@@ -29,14 +29,11 @@ pub fn DrawJurors(profile_user_account: String) -> impl IntoView {
         View::Form => {
             view! {
                 <div class="max-w-5xl mx-auto max-md:mx-10">
-                <GetPeriod profile_user_account=profile_user_account.clone() />
-                <DrawingEndBlock profile_user_account=profile_user_account.clone()  />
-                <ChangePeriod profile_user_account=profile_user_account.clone() />
+                    <GetPeriod profile_user_account=profile_user_account.clone()/>
+                    <DrawingEndBlock profile_user_account=profile_user_account.clone()/>
+                    <ChangePeriod profile_user_account=profile_user_account.clone()/>
 
-                    <form
-                        id="draw-juror-submit-from"
-                        on:submit=submit_click
-                    >
+                    <form id="draw-juror-submit-from" on:submit=submit_click>
                         <div class="mb-5">
                             <label
                                 for="draw-jurors"
@@ -78,9 +75,5 @@ pub fn DrawJurors(profile_user_account: String) -> impl IntoView {
 
     };
 
-    view! {
-        <div>
-            {move || render_view()}
-        </div>
-    }
+    view! { <div>{move || render_view()}</div> }
 }

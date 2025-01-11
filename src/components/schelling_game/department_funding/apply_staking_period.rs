@@ -19,13 +19,8 @@ pub fn ApplyStakingPeriod(department_required_fund_id: u64) -> impl IntoView {
     let render_view = move || match current_view() {
         View::Form => {
             view! {
-                <div
-                class="max-w-5xl mx-auto max-md:mx-10"
-                >
-                    <form                        
-                        id="apply-staking-period-from"
-                        on:submit=submit_click
-                    >
+                <div class="max-w-5xl mx-auto max-md:mx-10">
+                    <form id="apply-staking-period-from" on:submit=submit_click>
                         <div>Apply Staking Period</div>
                         <button
                             type="submit"
@@ -42,18 +37,13 @@ pub fn ApplyStakingPeriod(department_required_fund_id: u64) -> impl IntoView {
         View::Success => {
             view! {
                 <div>
-                    <SignTransaction
-                        department_required_fund_id=department_required_fund_id.clone()
-                    />
+                    <SignTransaction department_required_fund_id=department_required_fund_id
+                        .clone()/>
 
                 </div>
             }.into_any()
         }
     };
 
-    view! {
-        <div>
-            {move || render_view()}
-        </div>
-    }
+    view! { <div>{move || render_view()}</div> }
 }

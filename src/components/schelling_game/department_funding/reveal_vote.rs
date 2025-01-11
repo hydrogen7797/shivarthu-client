@@ -34,14 +34,11 @@ pub fn RevealVote(department_required_fund_id: u64) -> impl IntoView {
     let render_view = move || match current_view() {
         View::Form => {
             view! {
-                <div  class="max-w-5xl mx-auto max-md:mx-10">
-                <GetPeriod department_required_fund_id=department_required_fund_id.clone() />   
-                <VoteEndBlock department_required_fund_id=department_required_fund_id.clone() />             
-                <ChangePeriod department_required_fund_id=department_required_fund_id.clone() />
-                    <form
-                        id="reveal-vote-submit-from"
-                        on:submit=submit_click
-                    >
+                <div class="max-w-5xl mx-auto max-md:mx-10">
+                    <GetPeriod department_required_fund_id=department_required_fund_id.clone()/>
+                    <VoteEndBlock department_required_fund_id=department_required_fund_id.clone()/>
+                    <ChangePeriod department_required_fund_id=department_required_fund_id.clone()/>
+                    <form id="reveal-vote-submit-from" on:submit=submit_click>
 
                         <div class="mb-5">
                             <label
@@ -100,9 +97,5 @@ pub fn RevealVote(department_required_fund_id: u64) -> impl IntoView {
       
     };
 
-    view! {
-        <div>
-            {move || render_view()}
-        </div>
-    }
+    view! { <div>{move || render_view()}</div> }
 }

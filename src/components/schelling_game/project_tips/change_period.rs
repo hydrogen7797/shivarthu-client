@@ -15,9 +15,9 @@ pub fn ChangePeriod(project_id: u64) -> impl IntoView {
     };
 
     view! {
-        <div  class="max-w-5xl mx-auto max-md:mx-10">
+        <div class="max-w-5xl mx-auto max-md:mx-10">
             <form
-               
+
                 id="change-period-submit-from"
                 on:submit=submit_click
             >

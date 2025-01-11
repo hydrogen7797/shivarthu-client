@@ -63,12 +63,9 @@ pub fn ChallengeEvidence(profile_user_account: String) -> impl IntoView {
         {
             view! {
                 <div class="max-w-5xl mx-auto max-md:mx-10">
-                <EvidenceEndBlock profile_user_account=profile_user_account.clone()  />
-                <ChallengerFees  profile_user_account=profile_user_account.clone()  />
-                    <form                       
-                        id="challenge-evidence-submit-from"
-                        on:submit=submit_click
-                    >
+                    <EvidenceEndBlock profile_user_account=profile_user_account.clone()/>
+                    <ChallengerFees profile_user_account=profile_user_account.clone()/>
+                    <form id="challenge-evidence-submit-from" on:submit=submit_click>
 
                         <div class="mb-5">
                             <label
@@ -105,14 +102,13 @@ pub fn ChallengeEvidence(profile_user_account: String) -> impl IntoView {
 
         View::Success => view! {
             <div>
-                <SignTransaction post_cid=post_cid() profile_user_account=profile_user_account.clone()/>
+                <SignTransaction
+                    post_cid=post_cid()
+                    profile_user_account=profile_user_account.clone()
+                />
             </div>
         }.into_any(),
     };
 
-    view! {
-        <div>
-            {move || render_view()}
-        </div>
-    }
+    view! { <div>{move || render_view()}</div> }
 }

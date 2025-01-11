@@ -18,10 +18,7 @@ pub fn GetIncentives(department_required_fund_id: u64) -> impl IntoView {
         View::Form => {
             view! {
                 <div class="max-w-5xl mx-auto max-md:mx-10">
-                    <form
-                        id="get-incentives-submit-from"
-                        on:submit=submit_click
-                    >
+                    <form id="get-incentives-submit-from" on:submit=submit_click>
                         <button
                             type="submit"
                             id="get-incentives-submit"
@@ -36,7 +33,8 @@ pub fn GetIncentives(department_required_fund_id: u64) -> impl IntoView {
         View::Success => {
             view! {
                 <div>
-                    <SignTransaction department_required_fund_id=department_required_fund_id.clone()/>
+                    <SignTransaction department_required_fund_id=department_required_fund_id
+                        .clone()/>
 
                 </div>
             }.into_any()
@@ -44,9 +42,5 @@ pub fn GetIncentives(department_required_fund_id: u64) -> impl IntoView {
        
     };
 
-    view! {
-        <div>
-            {move || render_view()}
-        </div>
-    }
+    view! { <div>{move || render_view()}</div> }
 }

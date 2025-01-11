@@ -47,18 +47,17 @@ pub fn StakingEndBlock(profile_user_account: String) -> impl IntoView {
                             {"Staking Period ends: "}
                             <span id="end-period-time">{move || end_period()}</span>
                         </div>
-                    }.into_any()
+                    }
+                        .into_any()
                 } else {
                     view! {
                         <div>
                             {"Staking Period ends: "} <span id="end-period-time">
-                                <Icon
-                                    icon=icondata::ImSpinner6
-                                    style="color: green"
-                                />
+                                <Icon icon=icondata::ImSpinner6 style="color: green"/>
                             </span>
                         </div>
-                    }.into_any()
+                    }
+                        .into_any()
                 }
             }}
 

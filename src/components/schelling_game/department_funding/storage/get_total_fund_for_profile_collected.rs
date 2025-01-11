@@ -65,9 +65,5 @@ pub fn TotalFundProfileCollected(department_required_fund_id: u64) -> impl IntoV
     };
        
 
-    view! {
-        <div>
-            {async_result}
-        </div>
-    }
+    view! { <div>{async_result}</div> }
 }

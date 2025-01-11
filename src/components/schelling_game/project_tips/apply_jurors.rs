@@ -29,14 +29,12 @@ pub fn ApplyJurors(project_id: u64) -> impl IntoView {
     let render_view = move || match current_view() {
         View::Form => {
             view! {
-                <div
-                class="max-w-5xl mx-auto max-md:mx-10"
-                >
-                <GetPeriod project_id=project_id.clone() /> 
-                <StakingEndBlock project_id=project_id.clone() />
-                <ChangePeriod project_id=project_id.clone() />
+                <div class="max-w-5xl mx-auto max-md:mx-10">
+                    <GetPeriod project_id=project_id.clone()/>
+                    <StakingEndBlock project_id=project_id.clone()/>
+                    <ChangePeriod project_id=project_id.clone()/>
                     <form
-                        
+
                         id="apply-juror-submit-from"
                         on:submit=submit_click
                     >
@@ -70,19 +68,12 @@ pub fn ApplyJurors(project_id: u64) -> impl IntoView {
         View::Success => {
             view! {
                 <div>
-                    <SignTransaction
-                        stake=juror_stake().unwrap()
-                        project_id=project_id.clone()
-                    />
+                    <SignTransaction stake=juror_stake().unwrap() project_id=project_id.clone()/>
 
                 </div>
             }.into_any()
         }
     };
 
-    view! {
-        <div>
-            {move || render_view()}
-        </div>
-    }
+    view! { <div>{move || render_view()}</div> }
 }

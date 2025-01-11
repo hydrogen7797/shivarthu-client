@@ -16,15 +16,15 @@ pub fn ExtensionSignIn() -> impl IntoView {
         if account_load().0.is_empty() || account_load().1.is_empty() {
             view! {
                 <div>
-                    <GetAccountsExtension set_account_load={set_account_load}/>
+                    <GetAccountsExtension set_account_load=set_account_load/>
                 </div>
             }.into_any()
         } else if !account_load().0.is_empty() && !account_load().1.is_empty() {
             view! {
                 <div>
                     <ExtensionTransaction
-                        account_address={account_load().0}
-                        account_source={account_load().1}
+                        account_address=account_load().0
+                        account_source=account_load().1
                     />
                 </div>
             }.into_any()
@@ -60,7 +60,7 @@ pub fn ExtensionTransaction(account_address: String, account_source: String) -> 
         transaction_resource
             .get()
             .as_deref()
-            .map(|_| view!{<div></div>}.into_any())
+            .map(|_| view! { <div></div> }.into_any())
             // This loading state will only show before the first load
             .unwrap_or_else(|| view! {
                 <div class="alert">

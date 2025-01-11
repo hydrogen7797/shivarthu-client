@@ -61,7 +61,7 @@ pub fn CreatePositiveExternalityPost() -> impl IntoView {
             view! {
                 <div class="container mx-auto px-10">
 
-                    <form id="challenge-evidence-submit-from" on:submit={submit_click}>
+                    <form id="challenge-evidence-submit-from" on:submit=submit_click>
 
                         <div class="mb-5">
                             <label
@@ -71,11 +71,11 @@ pub fn CreatePositiveExternalityPost() -> impl IntoView {
                                 Create a Positive Externality
                             </label>
                             <MarkdownField
-                                set_markdown={set_markdown}
-                                name={String::from("positive-externality-post")}
-                                class={String::from(
+                                set_markdown=set_markdown
+                                name=String::from("positive-externality-post")
+                                class=String::from(
                                     "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
-                                )}
+                                )
                             />
 
                         </div>
@@ -98,7 +98,7 @@ pub fn CreatePositiveExternalityPost() -> impl IntoView {
 
         View::Success => view! {
             <div>
-                <SignTransaction post_cid={post_cid()}/>
+                <SignTransaction post_cid=post_cid()/>
             </div>
         }.into_any(),
     };

@@ -30,15 +30,14 @@ pub fn CommitVote(project_id: u64) -> impl IntoView {
     let render_view = move || match current_view() {
         View::Form => {
             view! {
-                <div  class="max-w-5xl mx-auto max-md:mx-10">
-                <GetPeriod project_id=project_id.clone() />                
-                <CommitEndBlock project_id=project_id.clone()  />
-                <ChangePeriod project_id=project_id.clone() />
-                <div>
-                                
-                </div>
+                <div class="max-w-5xl mx-auto max-md:mx-10">
+                    <GetPeriod project_id=project_id.clone()/>
+                    <CommitEndBlock project_id=project_id.clone()/>
+                    <ChangePeriod project_id=project_id.clone()/>
+                    <div>
+                    </div>
                     <form
-                       
+
                         id="commit-vote-submit-from"
                         on:submit=submit_click
                     >
@@ -72,10 +71,7 @@ pub fn CommitVote(project_id: u64) -> impl IntoView {
         View::Success => {
             view! {
                 <div>
-                    <SignTransaction
-                        hash=hash().unwrap().unwrap()
-                        project_id=project_id.clone()
-                    />
+                    <SignTransaction hash=hash().unwrap().unwrap() project_id=project_id.clone()/>
 
                 </div>
             }.into_any()
@@ -83,9 +79,5 @@ pub fn CommitVote(project_id: u64) -> impl IntoView {
        
     };
 
-    view! {
-        <div>
-            {move || render_view()}
-        </div>
-    }
+    view! { <div>{move || render_view()}</div> }
 }

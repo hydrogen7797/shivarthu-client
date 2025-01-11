@@ -30,15 +30,15 @@ pub fn CommitVote(department_required_fund_id: u64) -> impl IntoView {
     let render_view = move || match current_view() {
         View::Form => {
             view! {
-                <div  class="max-w-5xl mx-auto max-md:mx-10">
-                <GetPeriod department_required_fund_id=department_required_fund_id.clone() />                
-                <CommitEndBlock department_required_fund_id=department_required_fund_id.clone()  />
-                <ChangePeriod department_required_fund_id=department_required_fund_id.clone() />
-                <div>
-                                
-                </div>
+                <div class="max-w-5xl mx-auto max-md:mx-10">
+                    <GetPeriod department_required_fund_id=department_required_fund_id.clone()/>
+                    <CommitEndBlock department_required_fund_id=department_required_fund_id
+                        .clone()/>
+                    <ChangePeriod department_required_fund_id=department_required_fund_id.clone()/>
+                    <div>
+                    </div>
                     <form
-                       
+
                         id="commit-vote-submit-from"
                         on:submit=submit_click
                     >
@@ -83,9 +83,5 @@ pub fn CommitVote(department_required_fund_id: u64) -> impl IntoView {
        
     };
 
-    view! {
-        <div>
-            {move || render_view()}
-        </div>
-    }
+    view! { <div>{move || render_view()}</div> }
 }

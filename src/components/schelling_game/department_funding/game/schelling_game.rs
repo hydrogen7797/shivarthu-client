@@ -51,7 +51,6 @@ pub fn SchellingGameComponent(department_required_fund_id: u64) -> impl IntoView
                     let view = match period {
                         Period::Evidence => view! {
                             <div>
-                            
                             </div>
                         }.into_any(),
                         Period::Staking => {

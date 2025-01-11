@@ -30,15 +30,14 @@ pub fn CommitVote(user_to_calculate: String) -> impl IntoView {
     let render_view = move || match current_view() {
         View::Form => {
             view! {
-                <div  class="max-w-5xl mx-auto max-md:mx-10">
-                <GetPeriod user_to_calculate=user_to_calculate.clone() />                
-                <CommitEndBlock user_to_calculate=user_to_calculate.clone()  />
-                <ChangePeriod user_to_calculate=user_to_calculate.clone() />
-                <div>
-                                
-                </div>
+                <div class="max-w-5xl mx-auto max-md:mx-10">
+                    <GetPeriod user_to_calculate=user_to_calculate.clone()/>
+                    <CommitEndBlock user_to_calculate=user_to_calculate.clone()/>
+                    <ChangePeriod user_to_calculate=user_to_calculate.clone()/>
+                    <div>
+                    </div>
                     <form
-                       
+
                         id="commit-vote-submit-from"
                         on:submit=submit_click
                     >
@@ -83,9 +82,5 @@ pub fn CommitVote(user_to_calculate: String) -> impl IntoView {
        
     };
 
-    view! {
-        <div>
-            {move || render_view()}
-        </div>
-    }
+    view! { <div>{move || render_view()}</div> }
 }

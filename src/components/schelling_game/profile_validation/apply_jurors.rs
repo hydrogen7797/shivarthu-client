@@ -29,14 +29,12 @@ pub fn ApplyJurors(profile_user_account: String) -> impl IntoView {
     let render_view = move || match current_view() {
         View::Form => {
             view! {
-                <div
-                class="max-w-5xl mx-auto max-md:mx-10"
-                >
-                <GetPeriod profile_user_account=profile_user_account.clone() /> 
-                <StakingEndBlock profile_user_account=profile_user_account.clone() />
-                <ChangePeriod profile_user_account=profile_user_account.clone() />
+                <div class="max-w-5xl mx-auto max-md:mx-10">
+                    <GetPeriod profile_user_account=profile_user_account.clone()/>
+                    <StakingEndBlock profile_user_account=profile_user_account.clone()/>
+                    <ChangePeriod profile_user_account=profile_user_account.clone()/>
                     <form
-                        
+
                         id="apply-juror-submit-from"
                         on:submit=submit_click
                     >
@@ -80,9 +78,5 @@ pub fn ApplyJurors(profile_user_account: String) -> impl IntoView {
         }
     };
 
-    view! {
-        <div>
-            {move || render_view()}
-        </div>
-    }
+    view! { <div>{move || render_view()}</div> }
 }

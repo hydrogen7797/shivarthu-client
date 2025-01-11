@@ -29,14 +29,11 @@ pub fn DrawJurors(project_id: u64) -> impl IntoView {
         View::Form => {
             view! {
                 <div class="max-w-5xl mx-auto max-md:mx-10">
-                <GetPeriod project_id=project_id.clone() />
-                <DrawingEndBlock project_id=project_id.clone()  />
-                <ChangePeriod project_id=project_id.clone() />
+                    <GetPeriod project_id=project_id.clone()/>
+                    <DrawingEndBlock project_id=project_id.clone()/>
+                    <ChangePeriod project_id=project_id.clone()/>
 
-                    <form
-                        id="draw-juror-submit-from"
-                        on:submit=submit_click
-                    >
+                    <form id="draw-juror-submit-from" on:submit=submit_click>
                         <div class="mb-5">
                             <label
                                 for="draw-jurors"
@@ -78,9 +75,5 @@ pub fn DrawJurors(project_id: u64) -> impl IntoView {
 
     };
 
-    view! {
-        <div>
-            {move || render_view()}
-        </div>
-    }
+    view! { <div>{move || render_view()}</div> }
 }

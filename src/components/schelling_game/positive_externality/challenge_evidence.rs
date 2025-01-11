@@ -63,12 +63,9 @@ pub fn ChallengeEvidence(user_to_calculate: String) -> impl IntoView {
         {
             view! {
                 <div class="max-w-5xl mx-auto max-md:mx-10">
-                <EvidenceEndBlock user_to_calculate=user_to_calculate.clone()  />
-                <ChallengerFees  user_to_calculate=user_to_calculate.clone()  />
-                    <form                       
-                        id="challenge-evidence-submit-from"
-                        on:submit=submit_click
-                    >
+                    <EvidenceEndBlock user_to_calculate=user_to_calculate.clone()/>
+                    <ChallengerFees user_to_calculate=user_to_calculate.clone()/>
+                    <form id="challenge-evidence-submit-from" on:submit=submit_click>
 
                         <div class="mb-5">
                             <label
@@ -110,9 +107,5 @@ pub fn ChallengeEvidence(user_to_calculate: String) -> impl IntoView {
         }.into_any(),
     };
 
-    view! {
-        <div>
-            {move || render_view()}
-        </div>
-    }
+    view! { <div>{move || render_view()}</div> }
 }

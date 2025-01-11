@@ -37,7 +37,7 @@ pub fn GetLoginAccount() -> impl IntoView {
             <Nav/>
             <p>Loaded Account {account_load}</p>
             <div>
-                <GetAccountsExtension set_account_load={set_account_load}/>
+                <GetAccountsExtension set_account_load=set_account_load/>
             </div>
         </div>
     }

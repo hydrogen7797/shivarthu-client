@@ -13,15 +13,7 @@ pub fn SignTransaction(
     city: String,
     street: String,
 ) -> impl IntoView {
-    view! {
-        <ExtensionSignIn
-            post_cid={post_cid}
-            country={country}
-            state={state}
-            city={city}
-            street={street}
-        />
-    }
+    view! { <ExtensionSignIn post_cid=post_cid country=country state=state city=city street=street/> }
 }
 
 #[component]
@@ -38,20 +30,20 @@ pub fn ExtensionSignIn(
         if account_load().0.is_empty() || account_load().1.is_empty() {
             view! {
                 <div>
-                    <GetAccountsExtension set_account_load={set_account_load}/>
+                    <GetAccountsExtension set_account_load=set_account_load/>
                 </div>
             }.into_any()
         } else if !account_load().0.is_empty() && !account_load().1.is_empty() {
             view! {
                 <div>
                     <ExtensionTransaction
-                        post_cid={post_cid.clone()}
-                        country={country.clone()}
-                        state={state.clone()}
-                        city={city.clone()}
-                        street={street.clone()}
-                        account_address={account_load().0}
-                        account_source={account_load().1}
+                        post_cid=post_cid.clone()
+                        country=country.clone()
+                        state=state.clone()
+                        city=city.clone()
+                        street=street.clone()
+                        account_address=account_load().0
+                        account_source=account_load().1
                     />
                 </div>
             }.into_any()
@@ -131,7 +123,7 @@ pub fn ExtensionTransaction(
         transaction_resource
             .get()
             .as_deref()
-            .map(|_| view!{<div></div>}.into_any())
+            .map(|_| view! { <div></div> }.into_any())
             // This loading state will only show before the first load
             .unwrap_or_else(|| view! {
                 <div class="alert">
