@@ -18,6 +18,7 @@ use crate::components::schelling_game::positive_externality::{
     home::PositiveExternalityHome,
     views::juror_selected_check::JurorSelectedCheck as JurorSelectedCheckPositiveExternality,
     views::view_positive_externality::ViewPositiveExternality,
+    views::view_positive_externality_latest::ViewPositiveExternalityLatest,
 };
 use crate::components::schelling_game::profile_validation::add_profile::AddProfile;
 
@@ -127,6 +128,11 @@ pub fn RouterApp() -> impl IntoView {
                 />
 
                 <Route path=path!("/positive-externality-view/:user") view=ViewPositiveExternality/>
+
+                <Route
+                    path=path!("/positive-externality-view-latest/:user")
+                    view=ViewPositiveExternalityLatest
+                />
 
                 // Department funding routes
                 <Route

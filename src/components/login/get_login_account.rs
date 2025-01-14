@@ -26,7 +26,7 @@ pub fn GetLoginAccount() -> impl IntoView {
         use_local_storage::<AccountState, JsonSerdeCodec>("account-state");
     let (account_load, set_account_load) = signal(("".to_owned(), "".to_owned()));
 
-    create_effect(move |_| {
+    Effect::new(move |_| {
         let (account_id, _) = account_load();
         if !account_id.is_empty() && account_id != account_state().account_id {
             set_account_state.update(|s| s.account_id = account_id.clone());
@@ -35,7 +35,7 @@ pub fn GetLoginAccount() -> impl IntoView {
     view! {
         <div>
             <Nav/>
-            <p>Loaded Account {account_load}</p>
+            // <p>Loaded Account {account_load}</p>
             <div>
                 <GetAccountsExtension set_account_load=set_account_load/>
             </div>

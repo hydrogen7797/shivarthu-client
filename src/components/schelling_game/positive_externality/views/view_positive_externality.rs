@@ -8,6 +8,7 @@ use jsonrpsee_core::{client::ClientT, rpc_params};
 use jsonrpsee_wasm_client::WasmClientBuilder;
 use leptos_router::hooks::use_params_map;
 use crate::components::schelling_game::positive_externality::views::view_post_positive_externality::ViewPostPositiveExternality;
+use crate::components::navigation::nav::Nav;
 
 
 #[derive(Serialize, Deserialize, Clone)]
@@ -91,76 +92,84 @@ pub fn ViewPositiveExternality() -> impl IntoView {
         };
 
     view! {
-        <div class="p-4 space-y-4">
-            <h1 class="text-2xl font-bold">Paginated Posts</h1>
+        <>
+            <Nav/>
+            <div class="p-4 space-y-4">
+                <h1 class="text-2xl font-bold">Paginated Posts</h1>
 
-            // Display posts
-            <div class="space-y-2">
-                {move || match posts() {
-                    Some(posts) => {
-                        posts
-                            .into_iter()
-                            .map(|post| {
-                                view! { <div class="p-2 border rounded"><ViewPostPositiveExternality id={post}/></div> }
-                            })
-                            .collect_view()
-                            .into_any()
-                    }
-                    None => view! { <div>No posts found.</div> }.into_any(),
-                }}
+                // Display posts
+                <div class="space-y-2">
+                    {move || match posts() {
+                        Some(posts) => {
+                            posts
+                                .into_iter()
+                                .map(|post| {
+                                    view! {
+                                        <div class="p-2 border rounded">
+                                            <ViewPostPositiveExternality id=post/>
+                                        </div>
+                                    }
+                                })
+                                .collect_view()
+                                .into_any()
+                        }
+                        None => view! { <div>No posts found.</div> }.into_any(),
+                    }}
 
+                </div>
+
+                // Pagination controls
+                <div class="flex items-center justify-between">
+                    <button
+                        class="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+                        on:click=move |_| go_to_page(page() - 1)
+                        disabled=move || page() <= 1
+                    >
+                        "Previous"
+                    </button>
+                    <span class="text-gray-700">
+                        "Page " {page} " of " {total_pages} " (Total Posts: " {total_posts_length}
+                        ")"
+                    </span>
+                    <button
+                        class="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+                        on:click=move |_| { go_to_page(page() + 1) }
+                        disabled=move || { page() >= total_pages() }
+                    >
+                        "Next"
+                    </button>
+                </div>
+
+                // Page selector
+                <form on:submit=update_page class="flex items-center space-x-2">
+                    <label class="text-gray-700">Page Number:</label>
+                    <input
+                        type="number"
+                        class="p-2 border rounded"
+                        node_ref=input_element_page
+                        value=move || { page().to_string() }
+                    />
+                    <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded">
+                        "Update"
+                    </button>
+                </form>
+                <br/>
+
+                // Page size selector
+                <form on:submit=update_page_size class="flex items-center space-x-2">
+                    <label class="text-gray-700">Page Size:</label>
+                    <input
+                        type="number"
+                        class="p-2 border rounded"
+                        node_ref=input_element_page_size
+                        value=move || { page_size().to_string() }
+                    />
+                    <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded">
+                        Update
+                    </button>
+                </form>
             </div>
-
-            // Pagination controls
-            <div class="flex items-center justify-between">
-                <button
-                    class="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
-                    on:click=move |_| go_to_page(page() - 1)
-                    disabled=move || page() <= 1
-                >
-                    "Previous"
-                </button>
-                <span class="text-gray-700">
-                    "Page "{page}" of "{total_pages}" (Total Posts: "{total_posts_length}")"
-                </span>
-                <button
-                    class="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
-                    on:click=move |_| { go_to_page(page() + 1) }
-                    disabled=move || { page() >= total_pages() }
-                >
-                    "Next"
-                </button>
-            </div>
-
-           // Page selector
-            <form on:submit=update_page class="flex items-center space-x-2">
-                <label class="text-gray-700">Page Number:</label>
-                <input
-                    type="number"
-                    class="p-2 border rounded"
-                    node_ref=input_element_page
-                    value=move || { page().to_string() }
-                />
-                <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded">
-                    "Update"
-                </button>
-            </form>
-            <br/>
-
-               // Page size selector
-            <form on:submit=update_page_size class="flex items-center space-x-2">
-                <label class="text-gray-700">Page Size:</label>
-                <input
-                    type="number"
-                    class="p-2 border rounded"
-                    node_ref=input_element_page_size
-                    value=move || {page_size().to_string()}
-                />
-                <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded">
-                    Update
-                </button>
-            </form>
-        </div>
+        </>
     }
 }
 

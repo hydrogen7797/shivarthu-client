@@ -34,8 +34,7 @@ pub fn CommitVote(user_to_calculate: String) -> impl IntoView {
                     <GetPeriod user_to_calculate=user_to_calculate.clone()/>
                     <CommitEndBlock user_to_calculate=user_to_calculate.clone()/>
                     <ChangePeriod user_to_calculate=user_to_calculate.clone()/>
-                    <div>
-                    </div>
+                    <div></div>
                     <form
 
                         id="commit-vote-submit-from"

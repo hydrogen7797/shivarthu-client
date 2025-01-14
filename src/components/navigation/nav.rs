@@ -41,8 +41,7 @@ pub fn Nav() -> impl IntoView {
                             d="M1 1h15M1 7h15M1 13h15"
                         ></path>
                     </svg>
-                </button>
-                {} <div class="hidden lg:flex space-x-8">{navbar_items()}</div>
+                </button> {} <div class="hidden lg:flex space-x-8">{navbar_items()}</div>
             </div>
 
             {}
@@ -60,6 +59,7 @@ fn navbar_items() -> impl IntoView {
     let (department_open, set_department_open) = signal(false);
 
     let (positive_externality_open, set_positive_externality_open) = signal(false);
+
 
     let (account_state, set_account_state, reset_account) =
     use_local_storage::<AccountState, JsonSerdeCodec>("account-state");
@@ -201,59 +201,89 @@ let UseClipboardReturn {
                         "Create Positive Externality"
                     </a>
                     <a
-                    href=format!("/positive-externality-view/{}",account_state().account_id.clone())
-                    class="block py-2 w-full px-4 text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                >
-                    "View Positive Externality"
-                </a>
+                        href=move || {
+                            format!(
+                                "/positive-externality-view/{}",
+                                account_state().account_id.clone(),
+                            )
+                        }
+
+                        class="block py-2 w-full px-4 text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                    >
+                        "View Positive Externality"
+                    </a>
+                    <a
+                        href=move || {
+                            format!(
+                                "/positive-externality-view-latest/{}",
+                                account_state().account_id.clone(),
+                            )
+                        }
+
+                        class="block py-2 w-full px-4 text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                    >
+                        "View Positive Externality Latest"
+                    </a>
                 </div>
             </div>
-            <div  class="block py-2 px-4 text-gray-700 rounded hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                                {move || {
-                                    let full_id = account_state().account_id.clone();
-                                    let shortened_id = if full_id.len() > 8 {
-                                        format!(
-                                            "{}...{}",
-                                            &full_id[..8],
-                                            &full_id[full_id.len() - 4..],
-                                        )
-                                    } else {
-                                        full_id.clone()
-                                    };
-                                    if !shortened_id.is_empty() {
-                                        view! {
-                                            // Display the shortened account ID
-                                            <>
-                                                <span>{shortened_id}</span>
+            <a
+                href="/get-login-account"
+                class="block py-2 px-4 text-gray-700 rounded hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+            >
+                "Sign In"
+            </a>
+            <div class="block py-2 px-4 text-gray-700 rounded hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                {move || {
+                    let full_id = account_state().account_id.clone();
+                    let shortened_id = if full_id.len() > 8 {
+                        format!("{}...{}", &full_id[..8], &full_id[full_id.len() - 4..])
+                    } else {
+                        full_id.clone()
+                    };
+                    if !shortened_id.is_empty() {
+                        view! {
+                            // Display the shortened account ID
+                            <>
+                                <span>{shortened_id}</span>
 
-                                                <button on:click={
-                                                    let copy = copy.clone();
-                                                    move |_| copy(&full_id)
-                                                }>
-                                                    <Show
-                                                        when=copied
-                                                        fallback=|| {
-                                                            view! { <Icon icon=icondata::AiCopyOutlined/> }
-                                                        }
-                                                    >
+                                <button on:click={
+                                    let copy = copy.clone();
+                                    move |_| copy(&full_id)
+                                }>
+                                    <Show
+                                        when=copied
+                                        fallback=|| {
+                                            view! { <Icon icon=icondata::AiCopyOutlined/> }
+                                        }
+                                    >
 
-                                                        Copied!
-                                                    </Show>
-                                                </button>
-                                            </>
-                                        }.into_any()
-                                    } else {
-                                        view! {
-                                            // Display the shortened account ID
+                                        Copied!
+                                    </Show>
+                                </button>
+                            </>
+                        }
+                            .into_any()
+                    } else {
+                        view! {
+                            // Display the shortened account ID
 
-                                            <>
-                                                <div></div>
-                                            </>
-                                        }.into_any()
-                                    }
-                                }}
+                            // Display the shortened account ID
 
-                            </div>
+                            // Display the shortened account ID
+
+                            // Display the shortened account ID
+
+                            // Display the shortened account ID
+
+                            <>
+                                <div></div>
+                            </>
+                        }
+                            .into_any()
+                    }
+                }}
+
+            </div>
         </>
     }
 }

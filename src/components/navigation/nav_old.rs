@@ -346,6 +346,14 @@ pub fn Nav() -> impl IntoView {
                                         view! {
                                             // Display the shortened account ID
 
+                                            // Display the shortened account ID
+
+                                            // Display the shortened account ID
+
+                                            // Display the shortened account ID
+
+                                            // Display the shortened account ID
+
                                             <>
                                                 <div></div>
                                             </>

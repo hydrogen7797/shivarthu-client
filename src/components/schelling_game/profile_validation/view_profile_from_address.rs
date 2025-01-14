@@ -118,8 +118,5 @@ pub fn ViewProfileFromAddress() -> impl IntoView {
 
     // create_effect(move |_| async_load.get());
 
-    view! {
-        <div>{async_result}
-        </div>
-    }
+    view! { <div>{async_result}</div> }
 }

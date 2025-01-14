@@ -23,11 +23,7 @@ pub fn ViewPostPositiveExternality(id: u64) -> impl IntoView {
 
         });
     });
-    view! {
-        <div>
-        {data_post}
-        </div>
-    }
+    view! { <div>{data_post}</div> }
 }
 
 async fn get_post_data(id: u64) -> String {
