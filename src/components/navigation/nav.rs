@@ -194,6 +194,13 @@ fn navbar_items() -> impl IntoView {
                 }}>
 
                     <a
+                        href="/positive-externality-validation-list"
+                        class="block py-2 w-full px-4 text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                    >
+                        "Validation List"
+                    </a>
+
+                    <a
                         href="/positive-externality/create-post"
                         class="block py-2 w-full px-4 text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                     >
@@ -235,6 +242,20 @@ fn navbar_items() -> impl IntoView {
                     >
                         "Apply Staking Period"
                     </a>
+
+                    <a
+                        href={move || {
+                            format!(
+                                "/positive-externality/schelling-game/{}",
+                                account_state().account_id.clone(),
+                            )
+                        }}
+
+                        class="block py-2 w-full px-4 text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                    >
+                        "Schelling Game"
+                    </a>
+
                 </div>
             </div>
             <a

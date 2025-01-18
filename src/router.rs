@@ -17,6 +17,7 @@ use crate::components::schelling_game::positive_externality::{
     game::schelling_game::SchellingGame as PositiveExternalitySchellingGame,
     home::PositiveExternalityHome,
     views::juror_selected_check::JurorSelectedCheck as JurorSelectedCheckPositiveExternality,
+    views::validation_list::ValidationList,
     views::view_positive_externality::ViewPositiveExternality,
     views::view_positive_externality_latest::ViewPositiveExternalityLatest,
 };
@@ -144,6 +145,11 @@ pub fn RouterApp() -> impl IntoView {
                 <Route
                     path={path!("/positive-externality-view-latest/:user")}
                     view={ViewPositiveExternalityLatest}
+                />
+
+                <Route
+                    path={path!("/positive-externality-validation-list")}
+                    view={ValidationList}
                 />
 
                 // Department funding routes

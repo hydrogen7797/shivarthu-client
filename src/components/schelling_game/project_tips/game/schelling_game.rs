@@ -43,8 +43,7 @@ pub fn SchellingGameComponent(project_id: u64) -> impl IntoView {
                 // let period_read_signal = period();
                 if let Some(period) = period() {
                     let view = match period {
-                        Period::Evidence => view! { <div></div> }
-                        .into_any(),
+                        Period::Evidence => view! { <div></div> }.into_any(),
                         Period::Staking => view! {
                             <div>
                                 <ApplyJurors project_id={project_id()} />

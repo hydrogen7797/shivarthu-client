@@ -1,4 +1,5 @@
 use crate::components::navigation::nav::Nav;
+use crate::components::schelling_game::positive_externality::storage::get_period::GetPeriod;
 use crate::constants::constant::NODE_URL;
 use jsonrpsee_core::{client::ClientT, rpc_params};
 use jsonrpsee_wasm_client::WasmClientBuilder;
@@ -92,7 +93,17 @@ pub fn ValidationList() -> impl IntoView {
                             posts
                                 .into_iter()
                                 .map(|post| {
-                                    view! { <div class="p-2 border rounded">{post}</div> }
+                                    view! {
+                                        <>
+                                            <div class="p-2 border rounded">
+                                                <a href={format!(
+                                                    "/positive-externality/schelling-game/{}",
+                                                    post.clone(),
+                                                )}>{post.clone()}</a>
+                                            </div>
+                                            <GetPeriod user_to_calculate={post.clone()} />
+                                        </>
+                                    }
                                 })
                                 .collect_view()
                                 .into_any()
@@ -172,7 +183,7 @@ async fn validation_list_length(
 
     let accounts: Option<Vec<String>> = client
         .request(
-            "positiveexternality_paginateposts_latest",
+            "positiveexternality_validationlist_latest",
             rpc_params![page, page_size],
         )
         .await
