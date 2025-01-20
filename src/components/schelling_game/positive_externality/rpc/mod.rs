@@ -4,3 +4,5 @@ pub mod evidence_end_block;
 pub mod juror_selected;
 pub mod staking_end_block;
 pub mod vote_end_block;
+pub mod has_user_staked;
+pub mod user_staked_value;
