@@ -2,6 +2,8 @@ use crate::constants::constant::NODE_URL;
 use jsonrpsee_core::{client::ClientT, rpc_params};
 use jsonrpsee_wasm_client::WasmClientBuilder;
 use leptos::prelude::*;
+use crate::components::login::get_login_account::AccountState;
+
 
 async fn load_data(user_to_calculate: String, check_account: String) -> u64 {
     let client = WasmClientBuilder::default().build(NODE_URL).await.unwrap();
@@ -19,10 +21,10 @@ async fn load_data(user_to_calculate: String, check_account: String) -> u64 {
 #[component]
 pub fn UserStakedValue(
     user_to_calculate: String,
-    check_account: ReadSignal<String>,
+    account_state: Signal<AccountState>,
 ) -> impl IntoView {
     let async_data =
-        LocalResource::new(move || load_data(user_to_calculate.clone(), check_account().clone()));
+        LocalResource::new(move || load_data(user_to_calculate.clone(), account_state().account_id.clone()));
 
     let async_result = move || {
         async_data

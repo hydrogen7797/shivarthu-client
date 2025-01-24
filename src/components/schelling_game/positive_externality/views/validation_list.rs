@@ -8,6 +8,12 @@ use leptos::html;
 use leptos::prelude::*;
 use leptos::task::spawn_local;
 use serde::{Deserialize, Serialize};
+use crate::components::schelling_game::positive_externality::rpc::has_user_staked::HasUserStaked;
+use leptos_use::storage::use_local_storage;
+use crate::components::login::get_login_account::AccountState;
+use codee::string::JsonSerdeCodec;
+use crate::components::schelling_game::positive_externality::rpc::user_staked_value::UserStakedValue;
+
 
 #[derive(Serialize, Deserialize, Clone)]
 struct PaginatedPosts {
@@ -20,10 +26,12 @@ struct PaginatedPosts {
 pub fn ValidationList() -> impl IntoView {
     let (page, set_page) = signal(1);
     let (page_size, set_page_size) = signal(10);
-    let (posts, set_posts) = signal::<Option<Vec<String>>>(None);
+    let (accounts, set_accounts) = signal::<Option<Vec<String>>>(None);
     let (total_posts_length, set_total_posts_length) = signal(0);
     let (total_pages, set_total_pages) = signal(0);
     let input_element_page: NodeRef<html::Input> = NodeRef::new();
+    let (account_state, set_account_state, reset_account) =
+    use_local_storage::<AccountState, JsonSerdeCodec>("account-state");
 
     let input_element_page_size: NodeRef<html::Input> = NodeRef::new();
 
@@ -36,12 +44,12 @@ pub fn ValidationList() -> impl IntoView {
             let result = validation_list_length(page, page_size).await;
             match result {
                 Ok((Some(posts), total_length)) => {
-                    set_posts.set(Some(posts.clone()));
+                    set_accounts.set(Some(posts.clone()));
                     set_total_posts_length.set(total_length);
                     set_total_pages.set((total_length + page_size - 1) / page_size);
                 }
                 _ => {
-                    set_posts.set(None);
+                    set_accounts.set(None);
                     set_total_posts_length.set(0);
                     set_total_pages.set(0);
                 }
@@ -88,20 +96,22 @@ pub fn ValidationList() -> impl IntoView {
 
                 // Display posts
                 <div class="space-y-2">
-                    {move || match posts() {
-                        Some(posts) => {
-                            posts
+                    {move || match accounts() {
+                        Some(accounts_values) => {
+                            accounts_values
                                 .into_iter()
-                                .map(|post| {
+                                .map(|account| {
                                     view! {
                                         <>
                                             <div class="p-2 border rounded">
                                                 <a href={format!(
                                                     "/positive-externality/schelling-game/{}",
-                                                    post.clone(),
-                                                )}>{post.clone()}</a>
+                                                    account.clone(),
+                                                )}>{account.clone()}</a>
                                             </div>
-                                            <GetPeriod user_to_calculate={post.clone()} />
+                                            <GetPeriod user_to_calculate={account.clone()} />
+                                            <HasUserStaked user_to_calculate={account.clone()} account_state={account_state} />
+                                            <UserStakedValue user_to_calculate={account.clone()} account_state={account_state} />
                                         </>
                                     }
                                 })
