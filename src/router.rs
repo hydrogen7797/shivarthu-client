@@ -20,6 +20,7 @@ use crate::components::schelling_game::positive_externality::{
     views::validation_list::ValidationList,
     views::view_positive_externality::ViewPositiveExternality,
     views::view_positive_externality_latest::ViewPositiveExternalityLatest,
+    views::view_positive_externality_all_posts::ViewPositiveExternalityAllPosts,
 };
 use crate::components::schelling_game::profile_validation::add_profile::AddProfile;
 
@@ -145,6 +146,11 @@ pub fn RouterApp() -> impl IntoView {
                 <Route
                     path={path!("/positive-externality-view-latest/:user")}
                     view={ViewPositiveExternalityLatest}
+                />
+
+                <Route
+                    path={path!("/positive-externality-all")}
+                    view={ViewPositiveExternalityAllPosts}
                 />
 
                 <Route

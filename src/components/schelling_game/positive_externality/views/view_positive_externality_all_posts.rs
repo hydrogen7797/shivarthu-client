@@ -6,7 +6,6 @@ use leptos::task::spawn_local;
 use leptos::html;
 use jsonrpsee_core::{client::ClientT, rpc_params};
 use jsonrpsee_wasm_client::WasmClientBuilder;
-use leptos_router::hooks::use_params_map;
 use crate::components::schelling_game::positive_externality::views::view_post_positive_externality::ViewPostPositiveExternality;
 use crate::components::navigation::nav::Nav;
 
@@ -18,7 +17,7 @@ struct PaginatedPosts {
 }
 
 #[component]
-pub fn ViewPositiveExternalityLatest() -> impl IntoView {
+pub fn ViewPositiveExternalityAllPosts() -> impl IntoView {
     let (page, set_page) = signal(1);
     let (page_size, set_page_size) = signal(10);
     let (posts, set_posts) = signal::<Option<Vec<u64>>>(None);
@@ -28,22 +27,14 @@ pub fn ViewPositiveExternalityLatest() -> impl IntoView {
 
     let input_element_page_size: NodeRef<html::Input> = NodeRef::new();
 
-    let params = use_params_map();
-
-    let user = move || params.with(|params| params.get("user").unwrap_or_default());
-
-    let user_value = untrack(|| user());
-
-    gloo::console::log!(user_value);
 
     // Fetch paginated posts when `page` or `page_size` changes
     Effect::new(move |_| {
-        let user = user(); // Replace with actual user ID
         let page = page();
         let page_size = page_size();
 
         spawn_local(async move {
-            let result = paginate_posts_by_address(user, page, page_size).await;
+            let result = paginate_posts(page, page_size).await;
             match result {
                 Ok((Some(posts), total_length)) => {
                     set_posts.set(Some(posts.clone()));
@@ -94,7 +85,8 @@ pub fn ViewPositiveExternalityLatest() -> impl IntoView {
         <>
             <Nav />
             <div class="p-4 space-y-4">
-            <h1 class="text-2xl font-bold text-blue-600 bg-blue-100 p-4 rounded-lg shadow-md dark:bg-gray-700 dark:text-white">Your Posts</h1>
+
+            <h1 class="text-2xl font-bold text-blue-600 bg-blue-100 p-4 rounded-lg shadow-md dark:bg-gray-700 dark:text-white">Posts</h1>
 
                 // Display posts
                 <div class="space-y-2">
@@ -190,16 +182,15 @@ pub fn ViewPositiveExternalityLatest() -> impl IntoView {
 }
 
 // Mock API function (replace with your actual API call)
-async fn paginate_posts_by_address(
-    user: String,
+async fn paginate_posts(
     page: u64,
     page_size: u64,
 ) -> Result<(Option<Vec<u64>>, u64), String> {
     let client = WasmClientBuilder::default().build(NODE_URL).await.unwrap();
     let all_posts_length: u64 = client
         .request(
-            "positiveexternality_postbyaddresslength",
-            rpc_params![user.clone()],
+            "all_postlength",
+            rpc_params![],
         )
         .await
         .unwrap();
@@ -208,8 +199,8 @@ async fn paginate_posts_by_address(
 
     let posts: Option<Vec<u64>> = client
         .request(
-            "positiveexternality_paginateposts_latest",
-            rpc_params![user, page, page_size],
+            "positiveexternality_paginateall_posts",
+            rpc_params![page, page_size],
         )
         .await
         .unwrap();

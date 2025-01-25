@@ -94,7 +94,8 @@ pub fn ViewPositiveExternality() -> impl IntoView {
         <>
             <Nav />
             <div class="p-4 space-y-4">
-                <h1 class="text-2xl font-bold">Paginated Posts</h1>
+            <h1 class="text-2xl font-bold text-blue-600 bg-blue-100 p-4 rounded-lg shadow-md dark:bg-gray-700 dark:text-white">Your Posts</h1>
+
 
                 // Display posts
                 <div class="space-y-2">
