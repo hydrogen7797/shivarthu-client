@@ -69,28 +69,15 @@ fn navbar_items() -> impl IntoView {
         copy,
     } = use_clipboard_with_options(UseClipboardOptions::default().read(true));
 
-    let (is_dark_mode, set_is_dark_mode) = signal(false);
     let toggle_dark_mode = move |_| {
-        set_is_dark_mode.update(|dark| *dark = !*dark);
         let document = web_sys::window().unwrap().document().unwrap();
-        let local_storage = web_sys::window().unwrap().local_storage().unwrap().unwrap();
+        let document_element = document.document_element().unwrap();
+        let has_dark_class = document_element.class_list().contains("dark");
 
-        if is_dark_mode.get() {
-            document
-                .document_element()
-                .unwrap()
-                .class_list()
-                .add_1("dark")
-                .unwrap();
-            local_storage.set_item("currentTheme", "dark").unwrap();
-        } else {
-            document
-                .document_element()
-                .unwrap()
-                .class_list()
-                .remove_1("dark")
-                .unwrap();
-            local_storage.set_item("currentTheme", "light").unwrap();
+        if !has_dark_class {
+            document_element.class_list().add_1("dark").unwrap();
+        } else if has_dark_class {
+            document_element.class_list().remove_1("dark").unwrap();
         }
     };
 

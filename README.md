@@ -18,7 +18,7 @@ trunk serve
 
 ```bash
 
-npx tailwindcss -i ./src/input.css -o ./css/output.css --watch
+./tailwindcss -i ./src/input.css -o ./css/output.css --watch
 
 ```
 ## Start substrate node
