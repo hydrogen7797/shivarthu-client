@@ -112,7 +112,7 @@ pub fn ViewPositiveExternalityLatest() -> impl IntoView {
                                 .collect_view()
                                 .into_any()
                         }
-                        None => view! { <div>No posts found.</div> }.into_any(),
+                        None => view! { <div class="dark:text-white text-gray-800">No posts found.</div> }.into_any(),
                     }}
 
                 </div>

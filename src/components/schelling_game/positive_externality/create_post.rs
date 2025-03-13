@@ -92,7 +92,8 @@ pub fn CreatePositiveExternalityPost() -> impl IntoView {
                         </button>
 
                     </form>
-                    <p>{move || pending().then(|| "Loading...")}</p>
+                    <br/>
+                    <p class="text-gray-900 dark:text-white">{move || pending().then(|| "Loading...")}</p>
                     <p>{move || cid_value()}</p>
                 </div>
             }.into_any()

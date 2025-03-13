@@ -39,7 +39,7 @@ pub fn MarkdownField(
                         </div>
                     </form>
                 </div>
-                <div inner_html={html_data}></div>
+                <div class="text-gray-900 dark:text-white" inner_html={html_data}></div>
             </div>
         </>
     }
