@@ -1,19 +1,18 @@
+use crate::components::login::get_login_account::AccountState;
 use crate::components::navigation::nav::Nav;
+use crate::components::schelling_game::positive_externality::rpc::has_user_staked::HasUserStaked;
+use crate::components::schelling_game::positive_externality::rpc::user_staked_value::UserStakedValue;
 use crate::components::schelling_game::positive_externality::storage::get_period::GetPeriod;
 use crate::constants::constant::NODE_URL;
+use codee::string::JsonSerdeCodec;
 use jsonrpsee_core::{client::ClientT, rpc_params};
 use jsonrpsee_wasm_client::WasmClientBuilder;
 use leptos::ev::SubmitEvent;
 use leptos::html;
 use leptos::prelude::*;
 use leptos::task::spawn_local;
-use serde::{Deserialize, Serialize};
-use crate::components::schelling_game::positive_externality::rpc::has_user_staked::HasUserStaked;
 use leptos_use::storage::use_local_storage;
-use crate::components::login::get_login_account::AccountState;
-use codee::string::JsonSerdeCodec;
-use crate::components::schelling_game::positive_externality::rpc::user_staked_value::UserStakedValue;
-
+use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Clone)]
 struct PaginatedPosts {
@@ -31,7 +30,7 @@ pub fn ValidationList() -> impl IntoView {
     let (total_pages, set_total_pages) = signal(0);
     let input_element_page: NodeRef<html::Input> = NodeRef::new();
     let (account_state, set_account_state, reset_account) =
-    use_local_storage::<AccountState, JsonSerdeCodec>("account-state");
+        use_local_storage::<AccountState, JsonSerdeCodec>("account-state");
 
     let input_element_page_size: NodeRef<html::Input> = NodeRef::new();
 
@@ -92,7 +91,9 @@ pub fn ValidationList() -> impl IntoView {
         <>
             <Nav />
             <div class="p-4 space-y-4">
-                <h1 class="text-2xl font-bold text-blue-600 bg-blue-100 p-4 rounded-lg shadow-md dark:bg-gray-700 dark:text-white">Validation List</h1>
+                <h1 class="text-2xl font-bold text-blue-600 bg-blue-100 p-4 rounded-lg shadow-md dark:bg-gray-700 dark:text-white">
+                    Validation List
+                </h1>
 
                 // Display posts
                 <div class="space-y-2">
@@ -109,90 +110,113 @@ pub fn ValidationList() -> impl IntoView {
                                                     account.clone(),
                                                 )}>{account.clone()}</a>
                                             </div>
-                                            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded" role="alert">
-                                            <GetPeriod user_to_calculate={account.clone()} />
+                                            <div
+                                                class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded"
+                                                role="alert"
+                                            >
+                                                <GetPeriod user_to_calculate={account.clone()} />
                                             </div>
-                                            <HasUserStaked user_to_calculate={account.clone()} account_state={account_state} />
-                                            <UserStakedValue user_to_calculate={account.clone()} account_state={account_state} />
+                                            <HasUserStaked
+                                                user_to_calculate={account.clone()}
+                                                account_state={account_state}
+                                            />
+                                            <UserStakedValue
+                                                user_to_calculate={account.clone()}
+                                                account_state={account_state}
+                                            />
                                         </>
                                     }
                                 })
                                 .collect_view()
                                 .into_any()
                         }
-                        None => view! { <div class="dark:text-white text-gray-800">No posts found.</div> }.into_any(),
+                        None => {
+                            view! {
+                                <div class="dark:text-white text-gray-800">No posts found.</div>
+                            }
+                                .into_any()
+                        }
                     }}
 
                 </div>
 
                 // Pagination controls
-                { move || match accounts(){
-                    Some(accounts_values) => { if !accounts_values.is_empty() { view! {
+                {move || match accounts() {
+                    Some(accounts_values) => {
+                        if !accounts_values.is_empty() {
+                            view! {
+                                <div class="flex items-center justify-between">
+                                    <button
+                                        class="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+                                        on:click={move |_| go_to_page(page() - 1)}
+                                        disabled={move || page() <= 1}
+                                    >
+                                        "Previous"
+                                    </button>
+                                    <span class="text-gray-700">
+                                        "Page " {page} " of " {total_pages} " (Total Posts: "
+                                        {total_posts_length} ")"
+                                    </span>
+                                    <button
+                                        class="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+                                        on:click={move |_| { go_to_page(page() + 1) }}
+                                        disabled={move || { page() >= total_pages() }}
+                                    >
+                                        "Next"
+                                    </button>
+                                </div>
 
-                        <div class="flex items-center justify-between">
-                    <button
-                        class="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
-                        on:click={move |_| go_to_page(page() - 1)}
-                        disabled={move || page() <= 1}
-                    >
-                        "Previous"
-                    </button>
-                    <span class="text-gray-700">
-                        "Page " {page} " of " {total_pages} " (Total Posts: " {total_posts_length}
-                        ")"
-                    </span>
-                    <button
-                        class="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
-                        on:click={move |_| { go_to_page(page() + 1) }}
-                        disabled={move || { page() >= total_pages() }}
-                    >
-                        "Next"
-                    </button>
-                </div>
+                                <div class="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-4">
+                                    <form on:submit={update_page} class="w-full sm:w-auto">
+                                        <div class="flex items-center space-x-2">
+                                            <label class="w-24 text-gray-700 font-medium">
+                                                "Page Number:"
+                                            </label>
+                                            <input
+                                                type="number"
+                                                class="w-full p-2 border rounded sm:w-auto"
+                                                node_ref={input_element_page}
+                                                value={move || { page().to_string() }}
+                                            />
+                                            <button
+                                                type="submit"
+                                                class="px-4 py-2 bg-green-500 text-white rounded"
+                                            >
+                                                "Update"
+                                            </button>
+                                        </div>
+                                    </form>
 
-                 <div class="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-4">        
-                 <form on:submit={update_page} class="w-full sm:w-auto">
-                 <div class="flex items-center space-x-2">
-                     <label class="w-24 text-gray-700 font-medium">
-                         "Page Number:"
-                     </label>
-                     <input
-                         type="number"
-                         class="w-full p-2 border rounded sm:w-auto"
-                         node_ref={input_element_page}
-                         value={move || { page().to_string() }}
-                     />
-                     <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded">
-                         "Update"
-                     </button>
-                 </div>
-             </form>
-
-             // Page size form
-             <form on:submit={update_page_size} class="w-full sm:w-auto">
-                 <div class="flex items-center space-x-2">
-                     <label class="w-24 text-gray-700 font-medium">
-                         "Page Size:"
-                     </label>
-                     <input
-                         type="number"
-                         class="w-full p-2 border rounded sm:w-auto"
-                         node_ref={input_element_page_size}
-                         value={move || { page_size().to_string() }}
-                     />
-                     <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded">
-                         Update
-                     </button>
-                 </div>
-             </form>
-                </div>
-
-                      }.into_any()} else {
-                        view!{}.into_any()
-                      }}
-                    None => view! {}.into_any()
+                                    // Page size form
+                                    <form on:submit={update_page_size} class="w-full sm:w-auto">
+                                        <div class="flex items-center space-x-2">
+                                            <label class="w-24 text-gray-700 font-medium">
+                                                "Page Size:"
+                                            </label>
+                                            <input
+                                                type="number"
+                                                class="w-full p-2 border rounded sm:w-auto"
+                                                node_ref={input_element_page_size}
+                                                value={move || { page_size().to_string() }}
+                                            />
+                                            <button
+                                                type="submit"
+                                                class="px-4 py-2 bg-green-500 text-white rounded"
+                                            >
+                                                Update
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            }
+                                .into_any()
+                        } else {
+                            view! {}.into_any()
+                        }
+                    }
+                    None => view! {}.into_any(),
                 }}
-                
+
             </div>
         </>
     }

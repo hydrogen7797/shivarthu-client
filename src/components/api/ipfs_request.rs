@@ -41,7 +41,6 @@ pub async fn ipfs_call_json_string(
         IPFSProvider::Web3Storage => ipfs_call_json_string_web3storage(data, name).await,
         IPFSProvider::Everland => ipfs_call_json_string_everland(data, name).await,
         IPFSProvider::Iroh => upload_json_string_iroh(data, name).await,
-
     }
 }
 

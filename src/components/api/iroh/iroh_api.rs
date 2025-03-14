@@ -1,16 +1,15 @@
+use crate::constants::constant::IROH_UPLOAD_SERVER;
 use gloo::net::http::Request;
 use serde::Deserialize;
-use web_sys::{File, FormData};
 use wasm_bindgen::JsValue;
-use crate::constants::constant::IROH_UPLOAD_SERVER;
-
+use web_sys::{File, FormData};
 
 #[derive(Deserialize)]
 struct IrohResponse {
     ticket: String,
     node_id: String,
     blob_hash: String,
-    blob_format: String
+    blob_format: String,
 }
 
 pub async fn upload_file_iroh(file: File, name: String) -> String {
@@ -42,4 +41,3 @@ pub async fn upload_json_string_iroh(data: &str, name: String) -> String {
     let body = response.json::<IrohResponse>().await.unwrap();
     body.blob_hash
 }
-

@@ -33,60 +33,63 @@ pub fn SchellingGameComponent(profile_user_account: String) -> impl IntoView {
 
     let period = get_period_fn(profile_user_account());
 
-    let myview =
-        move || {
+    let myview = move || {
+        {
             {
-                {
-                    // let period_read_signal = period();
-                    if let Some(period) = period() {
-                        let view = match period {
+                // let period_read_signal = period();
+                if let Some(period) = period() {
+                    let view = match period {
                         Period::Evidence => view! {
                             <div>
 
                                 <ChallengeEvidence profile_user_account={profile_user_account()} />
 
                             </div>
-                        }.into_any(),
-                        Period::Staking => {
-                            view! {
-                                <div>
-                                    <ApplyJurors profile_user_account={profile_user_account()} />
-                                </div>
-                            }.into_any()
                         }
+                        .into_any(),
+                        Period::Staking => view! {
+                            <div>
+                                <ApplyJurors profile_user_account={profile_user_account()} />
+                            </div>
+                        }
+                        .into_any(),
                         Period::Drawing => view! {
                             <div>
                                 <DrawJurors profile_user_account={profile_user_account()} />
                             </div>
-                        }.into_any(),
+                        }
+                        .into_any(),
                         Period::Commit => view! {
                             <div>
                                 <CommitVote profile_user_account={profile_user_account()} />
                             </div>
-                        }.into_any(),
+                        }
+                        .into_any(),
                         Period::Vote => view! {
                             <div>
                                 <RevealVote profile_user_account={profile_user_account()} />
                             </div>
-                        }.into_any(),
+                        }
+                        .into_any(),
                         Period::Appeal => view! { <div></div> }.into_any(),
                         Period::Execution => {
                             view! { <div>You are in Execution phase. Get your incentives</div> }
-                        }.into_any()
-                    };
-                        view
-                    } else {
-                        view! {
-                            <div class="container">
-                                <p>{format!("{:?}", period())}</p>
-                                <p>{"No period"}</p>
-                            </div>
                         }
-                        .into_any()
+                        .into_any(),
+                    };
+                    view
+                } else {
+                    view! {
+                        <div class="container">
+                            <p>{format!("{:?}", period())}</p>
+                            <p>{"No period"}</p>
+                        </div>
                     }
+                    .into_any()
                 }
             }
-        };
+        }
+    };
 
     view! {
         <div>

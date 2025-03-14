@@ -199,14 +199,12 @@ fn navbar_items() -> impl IntoView {
                     }
                 }}>
 
-                <a
-                href="/positive-externality-all"
-                class="block py-2 w-full px-4 text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-            >
-                "All Positive Externality"
-            </a>
-
-
+                    <a
+                        href="/positive-externality-all"
+                        class="block py-2 w-full px-4 text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                    >
+                        "All Positive Externality"
+                    </a>
 
                     <a
                         href="/positive-externality-validation-list"
@@ -322,8 +320,8 @@ fn navbar_items() -> impl IntoView {
             </div>
 
             <button
-            class="block py-2 px-4 text-gray-700 rounded hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                on:click=toggle_dark_mode
+                class="block py-2 px-4 text-gray-700 rounded hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                on:click={toggle_dark_mode}
             >
                 "Dark Mode"
             </button>

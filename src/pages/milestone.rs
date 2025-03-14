@@ -1,6 +1,5 @@
 use leptos::prelude::*;
 
-
 #[component]
 pub fn MilestoneTimeline() -> impl IntoView {
     view! {
@@ -12,7 +11,11 @@ pub fn MilestoneTimeline() -> impl IntoView {
                 <Milestone title="Positive Externality" date="Early 2025" color="bg-blue-500" />
                 <Milestone title="Profile Validation" date="Q3-Q4 2025" color="bg-purple-500" />
                 <Milestone title="Department Funding" date="TBD" color="bg-green-500" />
-                <Milestone title="Election with Sequential Phragmén" date="TBD" color="bg-yellow-500" />
+                <Milestone
+                    title="Election with Sequential Phragmén"
+                    date="TBD"
+                    color="bg-yellow-500"
+                />
                 <Milestone title="Anonymous Voting" date="TBD" color="bg-pink-500" />
             </div>
         </div>
@@ -23,7 +26,10 @@ pub fn MilestoneTimeline() -> impl IntoView {
 pub fn Milestone(title: &'static str, date: &'static str, color: &'static str) -> impl IntoView {
     view! {
         <div class="relative">
-            <div class={format!("absolute -left-7 w-6 h-6 {} rounded-full border-4 border-white dark:border-gray-900", color)}></div>
+            <div class={format!(
+                "absolute -left-7 w-6 h-6 {} rounded-full border-4 border-white dark:border-gray-900",
+                color,
+            )}></div>
             <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg shadow">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">{title}</h3>
                 <p class="text-gray-600 dark:text-gray-300 text-sm">{date}</p>

@@ -94,7 +94,9 @@ pub fn ViewPositiveExternalityLatest() -> impl IntoView {
         <>
             <Nav />
             <div class="p-4 space-y-4">
-            <h1 class="text-2xl font-bold text-blue-600 bg-blue-100 p-4 rounded-lg shadow-md dark:bg-gray-700 dark:text-white">Your Posts</h1>
+                <h1 class="text-2xl font-bold text-blue-600 bg-blue-100 p-4 rounded-lg shadow-md dark:bg-gray-700 dark:text-white">
+                    Your Posts
+                </h1>
 
                 // Display posts
                 <div class="space-y-2">
@@ -112,78 +114,92 @@ pub fn ViewPositiveExternalityLatest() -> impl IntoView {
                                 .collect_view()
                                 .into_any()
                         }
-                        None => view! { <div class="dark:text-white text-gray-800">No posts found.</div> }.into_any(),
+                        None => {
+                            view! {
+                                <div class="dark:text-white text-gray-800">No posts found.</div>
+                            }
+                                .into_any()
+                        }
                     }}
 
                 </div>
 
-              // Pagination controls
-              { move || match posts(){
-                Some(posts_value) => { if !posts_value.is_empty() { view! {
+                // Pagination controls
+                {move || match posts() {
+                    Some(posts_value) => {
+                        if !posts_value.is_empty() {
+                            view! {
+                                <div class="flex items-center justify-between">
+                                    <button
+                                        class="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+                                        on:click={move |_| go_to_page(page() - 1)}
+                                        disabled={move || page() <= 1}
+                                    >
+                                        "Previous"
+                                    </button>
+                                    <span class="dark:text-white text-gray-800">
+                                        "Page " {page} " of " {total_pages} " (Total Posts: "
+                                        {total_posts_length} ")"
+                                    </span>
+                                    <button
+                                        class="px-4 py-2 bg-blue-500 dark:text-white text-gray-800 rounded disabled:opacity-50"
+                                        on:click={move |_| { go_to_page(page() + 1) }}
+                                        disabled={move || { page() >= total_pages() }}
+                                    >
+                                        "Next"
+                                    </button>
+                                </div>
 
-                    <div class="flex items-center justify-between">
-                <button
-                    class="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
-                    on:click={move |_| go_to_page(page() - 1)}
-                    disabled={move || page() <= 1}
-                >
-                    "Previous"
-                </button>
-                <span class="dark:text-white text-gray-800">
-                    "Page " {page} " of " {total_pages} " (Total Posts: " {total_posts_length}
-                    ")"
-                </span>
-                <button
-                    class="px-4 py-2 bg-blue-500 dark:text-white text-gray-800 rounded disabled:opacity-50"
-                    on:click={move |_| { go_to_page(page() + 1) }}
-                    disabled={move || { page() >= total_pages() }}
-                >
-                    "Next"
-                </button>
-            </div>
+                                <div class="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-4">
+                                    <form on:submit={update_page} class="w-full sm:w-auto">
+                                        <div class="flex items-center space-x-2">
+                                            <label class="w-24 dark:text-white text-gray-800 font-medium">
+                                                "Page Number:"
+                                            </label>
+                                            <input
+                                                type="number"
+                                                class="w-full p-2 border rounded sm:w-auto dark:text-white text-gray-800"
+                                                node_ref={input_element_page}
+                                                value={move || { page().to_string() }}
+                                            />
+                                            <button
+                                                type="submit"
+                                                class="px-4 py-2 bg-green-500 text-white rounded"
+                                            >
+                                                "Update"
+                                            </button>
+                                        </div>
+                                    </form>
 
-             <div class="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-4">
-             <form on:submit={update_page} class="w-full sm:w-auto">
-             <div class="flex items-center space-x-2">
-                 <label class="w-24 dark:text-white text-gray-800 font-medium">
-                     "Page Number:"
-                 </label>
-                 <input
-                     type="number"
-                     class="w-full p-2 border rounded sm:w-auto dark:text-white text-gray-800"
-                     node_ref={input_element_page}
-                     value={move || { page().to_string() }}
-                 />
-                 <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded">
-                     "Update"
-                 </button>
-             </div>
-         </form>
-
-         // Page size form
-         <form on:submit={update_page_size} class="w-full sm:w-auto">
-             <div class="flex items-center space-x-2">
-                 <label class="w-24 dark:text-white text-gray-800 font-medium">
-                     "Page Size:"
-                 </label>
-                 <input
-                     type="number"
-                     class="w-full p-2 border rounded sm:w-auto dark:text-white text-gray-800"
-                     node_ref={input_element_page_size}
-                     value={move || { page_size().to_string() }}
-                 />
-                 <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded">
-                     Update
-                 </button>
-             </div>
-         </form>
-            </div>
-
-                  }.into_any()} else {
-                    view!{}.into_any()
-                  }}
-                None => view! {}.into_any()
-            }}
+                                    // Page size form
+                                    <form on:submit={update_page_size} class="w-full sm:w-auto">
+                                        <div class="flex items-center space-x-2">
+                                            <label class="w-24 dark:text-white text-gray-800 font-medium">
+                                                "Page Size:"
+                                            </label>
+                                            <input
+                                                type="number"
+                                                class="w-full p-2 border rounded sm:w-auto dark:text-white text-gray-800"
+                                                node_ref={input_element_page_size}
+                                                value={move || { page_size().to_string() }}
+                                            />
+                                            <button
+                                                type="submit"
+                                                class="px-4 py-2 bg-green-500 text-white rounded"
+                                            >
+                                                Update
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            }
+                                .into_any()
+                        } else {
+                            view! {}.into_any()
+                        }
+                    }
+                    None => view! {}.into_any(),
+                }}
             </div>
         </>
     }

@@ -1,9 +1,8 @@
+use crate::components::login::get_login_account::AccountState;
 use crate::constants::constant::NODE_URL;
 use jsonrpsee_core::{client::ClientT, rpc_params};
 use jsonrpsee_wasm_client::WasmClientBuilder;
 use leptos::prelude::*;
-use crate::components::login::get_login_account::AccountState;
-
 
 async fn load_data(user_to_calculate: String, check_account: String) -> bool {
     let client = WasmClientBuilder::default().build(NODE_URL).await.unwrap();
@@ -23,8 +22,12 @@ pub fn HasUserStaked(
     user_to_calculate: String,
     account_state: Signal<AccountState>,
 ) -> impl IntoView {
-    let async_data =
-        LocalResource::new(move || load_data(user_to_calculate.clone(), account_state().account_id.clone()));
+    let async_data = LocalResource::new(move || {
+        load_data(
+            user_to_calculate.clone(),
+            account_state().account_id.clone(),
+        )
+    });
 
     let async_result = move || {
         async_data
@@ -33,14 +36,20 @@ pub fn HasUserStaked(
             .map(|data| {
                 if *data == false {
                     view! {
-                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded" role="alert">
+                        <div
+                            class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"
+                            role="alert"
+                        >
                             <p>Value: {data.clone()}, you have not staked</p>
                         </div>
                     }
                     .into_any()
                 } else {
                     view! {
-                        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded" role="alert">
+                        <div
+                            class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded"
+                            role="alert"
+                        >
                             <p>Value: {data.clone()}, you have staked</p>
                         </div>
                     }

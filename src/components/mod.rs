@@ -1,6 +1,7 @@
 pub mod accounts;
 pub mod api;
 pub mod balance;
+pub mod common;
 pub mod home;
 pub mod login;
 pub mod markdown;

@@ -53,29 +53,29 @@ pub fn GetAccountsExtension(set_account_load: WriteSignal<(String, String)>) -> 
                         <b>{"Select an account you want to use for signing:"}</b>
                     </div>
                     <div class="flex flex-col gap-4 mx-auto">
-                    {move || {
-                        accounts()
-                            .iter()
-                            .enumerate()
-                            .map(|(i, account)| {
-                                view! {
-                                    <div class="w-full px-4 py-2 rounded-lg bg-yellow-400 text-gray font-medium transition-colors hover:bg-yellow-500 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 mt-2">
-                                        <button
-                                            on:click={move |e| { onclick_button(e, i) }}
-                                            id={account.address.clone()}
-                                        >
-                                            {account.source.clone()}
-                                            {" | "}
-                                            {account.name.clone()}
-                                            <br />
-                                            <small>{account.address.clone()}</small>
-                                        </button>
-                                    </div>
-                                }
-                            })
-                            .collect_view()
-                    }}
-                 </div>
+                        {move || {
+                            accounts()
+                                .iter()
+                                .enumerate()
+                                .map(|(i, account)| {
+                                    view! {
+                                        <div class="w-full px-4 py-2 rounded-lg bg-yellow-400 text-gray font-medium transition-colors hover:bg-yellow-500 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 mt-2">
+                                            <button
+                                                on:click={move |e| { onclick_button(e, i) }}
+                                                id={account.address.clone()}
+                                            >
+                                                {account.source.clone()}
+                                                {" | "}
+                                                {account.name.clone()}
+                                                <br />
+                                                <small>{account.address.clone()}</small>
+                                            </button>
+                                        </div>
+                                    }
+                                })
+                                .collect_view()
+                        }}
+                    </div>
 
                 </div>
             }

@@ -19,8 +19,8 @@ use crate::components::schelling_game::positive_externality::{
     views::juror_selected_check::JurorSelectedCheck as JurorSelectedCheckPositiveExternality,
     views::validation_list::ValidationList,
     views::view_positive_externality::ViewPositiveExternality,
-    views::view_positive_externality_latest::ViewPositiveExternalityLatest,
     views::view_positive_externality_all_posts::ViewPositiveExternalityAllPosts,
+    views::view_positive_externality_latest::ViewPositiveExternalityLatest,
 };
 use crate::components::schelling_game::profile_validation::add_profile::AddProfile;
 

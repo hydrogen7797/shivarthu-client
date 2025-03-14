@@ -1,3 +1,4 @@
+use crate::components::common::spinner::LoadingSpinner;
 use crate::components::transaction::extension_sign_in::sign_in_with_extension;
 use crate::components::transaction::get_accounts_extension::GetAccountsExtension;
 use crate::services::common_services::polkadot;
@@ -99,24 +100,26 @@ pub fn ExtensionTransaction(
             .as_deref()
             .map(|_| view! { <div></div> }.into_any())
             // This loading state will only show before the first load
-            .unwrap_or_else(|| {
-                view! {
-                    <div class="alert">
-                        <span class="loading loading-spinner"></span>
-                        "Loading... Please sign with extension."
+            .unwrap_or_else(|| view! {
+                <div class="flex items-center gap-3 p-4 border-l-4 border-yellow-500 bg-yellow-100 text-yellow-800 rounded-xl shadow-md">
+                    <div>
+                        <LoadingSpinner />
                     </div>
-                }
-                .into_any()
-            })
+                    <div>"Loading... Please sign with extension."</div>
+                </div>
+            }
+            .into_any())
     };
     let error_fn = move || {
         if !error().is_empty() {
             view! {
-                <div role="alert" class="alert alert-error">
+                <div
+                    role="alert"
+                    class="flex items-center gap-3 p-4 border-l-4 border-red-500 bg-red-100 text-red-800 rounded-xl shadow-md"
+                >
                     {move || error()}
                 </div>
-            }
-            .into_any()
+            }.into_any()
         } else {
             view! { <div></div> }.into_any()
         }
@@ -125,11 +128,13 @@ pub fn ExtensionTransaction(
     let extrinsic_success_fn = move || {
         if !extrinsic_success().is_empty() {
             view! {
-                <div role="alert" class="alert alert-success">
+                <div
+                    role="alert"
+                    class="flex items-center gap-3 p-4 border-l-4 border-green-500 bg-green-100 text-green-800 rounded-xl shadow-md"
+                >
                     {move || extrinsic_success()}
                 </div>
-            }
-            .into_any()
+            }.into_any()
         } else {
             view! { <div></div> }.into_any()
         }
