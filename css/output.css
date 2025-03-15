@@ -550,6 +550,12 @@
   .z-1 {
     z-index: 1;
   }
+  .z-3 {
+    z-index: 3;
+  }
+  .z-5 {
+    z-index: 5;
+  }
   .z-10 {
     z-index: 10;
   }
@@ -579,6 +585,9 @@
   }
   .m-3 {
     margin: calc(var(--spacing) * 3);
+  }
+  .m-6 {
+    margin: calc(var(--spacing) * 6);
   }
   .mx-0 {
     margin-inline: calc(var(--spacing) * 0);
@@ -649,6 +658,9 @@
   .table {
     display: table;
   }
+  .h-0 {
+    height: calc(var(--spacing) * 0);
+  }
   .h-2 {
     height: calc(var(--spacing) * 2);
   }
@@ -663,6 +675,9 @@
   }
   .h-6 {
     height: calc(var(--spacing) * 6);
+  }
+  .h-8 {
+    height: calc(var(--spacing) * 8);
   }
   .h-10 {
     height: calc(var(--spacing) * 10);
@@ -682,6 +697,9 @@
   .min-h-80 {
     min-height: calc(var(--spacing) * 80);
   }
+  .w-0 {
+    width: calc(var(--spacing) * 0);
+  }
   .w-2 {
     width: calc(var(--spacing) * 2);
   }
@@ -696,6 +714,9 @@
   }
   .w-6 {
     width: calc(var(--spacing) * 6);
+  }
+  .w-8 {
+    width: calc(var(--spacing) * 8);
   }
   .w-10 {
     width: calc(var(--spacing) * 10);
@@ -973,6 +994,9 @@
   .stroke-current {
     stroke: currentColor;
   }
+  .p-1 {
+    padding: calc(var(--spacing) * 1);
+  }
   .p-2 {
     padding: calc(var(--spacing) * 2);
   }
@@ -981,6 +1005,9 @@
   }
   .p-4 {
     padding: calc(var(--spacing) * 4);
+  }
+  .p-5 {
+    padding: calc(var(--spacing) * 5);
   }
   .p-6 {
     padding: calc(var(--spacing) * 6);
@@ -1189,6 +1216,9 @@
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .\[i3�C�J�E\16 \3 ��\1 �\<��\11 㘲�tI���\@x\1b l9A��Vt�����R\f e���\1 \(-\1 \]C\4 \^C\4 _C\4 \`C\4 �\14 ��\11 㘲�tI���\@x\1b �b���f\)\19 0��\`\)Z�\:\^\12 e\|��\11 㘲�tI���\@x\1b kt\\�ٌS�e\6 �\b P�\] {
+    i3�C�J�E���<��㘲�tI���@xl9A��Vt�����Re� �(-]C^C_C`C���㘲�tI���@x�b���f)0��`)Z�: ^e|��㘲�tI���@xkt\�ٌS�e�P�;
   }
   .hover\:bg-blue-700 {
     &:hover {

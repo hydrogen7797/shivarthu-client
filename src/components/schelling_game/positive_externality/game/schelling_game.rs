@@ -37,7 +37,11 @@ pub fn SchellingGameComponent(user_to_calculate: String) -> impl IntoView {
                 // let period_read_signal = period();
                 if let Some(period) = period() {
                     let view = match period {
-                        Period::Evidence => view! { <div></div> }.into_any(),
+                        Period::Evidence => view! {
+                            <div>
+                            </div>
+                        }
+                        .into_any(),
                         Period::Staking => view! {
                             <div>
                                 <ApplyJurors user_to_calculate={user_to_calculate()} />

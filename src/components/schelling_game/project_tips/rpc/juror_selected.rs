@@ -53,5 +53,8 @@ pub fn JurorSelected(project_id: u64, check_account: ReadSignal<String>) -> impl
                 .into_any()
             })
     };
-    view! { <div>{async_result}</div> }
+    view! {
+        <div>{async_result}
+        </div>
+    }
 }

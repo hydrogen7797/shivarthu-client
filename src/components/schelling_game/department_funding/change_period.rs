@@ -10,7 +10,7 @@ pub fn ChangePeriod(department_required_fund_id: u64) -> impl IntoView {
         e.prevent_default();
         navigate(
             &format!(
-                "department-funding-change-period/{}",
+                "/department-funding-change-period/{}",
                 department_required_fund_id.clone()
             ),
             Default::default(),

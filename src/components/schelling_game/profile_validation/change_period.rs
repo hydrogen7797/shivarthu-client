@@ -10,7 +10,7 @@ pub fn ChangePeriod(profile_user_account: String) -> impl IntoView {
         e.prevent_default();
         navigate(
             &format!(
-                "profile-validation-change-period/{}",
+                "/profile-validation-change-period/{}",
                 profile_user_account.clone()
             ),
             Default::default(),

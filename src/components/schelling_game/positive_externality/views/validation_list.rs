@@ -108,7 +108,14 @@ pub fn ValidationList() -> impl IntoView {
                                                 <a href={format!(
                                                     "/positive-externality/schelling-game/{}",
                                                     account.clone(),
-                                                )}>{account.clone()}</a>
+                                                )}>Schelling Game: {account.clone()}</a>
+                                            </div>
+
+                                            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded border text-[10px] sm:text-base">
+                                                <a href={format!(
+                                                    "/positive-externality-view/{}",
+                                                    account.clone(),
+                                                )}>View Details: {account.clone()}</a>
                                             </div>
                                             <div
                                                 class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded"

@@ -9,7 +9,7 @@ pub fn ChangePeriod(project_id: u64) -> impl IntoView {
     let submit_click = move |e: SubmitEvent| {
         e.prevent_default();
         navigate(
-            &format!("project-tips-change-period/{}", project_id.clone()),
+            &format!("/project-tips-change-period/{}", project_id.clone()),
             Default::default(),
         );
     };
