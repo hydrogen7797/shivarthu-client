@@ -30,9 +30,11 @@ pub fn DrawJurors(profile_user_account: String) -> impl IntoView {
         View::Form => {
             view! {
                 <div class="max-w-5xl mx-auto max-md:mx-10">
-                    <GetPeriod profile_user_account={profile_user_account.clone()} />
-                    <DrawingEndBlock profile_user_account={profile_user_account.clone()} />
-                    <ChangePeriod profile_user_account={profile_user_account.clone()} />
+                    <div class="text-gray-900 dark:text-white">
+                        <GetPeriod profile_user_account={profile_user_account.clone()} />
+                        <DrawingEndBlock profile_user_account={profile_user_account.clone()} />
+                        <ChangePeriod profile_user_account={profile_user_account.clone()} />
+                    </div>
 
                     <form id="draw-juror-submit-from" on:submit={submit_click}>
                         <div class="mb-5">

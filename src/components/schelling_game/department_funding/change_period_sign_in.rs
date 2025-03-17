@@ -1,4 +1,5 @@
 use crate::components::common::spinner::LoadingSpinner;
+use crate::components::navigation::nav::Nav;
 use crate::components::transaction::extension_sign_in::sign_in_with_extension;
 use crate::components::transaction::get_accounts_extension::GetAccountsExtension;
 use crate::services::common_services::polkadot;
@@ -20,7 +21,12 @@ pub fn SignTransaction() -> impl IntoView {
         })
     };
 
-    view! { <ExtensionSignIn department_required_fund_id={department_required_fund_id()} /> }
+    view! {
+        <div>
+            <Nav />
+            <ExtensionSignIn department_required_fund_id={department_required_fund_id()} />
+        </div>
+    }
 }
 
 #[component]

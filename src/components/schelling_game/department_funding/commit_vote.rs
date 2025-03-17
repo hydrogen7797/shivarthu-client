@@ -30,13 +30,15 @@ pub fn CommitVote(department_required_fund_id: u64) -> impl IntoView {
                 View::Form => {
                     view! {
                         <div class="max-w-5xl mx-auto max-md:mx-10">
-                            <GetPeriod department_required_fund_id={department_required_fund_id
-                                .clone()} />
-                            <CommitEndBlock department_required_fund_id={department_required_fund_id
-                                .clone()} />
-                            <ChangePeriod department_required_fund_id={department_required_fund_id
-                                .clone()} />
-                            <div>
+                            <div class="text-gray-900 dark:text-white">
+                                <GetPeriod department_required_fund_id={department_required_fund_id
+                                    .clone()} />
+                                <CommitEndBlock department_required_fund_id={department_required_fund_id
+                                    .clone()} />
+                                <ChangePeriod department_required_fund_id={department_required_fund_id
+                                    .clone()} />
+                            </div>
+                            <div class="text-gray-900 dark:text-white">
                             </div>
                             <form
 

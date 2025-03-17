@@ -30,9 +30,11 @@ pub fn ApplyJurors(project_id: u64) -> impl IntoView {
         View::Form => {
             view! {
                 <div class="max-w-5xl mx-auto max-md:mx-10">
-                    <GetPeriod project_id={project_id.clone()} />
-                    <StakingEndBlock project_id={project_id.clone()} />
-                    <ChangePeriod project_id={project_id.clone()} />
+                    <div class="text-gray-900 dark:text-white">
+                        <GetPeriod project_id={project_id.clone()} />
+                        <StakingEndBlock project_id={project_id.clone()} />
+                        <ChangePeriod project_id={project_id.clone()} />
+                    </div>
                     <form
 
                         id="apply-juror-submit-from"

@@ -30,9 +30,11 @@ pub fn ApplyJurors(profile_user_account: String) -> impl IntoView {
         View::Form => {
             view! {
                 <div class="max-w-5xl mx-auto max-md:mx-10">
-                    <GetPeriod profile_user_account={profile_user_account.clone()} />
-                    <StakingEndBlock profile_user_account={profile_user_account.clone()} />
-                    <ChangePeriod profile_user_account={profile_user_account.clone()} />
+                    <div class="text-gray-900 dark:text-white">
+                        <GetPeriod profile_user_account={profile_user_account.clone()} />
+                        <StakingEndBlock profile_user_account={profile_user_account.clone()} />
+                        <ChangePeriod profile_user_account={profile_user_account.clone()} />
+                    </div>
                     <form
 
                         id="apply-juror-submit-from"

@@ -30,11 +30,14 @@ pub fn DrawJurors(department_required_fund_id: u64) -> impl IntoView {
         View::Form => {
             view! {
                 <div class="max-w-5xl mx-auto max-md:mx-10">
-                    <GetPeriod department_required_fund_id={department_required_fund_id.clone()} />
-                    <DrawingEndBlock department_required_fund_id={department_required_fund_id
-                        .clone()} />
-                    <ChangePeriod department_required_fund_id={department_required_fund_id
-                        .clone()} />
+                    <div class="text-gray-900 dark:text-white">
+                        <GetPeriod department_required_fund_id={department_required_fund_id
+                            .clone()} />
+                        <DrawingEndBlock department_required_fund_id={department_required_fund_id
+                            .clone()} />
+                        <ChangePeriod department_required_fund_id={department_required_fund_id
+                            .clone()} />
+                    </div>
 
                     <form id="draw-juror-submit-from" on:submit={submit_click}>
                         <div class="mb-5">

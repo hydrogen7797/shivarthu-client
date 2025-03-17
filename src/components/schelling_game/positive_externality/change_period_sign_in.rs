@@ -1,4 +1,5 @@
 use crate::components::common::spinner::LoadingSpinner;
+use crate::components::navigation::nav::Nav;
 use crate::components::transaction::extension_sign_in::sign_in_with_extension;
 use crate::components::transaction::get_accounts_extension::GetAccountsExtension;
 use crate::services::common_services::polkadot;
@@ -14,7 +15,12 @@ pub fn SignTransaction() -> impl IntoView {
     let user_to_calculate =
         move || params.with(|params| params.get("user_to_calculate").unwrap_or_default());
 
-    view! { <ExtensionSignIn user_to_calculate={user_to_calculate()} /> }
+    view! {
+        <div>
+            <Nav />
+            <ExtensionSignIn user_to_calculate={user_to_calculate()} />
+        </div>
+    }
 }
 
 #[component]

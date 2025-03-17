@@ -30,10 +30,13 @@ pub fn CommitVote(profile_user_account: String) -> impl IntoView {
                 View::Form => {
                     view! {
                         <div class="max-w-5xl mx-auto max-md:mx-10">
-                            <GetPeriod profile_user_account={profile_user_account.clone()} />
-                            <CommitEndBlock profile_user_account={profile_user_account.clone()} />
-                            <ChangePeriod profile_user_account={profile_user_account.clone()} />
-                            <div>
+                            <div class="text-gray-900 dark:text-white">
+                                <GetPeriod profile_user_account={profile_user_account.clone()} />
+                                <CommitEndBlock profile_user_account={profile_user_account
+                                    .clone()} />
+                                <ChangePeriod profile_user_account={profile_user_account.clone()} />
+                            </div>
+                            <div class="text-gray-900 dark:text-white">
 
                                 <div class="flex justify-center items-center">
                                     <div class="card w-96 bg-base-100 shadow-xl">

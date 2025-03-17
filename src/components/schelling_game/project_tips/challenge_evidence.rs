@@ -27,7 +27,7 @@ async fn get_cid_post(
 
 #[component]
 pub fn ChallengeEvidence(project_id: u64) -> impl IntoView {
-    
+
     let (current_view, set_current_view) = signal(View::Form);
     let (markdown, set_markdown) = signal(String::from(""));
     let (post_cid, set_post_cid) = signal(String::from(""));
@@ -63,8 +63,10 @@ pub fn ChallengeEvidence(project_id: u64) -> impl IntoView {
         {
             view! {
                 <div class="max-w-5xl mx-auto max-md:mx-10">
-                    <EvidenceEndBlock project_id={project_id.clone()} />
-                    <ChallengerFees project_id={project_id.clone()} />
+                    <div class="text-gray-900 dark:text-white">
+                        <EvidenceEndBlock project_id={project_id.clone()} />
+                        <ChallengerFees project_id={project_id.clone()} />
+                    </div>
                     <form id="challenge-evidence-submit-from" on:submit={submit_click}>
 
                         <div class="mb-5">

@@ -81,9 +81,9 @@ pub fn SchellingGameComponent(project_id: u64) -> impl IntoView {
                     view
                 } else {
                     view! {
-                        <div class="container">
-                            <p>{format!("{:?}", period())}</p>
-                            <p>{"No period"}</p>
+                        <div class="container mx-auto">
+                            <p class="text-gray-900 dark:text-white">{format!("{:?}", period())}</p>
+                            <p class="text-gray-900 dark:text-white">{"No period"}</p>
                         </div>
                     }
                     .into_any()

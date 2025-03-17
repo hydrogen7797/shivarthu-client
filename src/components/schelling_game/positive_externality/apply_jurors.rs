@@ -30,9 +30,11 @@ pub fn ApplyJurors(user_to_calculate: String) -> impl IntoView {
         View::Form => {
             view! {
                 <div class="max-w-5xl mx-auto max-md:mx-10">
-                    <GetPeriod user_to_calculate={user_to_calculate.clone()} />
-                    <StakingEndBlock user_to_calculate={user_to_calculate.clone()} />
-                    <ChangePeriod user_to_calculate={user_to_calculate.clone()} />
+                    <div class="text-gray-900 dark:text-white">
+                        <GetPeriod user_to_calculate={user_to_calculate.clone()} />
+                        <StakingEndBlock user_to_calculate={user_to_calculate.clone()} />
+                        <ChangePeriod user_to_calculate={user_to_calculate.clone()} />
+                    </div>
                     <form
 
                         id="apply-juror-submit-from"
