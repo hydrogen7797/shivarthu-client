@@ -146,6 +146,6 @@ let error_fn = move || {
             <div>{move || extrinsic_success_fn()}</div>
 
         </div>
-    } 
+    }
 
 }
