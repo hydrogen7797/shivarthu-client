@@ -9,6 +9,8 @@ use crate::services::common_services::polkadot::runtime_types::pallet_schelling_
 use leptos::prelude::*;
 use leptos_router::hooks::use_params_map;
 
+use crate::components::schelling_game::positive_externality::views::execution_links::ExecutionLinks;
+
 #[component]
 pub fn SchellingGame() -> impl IntoView {
     let params = use_params_map();
@@ -66,8 +68,13 @@ pub fn SchellingGameComponent(user_to_calculate: String) -> impl IntoView {
                         Period::Appeal => view! { <div></div> }.into_any(),
                         Period::Execution => {
                             view! {
-                                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded border text-[10px] sm:text-base">
-                                    You are in Execution phase. Get your incentives
+                                <div>
+                                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded border text-[10px] sm:text-base">
+                                        You are in Execution phase. Get your incentives
+                                    </div>
+
+                                    <ExecutionLinks user_to_calculate={user_to_calculate()} />
+
                                 </div>
                             }
                         }.into_any()

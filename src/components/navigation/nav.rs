@@ -269,6 +269,14 @@ fn navbar_items() -> impl IntoView {
                         "Schelling Game"
                     </a>
 
+                    <a
+                        href="/positive-externality/release-juror-incentives/"
+
+                        class="block py-2 w-full px-4 text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                    >
+                        "Release Juror Incentives"
+                    </a>
+
                 </div>
             </div>
             <a

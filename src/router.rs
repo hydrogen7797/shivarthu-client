@@ -15,7 +15,7 @@ use crate::components::schelling_game::positive_externality::{
     change_period_sign_in::SignTransaction as ChangePeriodPositiveExternality,
     create_post::CreatePositiveExternalityPost,
     game::schelling_game::SchellingGame as PositiveExternalitySchellingGame,
-    home::PositiveExternalityHome,
+    home::PositiveExternalityHome, release_juror_incentives::ReleaseJurorIncentives,
     views::juror_selected_check::JurorSelectedCheck as JurorSelectedCheckPositiveExternality,
     views::validation_list::ValidationList,
     views::view_positive_externality::ViewPositiveExternality,
@@ -127,6 +127,11 @@ pub fn RouterApp() -> impl IntoView {
                 <Route
                     path={path!("/positive-externality/schelling-game/:user_to_calculate")}
                     view={PositiveExternalitySchellingGame}
+                />
+
+                <Route
+                    path={path!("/positive-externality/release-juror-incentives/")}
+                    view={ReleaseJurorIncentives}
                 />
 
                 <Route

@@ -6,7 +6,7 @@ use leptos::prelude::*;
 
 #[component]
 pub fn SignTransaction() -> impl IntoView {
-    view! { <ExtensionSignIn  /> }
+    view! { <ExtensionSignIn /> }
 }
 
 #[component]
